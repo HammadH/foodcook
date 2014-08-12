@@ -1,0 +1,10 @@
+this is details page of <br>
+
+{% if user.id == object.id %}
+ <a href="{% url 'edit_profile_view'  %}" >edit</a>
+ {% endif %}
+
+ <br>
+{{object}}<br>
+{{object.nationality}}
+{{object.mobile}}
