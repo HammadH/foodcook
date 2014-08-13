@@ -1,6 +1,6 @@
 this is details page of <br>
 
-{% if user.id == object.id %}
+{% if object.user == user %}
  <a href="{% url 'edit_profile_view'  %}" >edit</a>
  {% endif %}
 

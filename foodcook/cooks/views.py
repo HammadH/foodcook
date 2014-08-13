@@ -20,13 +20,12 @@ class NewCookProfileView(LoginRequiredMixin, CreateView):
 		self.object = form
 		self.object.instance.user = self.request.user
 		self.object.instance.save()
-		return HttpResponseRedirect(reverse('cooks_detail_view', kwargs={'pk':self.request.user.id}))
+		return HttpResponseRedirect(reverse('cooks_detail_view', kwargs={'pk':self.object.instance.id}))
 
 profile_view = NewCookProfileView.as_view()
 
 class CookDetailsView(DetailView):
 	model = Cook
-	pk_url_kwarg = 'pk'
 	template_name = 'cook_detail.html'
 	
 

@@ -50,7 +50,7 @@ class Cook(models.Model):
 	
 	
 	
-
+admin.site.register(Area)
 
 
 
