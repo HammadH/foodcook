@@ -19,6 +19,9 @@ class NewCookProfileView(LoginRequiredMixin, CreateView):
 	def form_valid(self, form):
 		self.object = form
 		self.object.instance.user = self.request.user
+		self.object.instance.save()    #TODO: remove this save()
+		for area in form.cleaned_data.get('neighbourhood'):
+			self.object.instance.neighbourhood.add(area)
 		self.object.instance.save()
 		return HttpResponseRedirect(reverse('cooks_detail_view', kwargs={'pk':self.object.instance.id}))
 
@@ -69,16 +72,17 @@ congrats_view = CongratsView.as_view()
 
 class EditProfileView(LoginRequiredMixin, UpdateView):
 	model = Cook
-	fields = ['nationality', 'mobile']
+	form_class = NewCookProfileForm
+	fields = ['image', 'mobile', 'cuisines', 'breakfast', 
+			'lunch', 'dinner', 'price', 'neighbourhood',]
 	template_name = 'cook_profile_update.html'
 
 
 	def get_object(self, queryset=None):
-		profile = Cook.objects.get(id=self.request.user.id)
+		profile = Cook.objects.get(user=self.request.user)
 		return profile
 
 	def get_success_url(self):
-		import pdb;pdb.set_trace()
-		return reverse('cooks_detail_view', kwargs={'pk':self.request.user.id})
+		return reverse('cooks_detail_view', kwargs={'pk':self.object.id})
 
 edit_profile_view = EditProfileView.as_view()
