@@ -11,19 +11,23 @@ User = get_user_model()
 def get_profile_image_path(instance, filename):
 	return "cooks/%s/profile_pics/%s" %(instance, filename)
 
+class Area(models.Model):
+	name = models.CharField(max_length=100, blank=False)
+
+	def __unicode__(self):
+		return self.name
 
 class Cook(models.Model):
 	user = models.ForeignKey(User, unique=True, blank=False)
 	image = ImageField(upload_to=get_profile_image_path, blank=True) #TODO: add default image
-	nationality = models.CharField(max_length=60, blank=False)
 	mobile = models.CharField(max_length=10, blank=True)
 	cuisines = models.TextField(blank=False)
 	breakfast = models.BooleanField(blank=False)
 	lunch = models.BooleanField(blank=False)
 	dinner = models.BooleanField(blank=False)
 	price = models.IntegerField(blank=False)
-	neighbourhood = models.CharField(max_length=60, blank=False) 
-	buildings = models.CharField(max_length=60, blank=True)
+	neighbourhood = models.ManyToManyField(Area)
+
 
 	def __unicode__(self):
 		return self.user.username
@@ -49,7 +53,7 @@ class Cook(models.Model):
 
 
 
-admin.site.register(Cook)
+
 
 # admin.site.register(Profile)
 

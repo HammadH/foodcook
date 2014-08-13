@@ -43,7 +43,6 @@ class DisplayCooks(FormMixin, ListView):
 		return context
 
 	def get_queryset(self):
-		import pdb;pdb.set_trace()
 		search_area = CookSearchForm(self.request.GET)
 		if search_area and search_area.is_valid():
 			area = search_area.cleaned_data.get('area')
