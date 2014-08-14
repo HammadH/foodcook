@@ -1,5 +1,6 @@
 from django.conf.urls import patterns, include, url
 
+
 from cooks import views
 
 urlpatterns = patterns('',
@@ -18,3 +19,4 @@ urlpatterns = patterns('',
 
 	
 )
+

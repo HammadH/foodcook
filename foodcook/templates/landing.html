@@ -1,5 +1,5 @@
 <a href="{% url 'account_signup' %}?next={% url 'new_profile_view' %}">signup</a>
 
-<form method="GET" action="{% url 'cooks_list_view' %}">{% csrf_token %}
+<form method="GET" action="{% url 'cooks_list_view' %}">
 {{form.as_p}}
 </form>

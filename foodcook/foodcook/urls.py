@@ -1,4 +1,6 @@
 from django.conf.urls import patterns, include, url
+from django.conf import settings
+
 
 import autocomplete_light
 autocomplete_light.autodiscover()
@@ -17,3 +19,8 @@ urlpatterns = patterns('',
 	url(r'^cooks/', include('cooks.urls')),
 	
 )
+
+if settings.DEBUG:
+    urlpatterns += patterns('django.views.static',
+        (r'media/(?P<path>.*)', 'serve', {'document_root': settings.MEDIA_ROOT}),
+    )
