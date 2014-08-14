@@ -45,7 +45,7 @@ class Cook(models.Model):
 		area = params.get('area')
 		qset = Q(pk__gt=0)
 		if area:
-			qset &= Q(neighbourhood__icontains=area)
+			qset &= Q(neighbourhood__name__icontains=area)
 		return qset
 	
 	

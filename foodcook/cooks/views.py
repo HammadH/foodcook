@@ -48,7 +48,7 @@ class DisplayCooks(FormMixin, ListView):
 		search_area = CookSearchForm(self.request.GET)
 		if search_area and search_area.is_valid():
 			area = search_area.cleaned_data.get('area')
-			return Cook.objects.filter(neighbourhood__icontains=area)
+			return Cook.objects.filter(neighbourhood__name__icontains=area)
 		else:
 			return Cook.objects.all()
 
