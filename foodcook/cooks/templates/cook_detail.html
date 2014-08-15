@@ -1,10 +1,22 @@
 this is details page of <br>
+ <a href="{% url 'account_logout'  %}" >logout</a>
 
 {% if object.user == user %}
  <a href="{% url 'edit_profile_view'  %}" >edit</a>
  {% endif %}
 
  <br>
+ <img src="{{object.image.url}}" style="width:250px; height:250px;"/>
 {{object}}<br>
-{{object.nationality}}
+
+{{object.full_name}}<br>
+{{object.intro}}<br>
+{% for cuisine in object.cuisines.all %}
+	{{cuisine}}<br>
+{% endfor %}	
+{{object.price}}<br>
+{% for area in object.areas.all %}
+	{{area}}<br>
+{% endfor %}
+
 {{object.mobile}}

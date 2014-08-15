@@ -13,6 +13,8 @@ urlpatterns = patterns('',
     # url(r'^$', 'foodcook.views.home', name='home'),
     # url(r'^blog/', include('blog.urls')),
 	url(r'^$', 'views.landing_view', name='landing_view'),
+	url(r'^login/', 'views.check_and_login', name='check_and_login'),
+
 	url(r'^admin/', include(admin.site.urls)),
 	url(r'^autocomplete/', include('autocomplete_light.urls')),
 	url(r'^accounts/', include('allauth.urls')),

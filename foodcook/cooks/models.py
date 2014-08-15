@@ -31,21 +31,22 @@ class Cuisines(models.Model):
 
 class Cook(models.Model):
 	user = models.ForeignKey(User, unique=True, blank=False)
-	full_name = models.CharField(max_length=70, blank=True)
-	image = ImageField(upload_to=get_profile_image_path, blank=True, default=settings.DEFAULT_PROFILE_IMAGE_PATH) #TODO: add default image
-	mobile = models.CharField(unique=True, max_length=10, blank=True)
-	intro = models.TextField(blank=True)
+	full_name = models.CharField("Full Name", max_length=70, blank=True)
+	image = ImageField("Profile picture", upload_to=get_profile_image_path, blank=True, default=settings.DEFAULT_PROFILE_IMAGE_PATH) #TODO: add default image
+	mobile = models.CharField(max_length=10, blank=True)
+	intro = models.TextField("Introduction", blank=True)
 	cuisines = models.ManyToManyField(Cuisines, blank=False)
 	breakfast = models.BooleanField(blank=False)
 	lunch = models.BooleanField(blank=False)
 	dinner = models.BooleanField(blank=False)
 	price = models.IntegerField(blank=False)
-	area = models.ManyToManyField(Area)
+	areas = models.ManyToManyField(Area)
 	area_info = models.CharField(max_length=70, blank=True)
+	
 
 
 	def __unicode__(self):
-		return self.user.username
+		return self.user.email
 
 	def get_absolute_url(self):
 		from django.core.urlresolvers import reverse
@@ -60,7 +61,7 @@ class Cook(models.Model):
 		area = params.get('area')
 		qset = Q(pk__gt=0)
 		if area:
-			qset &= Q(area__name__icontains=area)
+			qset &= Q(areas__name__icontains=area)
 		return qset
 	
 	

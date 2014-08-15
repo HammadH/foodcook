@@ -1,5 +1,17 @@
-<a href="{% url 'account_signup' %}?next={% url 'new_profile_view' %}">signup</a>
 
+Are you a cook? 
+{% if not user.is_authenticated %}
+<a href="{% url 'account_signup' %}?next={% url 'new_profile_view' %}">signup</a>
+<a href="{% url 'account_login' %}">login</a>
+{% else %}
+<a href="{% url 'account_logout' %}">logout</a>
+{% endif %}
+
+<br>
+<br>
+
+
+Find great cooks to cook everyday meals for you
 <form method="GET" action="{% url 'cooks_list_view' %}">
 {{form.as_p}}
 </form>

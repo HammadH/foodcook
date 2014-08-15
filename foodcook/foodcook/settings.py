@@ -13,6 +13,8 @@ import os
 
 import django.conf.global_settings as DEFAULT_SETTINGS
 
+from django.core.urlresolvers import reverse
+
 
 
 BASE_DIR = os.path.dirname(os.path.dirname(__file__))
@@ -112,9 +114,9 @@ INSTALLED_APPS += (
     'allauth',
     'allauth.account',
     'allauth.socialaccount',
-    'allauth.socialaccount.providers.facebook',
-    'allauth.socialaccount.providers.google',
-    'allauth.socialaccount.providers.twitter',
+    # 'allauth.socialaccount.providers.facebook',
+    # 'allauth.socialaccount.providers.google',
+    # 'allauth.socialaccount.providers.twitter',
 )
 
 AUTHENTICATION_BACKENDS = (
@@ -137,3 +139,13 @@ TEMPLATE_CONTEXT_PROCESSORS = DEFAULT_SETTINGS.TEMPLATE_CONTEXT_PROCESSORS +(
     )
 
 ACCOUNT_EMAIL_VERIFICATION = None
+
+ACCOUNT_USERNAME_REQUIRED = False
+
+ACCOUNT_EMAIL_REQUIRED = True
+
+ACCOUNT_AUTHENTICATION_METHOD = "email"
+
+ACCOUNT_SIGNUP_PASSWORD_VERIFICATION = False
+
+LOGIN_REDIRECT_URL = reverse('check_and_login')
