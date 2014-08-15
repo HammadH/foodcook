@@ -33,3 +33,10 @@ MEALS
 {% for meal in meals %}
 	<a href="{{meal.get_absolute_url}}" >{{meal}}</a>
 {% endfor %}
+
+
+<form method="POST">{% csrf_token %}
+	{{form.as_p}}
+	<input type="hidden" name='cook_id' value="{{object.id}}"/>
+	<button type='submit'>Send</buttons>
+	</form>

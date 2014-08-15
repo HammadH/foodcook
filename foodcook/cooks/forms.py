@@ -48,4 +48,6 @@ class MealForm(forms.ModelForm):
 class CookSearchForm(forms.Form):
 	area = forms.CharField()
 
-
+class EmailForm(forms.Form):
+	email = forms.EmailField()
+	message = forms.CharField()
