@@ -105,6 +105,10 @@ DEFAULT_PROFILE_IMAGE_PATH = 'cooks/static/default/circle.png'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 
 MEDIA_URL = '/media/'
+
+EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
+
+
 #allauth settings
 
 SITE_ID=1

@@ -4,6 +4,7 @@ argparse==1.2.1
 distribute==0.6.24
 django-allauth==0.17.0
 django-autocomplete-light==2.0.0a18
+django-form-utils==1.0.1
 oauthlib==0.6.3
 python-openid==2.2.5
 requests==2.3.0

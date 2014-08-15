@@ -4,6 +4,7 @@ from django.db import models
 from django.contrib.auth import get_user_model
 from django.contrib import admin
 from django.core.urlresolvers import reverse
+from django.core.mail import send_mail
 
 from django.conf import settings
 
@@ -69,8 +70,19 @@ class Cook(models.Model):
 		if area:
 			qset &= Q(areas__name__icontains=area)
 		return qset
-	
-	
+
+	def send_email(self, data):
+		'''
+		used to send email to self
+		data: form.cleaned_data
+		'''
+		subject = "Someone is interested in your cooking"
+		message = data.get('message')
+		from_email = data.get('email')
+		recipient_list = [self.user.email]
+		send_mail(subject, message, from_email, recipient_list)
+		return True
+
 class Meal(models.Model):
 	name = models.CharField(max_length=50, blank=False)
 	image = ImageField(upload_to= get_meal_image_path, blank=False)

@@ -40,14 +40,14 @@ class CookDetailsView(DetailView):
 		return kwargs
 
 	def post(self, request, *args, **kwargs):
-		import pdb;pdb.set_trace()
 		form = EmailForm(request.POST)
 		if form.is_valid():
 			cook = Cook.objects.get(id=request.POST.get('cook_id'))
-			send_email(form.cleaned_data, cook)
-			return HttpResponseRedirect('cooks_detail_view',  kwargs={'pk':self.object.instance.id})
+			cook.send_email(form.cleaned_data)
+			return HttpResponseRedirect(reverse('cooks_detail_view',  kwargs={'pk':self.kwargs['pk']}))
 		else:
 			pass
+			
 			
 	
 	
