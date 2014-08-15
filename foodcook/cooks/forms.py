@@ -2,10 +2,10 @@ from django import forms
 
 import autocomplete_light
 
-from cooks.models import Cook, Area
+from cooks.models import Cook, Area, Meal
 
 from form_utils.widgets import ImageWidget
-from form_utils.forms import BetterModelForm, BetterModelFormMetaclass
+# from form_utils.forms import BetterModelForm, BetterModelFormMetaclass
 
 # class NewCookProfileForm(forms.ModelForm):
 # 	class Meta:
@@ -36,7 +36,13 @@ class NewCookProfileForm(autocomplete_light.ModelForm):
 
 
 
-
+class MealForm(forms.ModelForm):
+	class Meta:
+		model = Meal
+		exclude = ['cook',]
+		widgets = {
+		'image': ImageWidget(),
+		}
 
 
 class CookSearchForm(forms.Form):

@@ -14,6 +14,10 @@ urlpatterns = patterns('',
 	url(r'^profile/new/$', views.profile_view, name='new_profile_view'),
 	url(r'^profile/edit/$', views.edit_profile_view, name='edit_profile_view'),
 	url(r'^profile/delete/$', views.profile_view, name='my_profile_view'),
+	url(r'^meal/new/$', views.new_meal, name='new_meal'),
+	url(r'^meal/edit/(?P<pk>\d+)$', views.edit_meal, name='edit_meal'),
+	url(r'^meal/delete/(?P<pk>\d+)$', views.delete_meal, name='delete_meal'),
+
 
 	# url(r'^new/congrats/$', views.congrats_view, name='congrats_view'),
 

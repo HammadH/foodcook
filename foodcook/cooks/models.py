@@ -3,6 +3,7 @@ import os
 from django.db import models
 from django.contrib.auth import get_user_model
 from django.contrib import admin
+from django.core.urlresolvers import reverse
 
 from django.conf import settings
 
@@ -14,6 +15,9 @@ User = get_user_model()
 
 def get_profile_image_path(instance, filename):
 	return os.path.join(settings.MEDIA_ROOT, 'cooks_data/%s/profile_pics/%s' %(instance, filename)) 
+
+def get_meal_image_path(instance, filename):
+	return os.path.join(settings.MEDIA_ROOT, 'cooks_data/%s/meals/%s' %(instance.cook, filename))
 
 
 class Area(models.Model):
@@ -27,6 +31,8 @@ class Cuisines(models.Model):
 
 	def __unicode__(self):
 		return self.name
+
+
 
 
 class Cook(models.Model):
@@ -65,9 +71,20 @@ class Cook(models.Model):
 		return qset
 	
 	
-	
+class Meal(models.Model):
+	name = models.CharField(max_length=50, blank=False)
+	image = ImageField(upload_to= get_meal_image_path, blank=False)
+	cook = models.ForeignKey(Cook, related_name = 'meals')
+
+	def __unicode__(self):
+		return self.name
+
+	def get_absolute_url(self):
+		return reverse('edit_meal', kwargs={'pk':str(self.id)})
+
 admin.site.register(Area)
 admin.site.register(Cuisines)
+admin.site.register(Meal)
 
 
 

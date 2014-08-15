@@ -1,9 +1,10 @@
 from django.shortcuts import render
 from django.core.urlresolvers import reverse
 from django.http import HttpResponseRedirect
-from django.views.generic import CreateView, TemplateView, DetailView
+from django.views.generic import CreateView, TemplateView, DetailView, View
 from django.views.generic.edit import ModelFormMixin, FormView, UpdateView, FormMixin
 from django.views.generic.list import ListView
+from django.http import HttpResponseRedirect
 
 from utils import LoginRequiredMixin
 
@@ -32,6 +33,10 @@ profile_view = NewCookProfileView.as_view()
 class CookDetailsView(DetailView):
 	model = Cook
 	template_name = 'cook_detail.html'
+
+	def get_context_data(self, **kwargs):
+		kwargs['meals'] = self.object.meals.all()
+		return kwargs
 	
 
 
@@ -88,3 +93,48 @@ class EditProfileView(LoginRequiredMixin, UpdateView):
 		return reverse('cooks_detail_view', kwargs={'pk':self.object.id})
 
 edit_profile_view = EditProfileView.as_view()
+
+
+
+class NewMealView(LoginRequiredMixin, FormView):
+	form_class = MealForm
+	template_name = 'new_meal.html'
+
+	def get_initial(self):
+		self.initial['cook'] = self.request.user.cook_set.get()
+		return self.initial
+		
+	def form_valid(self, form):
+		form.instance.cook = form.initial['cook']
+		form.save()
+		return HttpResponseRedirect(self.get_success_url())
+
+	def get_success_url(self):
+		return reverse('cooks_detail_view', kwargs={'pk':self.request.user.cook_set.get().id})
+
+new_meal = NewMealView.as_view()
+
+
+class EditMealView(LoginRequiredMixin, UpdateView):
+	model = Meal
+	form_class = MealForm
+	fields = ['name','image']
+	template_name = 'edit_meal.html'
+	
+
+	def get_object(self, queryset=None):
+		return Meal.objects.get(id=self.kwargs['pk'])
+
+	def get_success_url(self):
+		return reverse('cooks_detail_view', kwargs={'pk':self.request.user.cook_set.get().id})
+		
+
+edit_meal = EditMealView.as_view()
+
+class DeleteMealView(LoginRequiredMixin, View):
+	def get(self, request, *args, **kwargs):
+		meal = Meal.objects.get(id=self.kwargs['pk'])
+		meal.delete()
+		return HttpResponseRedirect(reverse('cooks_detail_view', kwargs={'pk':self.request.user.cook_set.get().id}))
+
+delete_meal = DeleteMealView.as_view()

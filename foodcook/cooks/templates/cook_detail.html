@@ -22,3 +22,14 @@ this is details page of <br>
 {% endfor %}
 
 {{object.mobile}}
+
+
+{% if object.user == user %}
+<a href="{% url 'new_meal' %}">Add meal</a>
+ {% endif %}
+
+MEALS
+
+{% for meal in meals %}
+	<a href="{{meal.get_absolute_url}}" >{{meal}}</a>
+{% endfor %}
