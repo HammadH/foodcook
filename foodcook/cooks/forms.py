@@ -1,6 +1,7 @@
 from django import forms
 
 import autocomplete_light
+from autocomplete_light.widgets import TextWidget, MultipleChoiceWidget, ChoiceWidget
 
 from cooks.models import Cook, Area, Meal
 
@@ -21,7 +22,17 @@ class NewCookProfileForm(autocomplete_light.ModelForm):
 		#fields = ('image', 'full_name', 'intro')
 		exclude = ['user',]
 		widgets = {
-		'image': ImageWidget(),
+		'image': ImageWidget(attrs={'onchange':'upload_img(this)'}),
+		'cuisines':MultipleChoiceWidget('CuisinesAutocomplete', attrs={'class':'form-control', 'placeholder':'eg. Chinese, Italian'}),
+		'full_name': forms.TextInput(attrs={'class':'form-control', 'placeholder':'Enter your name '}),
+		'mobile': forms.TextInput(attrs={'class':'form-control', 'placeholder':'eg. 0552051301'}),
+		'intro': forms.Textarea(attrs={'class':'form-control', 'placeholder':'I cook different meals everyday. My food is very healthy and you can contact me anytime..', 'rows':3}),
+		# 'breakfast': forms.BooleanField(widget=forms.CheckboxInput(attrs={'class':'form-control'})),
+		# 'lunch': forms.TextInput(attrs={'class':'form-control', 'placeholder':'eg. 0552051301'}),
+		# 'dinner': forms.TextInput(attrs={'class':'form-control', 'placeholder':'eg. 0552051301'}),
+		'price': forms.TextInput(attrs={'class':'form-control', 'placeholder':'eg. 20'}),
+		'areas': MultipleChoiceWidget('AreaAutocomplete', attrs={'class':'form-control', 'placeholder':'eg. Dubai Marina, JLT'}),
+		'area_info': forms.TextInput(attrs={'class':'form-control', 'placeholder':'eg. Marina Pinnacle, near Marina Walk'}),
 		}
 		
 # class BaseNewCookProfileForm(BetterModelForm):
@@ -46,8 +57,9 @@ class MealForm(forms.ModelForm):
 
 
 class CookSearchForm(forms.Form):
-	area = forms.CharField()
+	area = forms.CharField(widget=forms.TextInput(attrs={'class':'form-control', 'placeholder':'Enter area to search..'}))
+
 
 class EmailForm(forms.Form):
-	email = forms.EmailField()
-	message = forms.CharField()
+	email = forms.EmailField(widget=forms.EmailInput(attrs={'placeholder':'Enter your email'}))
+	message = forms.CharField(widget=forms.Textarea(attrs={'rows':3}))

@@ -1,12 +1,127 @@
-<html>
-<head>
+{% extends 'base.html' %}
+{% load staticfiles %}
+
+
+
+
 <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.0/jquery.js" type="text/javascript"></script>
+
+
+
+
+<link rel="stylesheet" type="text/css" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
+{% block profile_links %}
 {% include 'autocomplete_light/static.html' %}
-</head>
-<body>
-<form method = "post" enctype='multipart/form-data'>{% csrf_token %}
-	{{form.as_p}}
-	<button type="submit">Finish</button>
-</form>
-</body>
-</html>
+<script type="text/javascript">
+	function upload_img(input){
+		if (input.files && input.files[0]){
+			var reader = new FileReader();
+			reader.onload = function(e){
+				$('#img_id').attr('src', e.target.result);
+			}
+			reader.readAsDataURL(input.files[0]);
+		}
+	}
+</script>
+{% endblock %}
+
+{% block profile_form %}
+<div class="container" style="margin-top:100px;">
+	<div class="row">
+		
+		<div class='col-lg-3'>
+		</div>
+
+		<div class='col-lg-6'>
+		
+		<form  class="form-group" method = "post" enctype='multipart/form-data'>{% csrf_token %}
+		
+		<div class='text-center'>
+		<img src="{% static 'default/profile.png' %}" class="img-thumbnail" style="width:150px;height:150px; margin:50px;" id='img_id' alt=>
+				{{form.image}}
+				<br>
+		</div>
+				<b>Full Name</b>
+				{{form.full_name}}
+				<br>
+
+				<b>Mobile</b>
+				{{form.mobile}}
+				<p style='color:blue'>Your contact number for customers. This is optional. People can contact you through email also.</p>
+				<br>
+
+				<b>What should people know about your cooking?</b>
+				{{form.intro}}
+				<br>
+
+				<div class="form-inline">
+					<b>What can you provide?</b><br>
+					<div style="margin:10px;">
+					Breakfast: {{form.breakfast}}
+					</div>
+
+					<div style="margin:10px;">
+					Lunch: {{form.lunch}}
+					</div>
+
+					<div style="margin:10px;">
+					Dinner: {{form.dinner}}
+					</div>
+					<br>
+					
+				</div>
+
+				<b>What food do you cook best?</b>		
+				{{form.cuisines}}
+				<br>
+				{% if form.cuisines.errors %}
+				<div class='alert alert-danger'><p>{{ form.cuisines.errors }}</p></div>
+				{% endif %}
+				<br>
+
+				<b>Please enter an average price for your food</b>
+				<div class="row">
+				
+				<div class='col-sm-2'>
+					<div style='width:100px;'>
+						{{form.price}} 
+						{{ form.price.non_field_errors }}
+
+					</div>
+				</div>
+				<div class='col-xs-3' style="margin-left:10px;">
+				<h4><b>AED</b></h4>	
+				</div>
+				{% if form.price.errors %}
+				<div class='alert alert-danger'><p>{{ form.price.errors }}</p></div>
+				{% endif %}
+        		
+				</div>
+				<p style='color:blue'>This price is what you want to charge per meal. For example: 20 AED for one dinner.</p>
+				<br>
+
+				<b>Please select your nieghbourhood</b>
+				{{form.areas}}
+				<br>
+				{% if form.areas.errors %}
+				<div class='alert alert-danger'><p>{{ form.areas.errors }}</p></div>
+				{% endif %}
+				<br>
+
+				<b>Additional area information</b>
+				{{form.area_info}}
+				<br>
+
+				<div class='text-center' style="margin:55px;">
+				<button class="btn btn-lg btn-danger " type="submit">Register</button>
+				</div>
+		</form>
+	
+	</div>
+
+	<div class='col-lg-3'>
+	</div>
+
+	</div>	
+</div>
+{% endblock %}

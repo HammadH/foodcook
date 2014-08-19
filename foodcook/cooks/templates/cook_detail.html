@@ -1,27 +1,121 @@
-this is details page of <br>
-{% if user.is_authenticated %}
- <a href="{% url 'account_logout'  %}" >logout</a>
- {% endif %}
+{% extends 'base.html' %}
+{% load bootstrap3 %}
 
-{% if object.user == user %}
- <a href="{% url 'edit_profile_view'  %}" >edit</a>
- {% endif %}
 
- <br>
- <img src="{{object.image.url}}" style="width:250px; height:250px;"/>
-{{object}}<br>
 
-{{object.full_name}}<br>
-{{object.intro}}<br>
-{% for cuisine in object.cuisines.all %}
-	{{cuisine}}<br>
-{% endfor %}	
-{{object.price}}<br>
-{% for area in object.areas.all %}
-	{{area}}<br>
-{% endfor %}
+	{% block auth %}
+					{% if not user.is_authenticated %}
+						<li class='active'><a href="contact.html" style='color:red'>Are you a cook?</a> </li>
+						<li><a class="btn" href="{% url 'account_signup' %}?next={% url 'new_profile_view' %}" style="background-color:red; color:white">SIGN UP</a></li>
+						<li><a class="btn" href="{% url 'account_login' %}" style="background-color:red; color:white">SIGN IN</a></li>
+					{% else %}
+					<li><a class="btn" href="{% url 'edit_profile_view' %}" style="background-color:white; color:red">EDIT PROFILE</a></li>
+					<li><a class="btn" href="{% url 'account_logout' %}" style="background-color:red; color:white">LOGOUT</a></li>
+					{% endif %}
+		{% endblock %}
 
-{{object.mobile}}
+{% block cook_detail %}
+
+<div class="container" style="margin-top:100px;width:80%;">
+
+<div class="row">
+
+	<div class='col-md-4'>
+		
+		<div class='row text-center' style='width:80%' >
+			 <div class='panel panel-info' > 
+			 <img src="{{object.image.url}}" style="width:250px; height:250px;" class='img-thumbnail' /><br>
+
+			 <h4 style='margin:10px'>{{object.full_name}}</h4>
+			</div>
+		</div>
+
+		<div class='row text-center' style='width:80%'>
+			<div class='panel panel-info' > 
+			 <h4 >Mobile</h4>	
+			 <p>{{object.mobile}}</p>		 
+			</div>
+		</div>
+
+		<div class='row text-center' style='width:80%'>
+			<div class='panel panel-info' > 
+			 <h4 >Cusines</h4>	
+			 {% for cuisine in object.cuisines.all %}
+			 <p>{{cuisine}}</p>
+			{% endfor %}		 
+			</div>
+		</div>
+
+		<div class='row text-center' style='width:80%'>
+			<div class='panel panel-info' > 
+			 <h4 >Neighbourhood</h4>	
+			 {% for area in object.areas.all %}
+			 <p>{{area}}</p>
+			{% endfor %}
+			<p><i>{{object.area_info}}</i></p>		 
+			</div>
+		</div>
+
+		<div class='row text-center' style='width:80%'>
+			<div class='panel panel-info' > 
+			 <h4 >Price</h4>	
+			 <p>{{object.price}} AED</p>		 
+			</div>
+		</div>
+
+		<div class='row text-center' style='width:80%'>
+			<div class='panel panel-info' > 
+			 <h4>Cooking Time</h4>	
+			 {% if object.breakfast %}
+			 	<p>Breakfast</p>
+			 {% endif %}
+			 {% if object.lunch %}
+			 	<p>Lunch</p>
+			 {% endif %}
+			 {% if object.dinner %}
+			 	<p>Dinner</p>
+			 {% endif %}		 
+			</div>
+		</div>
+
+
+	</div>
+
+	<div class='col-md-8'>
+		
+		<div class="row" style="width:80%">
+			{% if object.intro %}
+  			<div class="panel panel-default" style='padding:20px;'>
+  			<p>	{{object.intro}} </p>
+  			</div>
+  			{% endif %}
+		</div>
+
+		{% if object.user != user %}
+		<div class="row" style="width:80%">
+			<div class="panel panel-default" style='padding:20px;'>
+				<h4>Contact {{object.full_name}}</h4>	
+					<form method="POST">{% csrf_token %}
+						{% bootstrap_form form %}
+						<input type="hidden" name='cook_id' value="{{object.id}}"/>
+						<button class='btn btn-primary' type='submit'>Send</buttons>
+					</form>
+				
+  			
+  			</div>
+  		</div>
+  		{% endif %}
+
+
+  			ACTIVITY STREAM..
+
+
+	</div>
+
+	</div>
+
+
+
 
 
 {% if object.user == user %}
@@ -34,10 +128,7 @@ MEALS
 	<a href="{{meal.get_absolute_url}}" >{{meal}}</a>
 {% endfor %}
 
-{% if object.user != user %}
-<form method="POST">{% csrf_token %}
-	{{form.as_p}}
-	<input type="hidden" name='cook_id' value="{{object.id}}"/>
-	<button type='submit'>Send</buttons>
-	</form>
-{% endif %}
+
+
+</div>
+{% endblock %}

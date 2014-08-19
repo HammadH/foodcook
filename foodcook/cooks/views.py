@@ -28,11 +28,14 @@ class NewCookProfileView(LoginRequiredMixin, CreateView):
 		self.object.instance.save()
 		return HttpResponseRedirect(reverse('cooks_detail_view', kwargs={'pk':self.object.instance.id}))
 
+
+
 profile_view = NewCookProfileView.as_view()
 
 class CookDetailsView(DetailView):
 	model = Cook
 	template_name = 'cook_detail.html'
+	context_object_name = 'cook'
 
 	def get_context_data(self, **kwargs):
 		kwargs['meals'] = self.object.meals.all()
@@ -58,6 +61,7 @@ detail_view = CookDetailsView.as_view()
 class DisplayCooks(FormMixin, ListView):
 	model = Cook
 	template_name = 'cooks_list.html'
+	
 
 	def get_context_data(self, **kwargs):
 		context = super(DisplayCooks, self).get_context_data(**kwargs)
@@ -94,12 +98,17 @@ class EditProfileView(LoginRequiredMixin, UpdateView):
 	model = Cook
 	form_class = NewCookProfileForm
 	fields = ['image', 'mobile', 'cuisines', 'breakfast', 
-			'lunch', 'dinner', 'price', 'areas', 'info', 'area_info']
+			'lunch','dinner', 'price', 'areas', 'info', 'area_info']
 	template_name = 'cook_profile_update.html'
 
 
+
 	def get_object(self, queryset=None):
-		profile = Cook.objects.get(user=self.request.user)
+		try:
+			profile = Cook.objects.get(user=self.request.user)
+		except Cook.DoesNotExist:
+
+			profile = Cook(user=self.request.user)   # redirect to a new profile..
 		return profile
 
 	def get_success_url(self):

@@ -47,6 +47,7 @@ INSTALLED_APPS = (
     'django.contrib.staticfiles',
     'sorl.thumbnail',
     'autocomplete_light',
+    'bootstrap3',
     'cooks',
    
 )
@@ -94,13 +95,13 @@ USE_TZ = True
 
 STATIC_URL = '/static/'
 
-#STATICFILES_DIRS = [os.path.join(BASE_DIR, 'static')]
+STATICFILES_DIRS = (os.path.join(BASE_DIR, 'static'),)
 
-STATIC_ROOT = os.path.join(BASE_DIR, 'static')
+#STATIC_ROOT = os.path.join(BASE_DIR, 'static')
 
 TEMPLATE_DIRS= os.path.join(BASE_DIR, 'templates')
 
-DEFAULT_PROFILE_IMAGE_PATH = 'cooks/static/default/circle.png'
+DEFAULT_PROFILE_IMAGE_PATH = 'cooks/static/default/profile.png'
 
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 

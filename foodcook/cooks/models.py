@@ -38,16 +38,16 @@ class Cuisines(models.Model):
 
 class Cook(models.Model):
 	user = models.ForeignKey(User, unique=True, blank=False)
-	full_name = models.CharField("Full Name", max_length=70, blank=True)
-	image = ImageField("Profile picture", upload_to=get_profile_image_path, blank=True, default=settings.DEFAULT_PROFILE_IMAGE_PATH) #TODO: add default image
+	image = ImageField("Profile picture", upload_to=get_profile_image_path, blank=True, default=settings.DEFAULT_PROFILE_IMAGE_PATH)
+	full_name = models.CharField("Full Name", max_length=70, blank=False)
 	mobile = models.CharField(max_length=10, blank=True)
-	intro = models.TextField("Introduction", blank=True)
+	intro = models.TextField(blank=True)
+	areas = models.ManyToManyField(Area)
 	cuisines = models.ManyToManyField(Cuisines, blank=False)
 	breakfast = models.BooleanField(blank=False)
 	lunch = models.BooleanField(blank=False)
 	dinner = models.BooleanField(blank=False)
 	price = models.IntegerField(blank=False)
-	areas = models.ManyToManyField(Area)
 	area_info = models.CharField(max_length=70, blank=True)
 	
 
@@ -82,6 +82,22 @@ class Cook(models.Model):
 		recipient_list = [self.user.email]
 		send_mail(subject, message, from_email, recipient_list)
 		return True
+
+	def get_cuisines(self):
+		cuisines = ''
+		for cuisine in self.cuisines.all()[:3]:
+			cuisines += str(cuisine)
+			cuisines += ' '
+		return cuisines 
+
+	def get_areas(self):
+		areas = ''
+		for area in self.areas.all()[:3]:
+			areas += str(area)
+			areas += '\n'
+		return areas
+
+
 
 class Meal(models.Model):
 	name = models.CharField(max_length=50, blank=False)

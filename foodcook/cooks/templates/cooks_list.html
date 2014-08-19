@@ -1,22 +1,95 @@
+{% extends "base.html" %}
 {% load staticfiles %}
-<html>
-<head>
-	<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.0/jquery.js" type="text/javascript"></script>
-	{% include 'autocomplete_light/static.html' %}
-</head>
 
-<body>
-Cooks<br>
+{% block links %}
 
-Search
-<form method="GET">
-	{{form.as_p}}
-	<button type="submit">Search</button>
-</form>
+{% endblock %}
 
-{% for cook in object_list %}
-	<img src="{{ cook.image.url}}" />
-	<a href="{{cook.get_absolute_url}}"> {{cook}}</a><br>
-{% endfor %}
 
-</body>
+
+{% block cooks_list %}
+<div class="container wrap" style='margin-top:50px;margin-bottom:150px;'>
+		
+	<div class='row'>
+		<h1>Search cooks</h1>
+
+		<form method="GET">
+			<div class="input-group">
+			<div class="input-group-btn">
+				
+                <span class="input-group-btn">
+                	{{form}}
+              <button class="btn btn-default" type="submit" style='height:34px;'>
+              <span class="glyphicon glyphicon-search"></span>
+             </button>
+             </span>
+            </div>
+			</div>
+		</form>
+	</div>
+
+	<div class="container" >
+
+	{% if object_list.count == 0 %}
+	<div class="row" style="margin-top:30px;">
+		<h1> No cooks found in this area at the moment.. please check back later.</h1>
+	</div>
+	{% else %}
+	
+	<div class='row text-center' style="margin-top:30px;">
+		<h1>Found {{object_list.all.count}} cooks</h1>
+	</div>
+	
+		<div class="row" style="margin-top:30px;">
+			<div class="[ col-xs-12 col-sm-offset-2 col-sm-8 ]">
+				<ul class="event-list">
+					{% for cook in object_list %}
+
+					<li>
+						
+						<img alt="" src="{{cook.image.url}}" />
+						<div class="info">
+						<h3 class="title"><a href="{% url 'cooks_detail_view' pk=cook.id %}" style="text-decoration:none !important; margin-top:-30px;">{{cook.full_name}}</h3></a>	
+							<p class="desc"><b>Cooks:</b> {{cook.get_cuisines}}</p>
+							<p class="desc"><b>Lives in:</b> {{cook.get_areas}}</p>
+							<p class="desc"><b>Charges:</b> {{cook.price}} AED</p>
+
+						</div>
+						<div class="social">
+							<ul>
+								<li class="facebook" style="width:33%;"><a href="#facebook"><span class="fa fa-facebook"></span></a></li>
+								<li class="twitter" style="width:34%;"><a href="#twitter"><span class="fa fa-twitter"></span></a></li>
+								<li class="google-plus" style="width:33%;"><a href="#google-plus"><span class="fa fa-google-plus"></span></a></li>
+							</ul>
+						</div>
+					</li>
+	
+
+					{% endfor %}
+				</ul>
+
+				{% if is_paginated %}
+				<div class='pagination'>
+					<span class='page-links'>
+						{% if page_obj.has_previous %}
+						<a href="/cooks?page={{ page_obj.previous_page_number }}">previous</a>
+						{% endif %}
+						<span class="page-current">
+                    	Page {{ page_obj.number }} of {{ page_obj.paginator.num_pages }}.
+               		 </span>
+               		 {% if page_obj.has_next %}
+                    <a href="/cooks?page={{ page_obj.next_page_number }}">next</a>
+                	{% endif %}
+            		</span>
+        		</div>
+   				 {% endif %}
+
+
+			</div>
+		</div>	
+	</div>			
+	
+		
+	{% endif %}
+	</div>
+{% endblock %}
