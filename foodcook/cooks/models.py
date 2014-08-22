@@ -35,11 +35,12 @@ class Cuisines(models.Model):
 
 
 
+# class Rating(models.Model):
+
 
 class Cook(models.Model):
 	user = models.ForeignKey(User, unique=True, blank=False)
 	image = ImageField("Profile picture", upload_to=get_profile_image_path, blank=True, default=settings.DEFAULT_PROFILE_IMAGE_PATH)
-	full_name = models.CharField("Full Name", max_length=70, blank=False)
 	mobile = models.CharField(max_length=10, blank=True)
 	intro = models.TextField(blank=True)
 	areas = models.ManyToManyField(Area)
@@ -47,8 +48,16 @@ class Cook(models.Model):
 	breakfast = models.BooleanField(blank=False)
 	lunch = models.BooleanField(blank=False)
 	dinner = models.BooleanField(blank=False)
-	price = models.IntegerField(blank=False)
+	price_regular = models.IntegerField(blank=True, null=True)
+	price_special = models.IntegerField(blank=True, null=True)
 	area_info = models.CharField(max_length=70, blank=True)
+	is_regular = models.BooleanField(blank=True)
+	is_special = models.BooleanField(blank=True)
+	will_bring_grocery = models.BooleanField(blank=False)
+	can_come_home = models.BooleanField(blank=False)
+	has_delivery = models.BooleanField(blank=False)
+	created_at = models.DateTimeField(auto_now_add=True)
+	updated_at = models.DateTimeField(blank=True, null=True) # when the cook updates profile.
 	
 
 

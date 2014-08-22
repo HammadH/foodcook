@@ -38,12 +38,9 @@
 		
 		<div class='text-center'>
 		<img src="{% static 'default/profile.png' %}" class="img-thumbnail" style="width:150px;height:150px; margin:50px;" id='img_id' alt=>
-				{{form.image}}
+			{{form.image}}
 				<br>
 		</div>
-				<b>Full Name</b>
-				{{form.full_name}}
-				<br>
 
 				<b>Mobile</b>
 				{{form.mobile}}
@@ -79,26 +76,69 @@
 				{% endif %}
 				<br>
 
-				<b>Please enter an average price for your food</b>
-				<div class="row">
-				
-				<div class='col-sm-2'>
-					<div style='width:100px;'>
-						{{form.price}} 
-						{{ form.price.non_field_errors }}
-
-					</div>
+				{% if form.non_field_errors %}
+				<div class="alert alert-danger">
+				<strong>{{form.non_field_errors}}</strong>
 				</div>
-				<div class='col-xs-3' style="margin-left:10px;">
-				<h4><b>AED</b></h4>	
-				</div>
-				{% if form.price.errors %}
-				<div class='alert alert-danger'><p>{{ form.price.errors }}</p></div>
 				{% endif %}
-        		
+
+				<div class="form-inline" style="margin-top:15px;margin-bottom:25px;">
+				<b>Check the box if are you willing to provide regular cooking services</b><br>
+				
+				<div style="margin:10px;">
+				Regular Cooking: {{form.is_regular}}   (Check for 'YES')
+				{% if form.is_regular.errors %}
+				<div class='alert alert-danger'><p>{{ form.is_regular.errors }}</p></div>
+				{% endif %}
 				</div>
-				<p style='color:blue'>This price is what you want to charge per meal. For example: 20 AED for one dinner.</p>
-				<br>
+				<b>If yes, whats your price?</b>
+				
+						{{form.price_regular}}  AED
+						{{ form.price_regular.non_field_errors }}
+						{% if form.price_regular.errors %}
+				<div class='alert alert-danger'><p>{{ form.price_regular.errors }}</p></div>
+				{% endif %}
+				</div>
+
+				
+
+				<div class="form-inline" style="margin-top:35px;">
+				<b>Check the box if are you willing to provide cooking services on occasions (birthdays & parties)</b><br>
+				<div style="margin:10px;">
+				Special Cooking: {{form.is_special}}   (Check for 'YES')
+				</div>
+				<b>If yes, whats your price?</b>
+				
+						{{form.price_special}} 
+						{{ form.price_special.non_field_errors }} AED
+				{% if form.price_special.errors %}
+				<div class='alert alert-danger'><p>{{ form.price_special.errors }}</p></div>
+				{% endif %}
+
+				</div>
+
+			
+				
+        		
+				<div class="form-inline" style="margin-top:35px;">
+					<b>Grocery for cooking</b><br>
+					<div style="margin:10px;">
+					I will bring grocery myself: {{form.will_bring_grocery}} (Check for 'YES')
+					</div>
+
+					<b>Place of cooking</b><br>
+					<div style="margin:10px;">
+					I can come to your home and cook: {{form.can_come_home}} (Check for 'YES')
+					</div>
+
+					<b>Delivery</b>
+					<div style="margin:10px;">
+					I can deliver the food to you: {{form.has_delivery}} (Check for 'YES')
+					</div>
+					<br>
+					
+				</div>
+				 
 
 				<b>Please select your nieghbourhood</b>
 				{{form.areas}}
@@ -108,10 +148,11 @@
 				{% endif %}
 				<br>
 
-				<b>Additional area information</b>
+				<b>Additional area information (building name or subcommunity)</b>
 				{{form.area_info}}
 				<br>
-
+				
+				
 				<div class='text-center' style="margin:55px;">
 				<button class="btn btn-lg btn-danger " type="submit">Register</button>
 				</div>
