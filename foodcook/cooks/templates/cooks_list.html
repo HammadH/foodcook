@@ -2,6 +2,10 @@
 {% load staticfiles %}
 {% load thumbnail %}
 
+
+
+
+
 {% block auth %}
 					{% if not user.is_authenticated %}
 						<li class='active'><a href="contact.html" style='color:red'>Are you a cook?</a> </li>
@@ -15,19 +19,50 @@
 
 
 
+
+
 {% block cooks_list %}
-<div class="container-fluid wrap" style='margin-top:100px;margin-bottom:150px;'>
+<div class="container-fluid wrap " style='margin-top:100px;margin-bottom:80px;'>
 		
 	<div class='row' style="background-color:;padding:30px;">
 		<div class="col-xs-3">
 		</div>
+		
 		<div class='col-lg-6 text-center'>
 			<form method="GET">
 		
 			
-				{{form.as_p}}
+				{{form}}
 				 
+              {% if object_list.count > 1 %}
               
+              	<form method='GET' >
+              		<div class="col-md-4" style="margin-top:10px;">
+              		<select class="form-control" id="price_filter">
+ 						<option>Price</option>
+  						<option>More to less</option>
+  						<option>Less to more</option>
+  					</select>
+  				</div>
+  					<div class="col-md-4" style="margin-top:10px;">
+              		<select class="form-control">
+ 						<option>Rating</option>
+  						<option>More to less</option>
+  						<option>Less to more</option>
+  					</select>
+  					</div>
+  					<div class="col-md-4" style="margin-top:10px;">
+  						<select class="form-control">
+ 						<option>Cook type</option>
+  						<option>Regular cooks</option>
+  						<option>Special cooks</option>
+  					</select>
+  					</div>
+
+
+  					</div>
+  				</from>
+              {% endif %}
               
             <!--   <button class="btn btn-default" type="submit" style='height:34px;'> -->
               
@@ -43,144 +78,94 @@
 	</div> <!-- row -->
 
 
-
-
-	<div class="container" >
-
 	{% if object_list.count == 0 %}
-	<div class="row" style="margin-top:30px;">
+	<div class='container'>
+	<div class="row text-center" style="margin-top:30px;">
 		<h1> No cooks found in this area at the moment.. please check back later.</h1>
 	</div>
+</div>
 	{% else %}
 	
 	<div class='container'>
-		<div class="row" style="margin-top:30px;">
-			
-						<div class='col-lg-2'>
-						</div>
+		
 
-						<div class="col-xs-2" style='background-color:green;'>
-							
-						</div>
 
-						<div class='col-xs-1 text-center' style='background-color:blue;'>
-							<h5>Cuisines</h5>
-						</div>
+		<div class="row" >
+			<table class='table table-hover '>
+				
 						
-						<div class='col-xs-2 text-center'>
-							<h5>Neighbourhood</h5>
-						</div>
-
-						<div class='col-xs-1'>
-						</div>
-
-						<!-- <div class='col-xs-1 text-center'><h5>Special</h5> -->
-						<!-- <button class="btn btn-default btn-xs" style=" background-color:transparent;color:red;cursor: default">Special Cook</button> -->
-					<!-- 	</div> -->
-
-
-						<div class='col-xs-2 text-center' style="background-color:blue"><h5>Cooking</h5>
-				<!-- 		<button class="btn btn-default btn-xs" style=" background-color:transparent;color:red;cursor: default">Regular Cook</button> -->	
-						</div>
-
-						<div class='col-xs-1 text-center'>
-							<p>{{cook.is_regular}}</p>
-							<p>{{cook.price_regular}}</p>
-						</div>
-
-						<div class='col-xs-1'>
-							
-						</div>
-
-		</div>
-
-
-		<div class="row" style="margin-top:30px;">
-			
+				
+				<tr>
+					<th></th>
+					<th></th>
+					<th>Cuisines</th>
+					<th>Neighbourhood</th>
+					<th></th>
+					<th></th>
+					<th></th>
+					<th></th>
+					<th></th>	
+				</tr>
 					{% for cook in object_list %}
 
-					<li style="list-style-type:none;">
 						
-					<div class="row" style="margin:12px;">
-						<div class='col-lg-2' >
+					
+						<tr>
+							<td>
 							{% thumbnail cook.image "110x110" crop="center" as im %}
     							<img src="{{ cook.image.url }}" class='img-thumbnail' width="{{ im.width }}" height="{{ im.height }}">
 							{% endthumbnail %}
-						</div>
+						</td>
+						<td><b>{{cook.user.get_full_name}}</b></td>
+						<td>
+							{% for cuisine in cook.cuisines.all|slice:":3" %}
+							{{cuisine}}<br>
+							{% endfor %}
+						</td>
+						<td>
+							{% for area in cook.areas.all|slice:":3" %}
+							{{area}}<br>
+							{% endfor %}
+						</td>
 
-						<div class="col-xs-2 text-center" >
-							<h5>{{cook.user.get_full_name}}</a></h5>
-						</div>
-
-						<div class='col-xs-1 text-center' 
-							<p>{{cook.get_cuisines}}</p>
-						</div>
+						<td>
+							{% if cook.breakfast %}
+							<p>Breakfast</p>
+							{% endif %}
 						
-						<div class='col-xs-2 text-center'>
-							<p>{{cook.get_areas}}</p>
-						</div>
-
-						<div class='col-xs-1 text-center'>
-							<p>{{cook.breakfast}}</p>
-							<p>{{cook.lunch}}</p>
-							<p>{{cook.dinner}}</p>
-						</div>
-
-
-						
-							<div class='col-xs-1 text-center'>
-							<p>{{cook.is_special}}</p>
-					
-							<p>{{cook.is_special}}</p>
-							</div>
-					
-						<div class='col-xs-1 text-center'>
-						
-							<p>{{cook.is_regular}}</p>
+							{% if cook.lunch %}
+							<p>Lunch</p>
+							{% endif %}
 							
-					
+							{% if cook.dinner %}
+							<p>Dinner</p>
+							{% endif %}
+						</td>
+						<td>
+							{% if cook.is_regular %}
+							<p>Regular Cooking</p>
 							<p>{{cook.price_regular}}</p>
-							
-						</div>
-
-						<div class='col-xs-1'>
-							<!-- <a class="btn btn-xs" role="button" href="{% url 'cooks_detail_view' pk=cook.id %}" style="background-color:red; color:white;"><h5>CONTACT</h5></a> -->
-							<a href="{% url 'cooks_detail_view' pk=cook.id %}" class="btn btn-default btn-xs"><b>Contact</b></a>
-						</div>
-							
-
-						</div>
+							{% endif %}
+						</td>
+						<td >
+							{% if cook.is_special %}
+							<p>Special Cooking</p>
+							<p>{{cook.price_special}}</p>
+							{% endif %}
+						</td>
 						
-					
-					</li>
-					
+						<td><a class="btn btn-default" href="{% url 'cooks_detail_view' pk=cook.id %}">Contact</a></td>
+
 
 					{% endfor %}
-				</div>
-			</div>
+				</table>
+						
+
 				
 
-				{% if is_paginated %}
-				<div class='pagination'>
-					<span class='page-links'>
-						{% if page_obj.has_previous %}
-						<a href="/cooks?page={{ page_obj.previous_page_number }}">previous</a>
-						{% endif %}
-						<span class="page-current">
-                    	Page {{ page_obj.number }} of {{ page_obj.paginator.num_pages }}.
-               		 </span>
-               		 {% if page_obj.has_next %}
-                    <a href="/cooks?page={{ page_obj.next_page_number }}">next</a>
-                	{% endif %}
-            		</span>
-        		</div>
-   				 {% endif %}
-
-
-			
-	</div>			
-	
 		
 	{% endif %}
 	</div>
+</div>
+</div>
 {% endblock %}

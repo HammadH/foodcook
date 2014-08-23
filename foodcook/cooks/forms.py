@@ -81,7 +81,7 @@ class MealForm(forms.ModelForm):
 
 
 class CookSearchForm(forms.Form):
-	area = forms.CharField(widget=forms.TextInput(attrs={'class':'form-control', 'placeholder':'Enter area to search..', 'label':""}))
+	area = forms.CharField(widget=forms.TextInput(attrs={'class':'form-control', 'placeholder':'Enter area to search..'}), label='')
 
 
 class EmailForm(forms.Form):

@@ -17,6 +17,7 @@ urlpatterns = patterns('',
 	url(r'^meal/new/$', views.new_meal, name='new_meal'),
 	url(r'^meal/edit/(?P<pk>\d+)$', views.edit_meal, name='edit_meal'),
 	url(r'^meal/delete/(?P<pk>\d+)$', views.delete_meal, name='delete_meal'),
+	# url(r'^sort/$', views.sort_list, name='sort_list'),
 
 
 	# url(r'^new/congrats/$', views.congrats_view, name='congrats_view'),

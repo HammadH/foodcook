@@ -97,8 +97,6 @@ congrats_view = CongratsView.as_view()
 class EditProfileView(LoginRequiredMixin, UpdateView):
 	model = Cook
 	form_class = NewCookProfileForm
-	fields = ['image', 'mobile', 'cuisines', 'breakfast', 
-			'lunch','dinner', 'price', 'areas', 'info', 'area_info']
 	template_name = 'cook_profile_update.html'
 
 
@@ -160,3 +158,4 @@ class DeleteMealView(LoginRequiredMixin, View):
 		return HttpResponseRedirect(reverse('cooks_detail_view', kwargs={'pk':self.request.user.cook_set.get().id}))
 
 delete_meal = DeleteMealView.as_view()
+

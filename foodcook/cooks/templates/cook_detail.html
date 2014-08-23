@@ -1,5 +1,6 @@
 {% extends 'base.html' %}
 {% load bootstrap3 %}
+{% load thumbnail %}
 
 
 
@@ -16,16 +17,17 @@
 
 {% block cook_detail %}
 
-<div class="container" style="margin-top:100px;width:80%;">
+<div class="container" style="margin-top:150px;">
 
 <div class="row">
 
 	<div class='col-md-3'>
 		
 		<div class='row text-center' style='width:80%' >
-			 <div class='panel panel-info' > 
-			 <img src="{{object.image.url}}" style="width:250px; height:250px;" class='img-thumbnail' /><br>
-
+			 <div > 
+			 {% thumbnail object.image "200x200" crop="center" as im %}
+    			<img src="{{ object.image.url }}" class='img-thumbnail' width="{{ im.width }}" height="{{ im.height }}">
+			 {% endthumbnail %}
 			 <h4 style='margin:10px'>{{object.full_name}}</h4>
 			</div>
 		</div>
@@ -56,12 +58,25 @@
 			</div>
 		</div>
 
+		{% if object.is_regular %}
 		<div class='row text-center' style='width:80%'>
 			<div class='panel panel-info' > 
-			 <h4 >Price</h4>	
-			 <p>{{object.price}} AED</p>		 
+			 <h4 >Regular cooking</h4>	
+			 <p>{{object.price_regular}} AED</p>		 
 			</div>
 		</div>
+		{% endif %}
+
+		{% if object.is_special %}
+		<div class='row text-center' style='width:80%'>
+			<div class='panel panel-info' > 
+			 <h4 >Specialty cooking</h4>	
+			 <p>{{object.price_special}} AED</p>		 
+			</div>
+		</div>
+		{% endif %}
+
+
 
 		<div class='row text-center' style='width:80%'>
 			<div class='panel panel-info' > 
@@ -81,9 +96,9 @@
 
 	</div>
 
-	<div class='col-md-8'>
+	<div class='col-md-6'>
 		
-		<div class="row" style="width:80%">
+		<div class="row" >
 			{% if object.intro %}
   			<div class="panel panel-default" style='padding:20px;'>
   			<p>	{{object.intro}} </p>
@@ -92,7 +107,7 @@
 		</div>
 
 		{% if object.user != user %}
-		<div class="row" style="width:80%">
+		<div class="row" >
 			<div class="panel panel-default" style='padding:20px;'>
 				<h4>Contact {{object.full_name}}</h4>	
 					<form method="POST">{% csrf_token %}
@@ -106,9 +121,30 @@
   		</div>
   		{% endif %}
 
+  		<div class='row text-center'>
+  		<h4>ACTIVITY STREAM..</h4>
+		</div>
 
-  			ACTIVITY STREAM..
-
+		<div class='row' style="margin:20px;">
+		{% if object.user == user %}
+			<a class='btn btn-default ' href="{% url 'new_meal' %}">New</a>
+ 		{% endif %}
+ 		</div>
+  			
+ 		<div class='text-center'>
+		{% for meal in meals %}
+			{% thumbnail meal.image  "200" crop="center" as im %}
+    			<img src="{{ meal.image.url }}"  width="{{ im.width }}" height="{{ im.height }}">
+			 {% endthumbnail %}
+			 <br>
+				{% if object.user == user %}	
+				<a href="{{meal.get_absolute_url}}" >{{meal}}</a>
+				{% else %}
+				<p>{{meal}}</p>
+				{% endif %}
+		{% endfor %}
+	</div>
+	
 
 	</div>
 
@@ -118,15 +154,6 @@
 
 
 
-{% if object.user == user %}
-<a href="{% url 'new_meal' %}">Add meal</a>
- {% endif %}
-
-MEALS
-
-{% for meal in meals %}
-	<a href="{{meal.get_absolute_url}}" >{{meal}}</a>
-{% endfor %}
 
 
 
