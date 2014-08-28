@@ -8,7 +8,7 @@
 
 {% block auth %}
 					{% if not user.is_authenticated %}
-						<li class='active'><a href="contact.html" style='color:red'>Are you a cook?</a> </li>
+						<li class='active'><a href="{% url 'account_signup' %}?next={% url 'new_profile_view' %}" style='color:red'>Are you a cook?</a> </li>
 						<li><a class="btn" href="{% url 'account_signup' %}?next={% url 'new_profile_view' %}" style="background-color:red; color:white">SIGN UP</a></li>
 						<li><a class="btn" href="{% url 'account_login' %}" style="background-color:red; color:white">SIGN IN</a></li>
 					{% else %}
@@ -81,7 +81,8 @@
 	{% if object_list.count == 0 %}
 	<div class='container'>
 	<div class="row text-center" style="margin-top:30px;">
-		<h1> No cooks found in this area at the moment.. please check back later.</h1>
+		<h3> No cooks have registered in this neighbourhood yet...</h3>
+
 	</div>
 </div>
 	{% else %}

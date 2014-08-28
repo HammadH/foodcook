@@ -6,7 +6,7 @@
 
 	{% block auth %}
 					{% if not user.is_authenticated %}
-						<li class='active'><a href="contact.html" style='color:red'>Are you a cook?</a> </li>
+						<li class='active'><a href="{% url 'account_signup' %}?next={% url 'new_profile_view' %}" style='color:red'>Good at cooking?</a> </li>
 						<li><a class="btn" href="{% url 'account_signup' %}?next={% url 'new_profile_view' %}" style="background-color:red; color:white">SIGN UP</a></li>
 						<li><a class="btn" href="{% url 'account_login' %}" style="background-color:red; color:white">SIGN IN</a></li>
 					{% else %}
@@ -121,7 +121,7 @@
   		</div>
   		{% endif %}
 
-  		<div class='row text-center'>
+  		<!-- <div class='row text-center'>
   		<h4>ACTIVITY STREAM..</h4>
 		</div>
 
@@ -144,7 +144,7 @@
 				{% endif %}
 		{% endfor %}
 	</div>
-	
+	 -->
 
 	</div>
 

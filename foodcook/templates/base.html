@@ -9,9 +9,9 @@
 	<meta name="description" content="">
 	<meta name="author"      content="Sergey Pozhilov (GetTemplate.com)">
 	
-	<title>Title</title>
+	<title>44Cooks</title>
 
-	<link rel="shortcut icon" href="assets/images/gt_favicon.png">
+	<link href='http://fonts.googleapis.com/css?family=Luckiest+Guy' rel='stylesheet' type='text/css'>
 	
 	<link rel="stylesheet" media="screen" href="http://fonts.googleapis.com/css?family=Open+Sans:300,400,700">
 	<link rel="stylesheet" href="{% static 'assets/css/bootstrap.min.css' %}">
@@ -65,14 +65,21 @@ $(document).on('change','#price_filter', function() {
 
 <body >
 	<!-- Fixed navbar -->
-	<div id='wrap'>
+
 
 	<div class="navbar navbar-inverse navbar-fixed-top headroom panel"  style="background-color:white">
 		<div class="container">
 			<div class="navbar-header">
 				<!-- Button for smallest screens -->
 				<button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse"><span class="icon-bar"></span> <span class="icon-bar"></span> <span class="icon-bar"></span> </button>
-				<a class="navbar-brand" href="/"><img src="assets/images/logo.png" alt="Progressus HTML5 template"></a>
+				<div class='row'>
+					<div class='col-lg-6'>
+				<a href='/' style='text-decoration:none'><h1 style='font-family:Luckiest Guy, cursive; color:red'>44Cooks </h1></a> 
+				</div>
+				<div class='col-lg-6'>
+				<h3 style='font-family:Luckiest Guy, cursive; color:#B20000; margin-left:10px;'>Dubai</h3>
+				</div>
+			</div>
 			</div>
 			<div class="navbar-collapse collapse">
 				<ul class="nav navbar-nav pull-right">
@@ -95,7 +102,7 @@ $(document).on('change','#price_filter', function() {
 	</div> 
 	<!-- /.navbar -->
 
-	
+		<div class='container' id='wrap'>
 	{% block search %}
 
 	{% endblock %}	
@@ -172,8 +179,8 @@ $(document).on('change','#price_filter', function() {
 
 					<div class="col-md-6 widget">
 						<div class="widget-body">
-							<p class="text-right">
-								Copyright &copy; 2014, Your name. Designed by <a href="http://gettemplate.com/" rel="designer">gettemplate</a> 
+							<p class="text-right" style='color:red'>
+								44Cooks 
 							</p>
 						</div>
 					</div>

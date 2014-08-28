@@ -4,7 +4,7 @@
 
 {% block auth %}
 					{% if not user.is_authenticated %}
-						<li class='active'><a href="contact.html" style='color:red'>Are you a cook?</a> </li>
+						<li class='active'><a href="{% url 'account_signup' %}?next={% url 'new_profile_view' %}" style='color:red'>Good at cooking?</a> </li>
 						<li><a class="btn" href="{% url 'account_signup' %}?next={% url 'new_profile_view' %}" style="background-color:red; color:white">SIGN UP</a></li>
 						<li><a class="btn" href="{% url 'account_login' %}" style="background-color:red; color:white">SIGN IN</a></li>
 					{% else %}
@@ -17,7 +17,7 @@
 	
 		<div class="container" style='margin-top:150px;'>
 			<div class="row text-center">
-				<h1 class="lead ">Find great cooks to cook for you everyday</h1>
+				<h1 class="lead ">Find people to cook for you</h1>
 				
 	 <div class='col-lg-4'>
       </div>
@@ -30,7 +30,7 @@
                 <span class="input-group-btn">
                 	{{form}}
               <button class="btn btn-default" type="submit" style='height:34px;'>
-              <span class="glyphicon glyphicon-search"></span>
+              <span class="fa fa-search"></span>
              </button>
              </span>
             </div>
@@ -49,7 +49,7 @@
 	
 	<div class="container text-center">
 		<br> <br>
-		<h2 class="thin">The best place to find amazing chefs for your occasion</h2>
+		<h2 class="thin">The best place to find amazing cooks around you.</h2>
 		<p class="text-muted">
 			<br> 
 		
