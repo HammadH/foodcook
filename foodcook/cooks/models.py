@@ -86,7 +86,7 @@ class Cook(models.Model):
 		data: form.cleaned_data
 		'''
 		subject = "Someone is interested in your cooking"
-		message =  "Message from %s \n" %data.get('email') + data.get('message')
+		message =  "Message from %s  %s" %(data.get('email'), data.get('message'))
 		from_email = 'findcooks@44Cooks.com'
 		recipient_list = [self.user.email]
 		send_mail(subject, message, from_email, recipient_list)
