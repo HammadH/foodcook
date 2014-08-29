@@ -47,7 +47,7 @@ class CookDetailsView(DetailView):
 		if form.is_valid():
 			cook = Cook.objects.get(id=request.POST.get('cook_id'))
 			cook.send_email(form.cleaned_data)
-			return HttpResponseRedirect(reverse('cooks_detail_view',  kwargs={'pk':self.kwargs['pk']}))
+			return HttpResponseRedirect(reverse('cooks_list_view'))
 		else:
 			pass
 			

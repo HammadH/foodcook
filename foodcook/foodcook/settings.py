@@ -113,7 +113,12 @@ MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 
 MEDIA_URL = '/media/'
 
-EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
+
+EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+EMAIL_HOST = 'smtp.webfaction.com'
+EMAIL_HOST_USER = '44cooks'
+EMAIL_HOST_PASSWORD = 'quakeroats'
+
 
 
 #allauth settings
