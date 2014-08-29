@@ -85,8 +85,8 @@ class Cook(models.Model):
 		used to send email to self
 		data: form.cleaned_data
 		'''
-		subject = "44Cooks: Someone is interested in your cooking"
-		message =  "Message from %s" %data.get('email') + data.get('message')
+		subject = "Someone is interested in your cooking"
+		message =  "Message from %s \n" %data.get('email') + data.get('message')
 		from_email = 'findcooks@44Cooks.com'
 		recipient_list = [self.user.email]
 		send_mail(subject, message, from_email, recipient_list)
