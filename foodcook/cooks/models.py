@@ -1,7 +1,7 @@
 import os
 
 from django.db import models
-from django.contrib.auth import get_user_model
+from django.contrib.auth.models import User
 from django.contrib import admin
 from django.core.urlresolvers import reverse
 from django.core.mail import send_mail
@@ -11,7 +11,7 @@ from django.conf import settings
 from sorl.thumbnail import ImageField
 
 
-User = get_user_model()
+
 	
 
 def get_profile_image_path(instance, filename):
@@ -50,7 +50,7 @@ class Cook(models.Model):
 	dinner = models.BooleanField(blank=False)
 	price_regular = models.IntegerField(blank=True, null=True)
 	price_special = models.IntegerField(blank=True, null=True)
-	area_info = models.CharField(max_length=70, blank=True)
+	area_info = models.TextField(blank=True)
 	is_regular = models.BooleanField(blank=True)
 	is_special = models.BooleanField(blank=True)
 	will_bring_grocery = models.BooleanField(blank=False)

@@ -48,6 +48,7 @@ INSTALLED_APPS = (
     'sorl.thumbnail',
     'autocomplete_light',
     'bootstrap3',
+    'south',
     'cooks',
    
 )
@@ -102,7 +103,7 @@ STATIC_URL = '/static/'
 
 STATICFILES_DIRS = (os.path.join(BASE_DIR, 'static'),)
 
-#STATIC_ROOT = os.path.join(BASE_DIR, 'static')
+STATIC_ROOT = os.path.join(BASE_DIR, 'static_root')
 
 TEMPLATE_DIRS= os.path.join(BASE_DIR, 'templates')
 
