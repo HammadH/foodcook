@@ -107,7 +107,7 @@ STATIC_ROOT = os.path.join(BASE_DIR, 'static_root')
 
 TEMPLATE_DIRS= os.path.join(BASE_DIR, 'templates')
 
-DEFAULT_PROFILE_IMAGE_PATH = 'cooks/static/default/profile1.png'
+DEFAULT_PROFILE_IMAGE_PATH = os.path.join(BASE_DIR, 'media/default/profile1.png')
 
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 
