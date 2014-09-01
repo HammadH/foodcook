@@ -1,5 +1,5 @@
 {% extends "base.html" %}
-
+{% load staticfiles %}
 
 
 {% block auth %}
@@ -24,18 +24,14 @@
 
        <div class='col-lg-4 '>
 		<form method="GET" action="{% url 'cooks_list_view' %}">
-				<div class="input-group">
-			<div class="input-group-btn">
-				
-                <span class="input-group-btn">
-                	{{form}}
-              <button class="btn btn-default" type="submit" style='height:34px;'>
+			 <div class='input-group'>
+	            {{form}}
+				<span class="input-group-btn">
+					<button class="btn btn-default" type="submit" style='height:34px;'>
               <span class="fa fa-search"></span>
-             </button>
-             </span>
-            </div>
-			</div>
-		</form>
+             </button></span>
+             </div>
+         </form>
 		</div>
 
 		

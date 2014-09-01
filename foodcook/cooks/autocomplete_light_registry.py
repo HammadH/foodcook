@@ -8,4 +8,3 @@ autocomplete_light.register(Area, search_fields=('name',),
 autocomplete_light.register(Cuisines, search_fields=('name',),
 	autocomplete_js_attributes={'placeholder':'Dubai Marina..'})
 
-
