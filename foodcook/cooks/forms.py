@@ -39,37 +39,13 @@ class NewCookProfileForm(autocomplete_light.ModelForm):
 		# 'breakfast': forms.BooleanField(widget=forms.CheckboxInput(attrs={'class':'form-control'})),
 		# 'lunch': forms.TextInput(attrs={'class':'form-control', 'placeholder':'eg. 0552051301'}),
 		# 'dinner': forms.TextInput(attrs={'class':'form-control', 'placeholder':'eg. 0552051301'}),
-		'price_regular': forms.TextInput(attrs={'class':'form-control', 'placeholder':'eg. 20'}),
-		'price_special': forms.TextInput(attrs={'class':'form-control', 'placeholder':'eg. 100'}),
+		'cook_type': forms.RadioSelect(attrs={'class':'form-control',}, ),
+		'min_price': forms.NumberInput(attrs={'class':'form-control', 'style':'width:60px;'}),
+		'max_price': forms.NumberInput(attrs={'class':'form-control', 'style':'width:60px;'}),
 		'areas': MultipleChoiceWidget('AreaAutocomplete', attrs={'class':'form-control', 'placeholder':'eg. Dubai Marina, JLT'}),
 		'area_info': forms.TextInput(attrs={'class':'form-control', 'placeholder':'eg. Marina Pinnacle, near Marina Walk'}),
 		}
 		
-	def clean(self):
-		cleaned_data = super(NewCookProfileForm, self).clean()
-		is_regular = cleaned_data.get('is_regular')
-		price_regular = cleaned_data.get('price_regular')
-		is_special = cleaned_data.get('is_special')
-		price_special = cleaned_data.get('price_special')
-
-		if (is_special or is_regular) == False:
-			# msg = "You must select atleast one; Regular cooking or Special cooking"
-			# self.add_error('is_regular', msg)
-			# self.add_error('is_special', msg)
-			
-			raise forms.ValidationError("Please choose if you are a Regular or Special cook")
-
-		elif is_special and not price_special:
-		# 	msg = "Please enter a price for your special cooking services"
-		# 	self.add_error('price_special', msg)
-			raise forms.ValidationError("Please enter a price for your special cooking service")
-
-		elif is_regular and not price_regular:
-		# 	msg = "Please enter a price for your regular cooking services"
-		# 	self.add_error('price_regular', msg)
-			raise forms.ValidationError("Please enter a price for your regular cooking service")
-		return cleaned_data
-
 
 class MealForm(forms.ModelForm):
 	class Meta:

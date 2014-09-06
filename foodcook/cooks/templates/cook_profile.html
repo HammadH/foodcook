@@ -22,6 +22,7 @@
 			reader.readAsDataURL(input.files[0]);
 		}
 	}
+
 </script>
 {% endblock %}
 
@@ -37,6 +38,9 @@
 		<form  class="form-group" method = "post" enctype='multipart/form-data'>{% csrf_token %}
 		
 		<div class='text-center'>
+			{% if form.errors %}
+			<div class='alert alert-danger'><p>SOME FIELDS ARE MISSING!</p></div>
+			{% endif %}
 		<img src="{% static 'default/profile1.png' %}" class="img-thumbnail" style="width:150px;height:150px; margin:50px;" id='img_id' alt=>
 			{{form.image}}
 				<br>
@@ -72,7 +76,7 @@
 				{{form.cuisines}}
 				<br>
 				{% if form.cuisines.errors %}
-				<div class='alert alert-danger'><p>{{ form.cuisines.errors }}</p></div>
+				<div class='alert alert-danger'><p>Please select a cuisine.</p></div>
 				{% endif %}
 				<br>
 
@@ -83,75 +87,40 @@
 				{% endif %}
 
 				<div class="form-inline" style="margin-top:15px;margin-bottom:25px;">
-				<b>Check the box if are you willing to provide regular cooking services</b><br>
+				<b>What type of cooking service are you providing?</b><br>
 				
 				<div style="margin:10px;">
-				Regular Cooking: {{form.is_regular}}   (Check for 'YES')
-				{% if form.is_regular.errors %}
-				<div class='alert alert-danger'><p>{{ form.is_regular.errors }}</p></div>
-				{% endif %}
-				</div>
-				<b>If yes, whats your price?</b>
-				
-						{{form.price_regular}}  AED
-						{{ form.price_regular.non_field_errors }}
-						{% if form.price_regular.errors %}
-				<div class='alert alert-danger'><p>{{ form.price_regular.errors }}</p></div>
+				{{form.cook_type}}
+				{% if form.cook_type.errors %}
+				<div class='alert alert-danger'><p>Please select a cooking service.</p></div>
 				{% endif %}
 				</div>
 
+				
+		
+			</div>
 				
 
 				<div class="form-inline" style="margin-top:35px;">
-				<b>Check the box if are you willing to provide cooking services on occasions (birthdays & parties)</b><br>
-				<div style="margin:10px;">
-				Special Cooking: {{form.is_special}}   (Check for 'YES')
+				<b>Enter a price range for your cooking service</b><br>				
+					{{form.min_price}}  AED
+					 <b style='margin-left:10px;margin-right:10px;'>to</b> 		
+					{{form.max_price}} AED
 				</div>
-				<b>If yes, whats your price?</b>
-				
-						{{form.price_special}} 
-						{{ form.price_special.non_field_errors }} AED
-				{% if form.price_special.errors %}
-				<div class='alert alert-danger'><p>{{ form.price_special.errors }}</p></div>
-				{% endif %}
-
-				</div>
-
-			
-				
-        		
-				<div class="form-inline" style="margin-top:35px;">
-					<b>Grocery for cooking</b><br>
-					<div style="margin:10px;">
-					Do you need grocery?: {{form.will_bring_grocery}} (Check for 'YES')
-					</div>
-
-					<b>Place of cooking</b><br>
-					<div style="margin:10px;">
-					Do you go to customer's house for cooking?: {{form.can_come_home}} (Check for 'YES')
-					</div>
-
-					<b>Delivery</b>
-					<div style="margin:10px;">
-					Can you deliver the food to customer?: {{form.has_delivery}} (Check for 'YES')
-					</div>
-					<br>
-					
-				</div>
+				<p style='color:blue'>If you are an everyday cook, enter a price range for one meal. Eg: if you wish to charge 15 AED for one meal then enter 10-20.</p><p style='color:blue'>If you are a special cook, enter a price range for one time cooking. Eg: if you wish to charge 130 AED for one time cooking then enter 100-150.</p><br><br> 
 				 
-
+			
 				<b>Please select your nieghbourhood</b>
 				{{form.areas}}
 				<br>
 				{% if form.areas.errors %}
-				<div class='alert alert-danger'><p>{{ form.areas.errors }}</p></div>
+				<div class='alert alert-danger'><p>Please select a neighbourhood.</p></div>
 				{% endif %}
 				<br>
 
 				<b>Additional area information (building name or subcommunity)</b>
 				{{form.area_info}}
-				<br>
-				
+				<br><br>
 				
 				<div class='text-center' style="margin:55px;">
 				<button class="btn btn-lg btn-danger " type="submit">Register</button>

@@ -33,6 +33,11 @@ class Cuisines(models.Model):
 	def __unicode__(self):
 		return self.name
 
+class CookType(models.Model):
+	name = models.CharField(max_length=100, blank=False)
+
+	def __unicode__(self):
+		return self.name
 
 
 # class Rating(models.Model):
@@ -48,14 +53,10 @@ class Cook(models.Model):
 	breakfast = models.BooleanField(blank=False)
 	lunch = models.BooleanField(blank=False)
 	dinner = models.BooleanField(blank=False)
-	price_regular = models.IntegerField(blank=True, null=True)
-	price_special = models.IntegerField(blank=True, null=True)
+	min_price = models.IntegerField(blank=True, null=True)
+	max_price = models.IntegerField(blank=True, null=True)
 	area_info = models.TextField(blank=True)
-	is_regular = models.BooleanField(blank=True)
-	is_special = models.BooleanField(blank=True)
-	will_bring_grocery = models.BooleanField(blank=False)
-	can_come_home = models.BooleanField(blank=False)
-	has_delivery = models.BooleanField(blank=False)
+	cook_type = models.ForeignKey(CookType, blank=False, null=True, default='Unspecified')
 	created_at = models.DateTimeField(auto_now_add=True)
 	updated_at = models.DateTimeField(blank=True, null=True) # when the cook updates profile.
 	
@@ -92,21 +93,6 @@ class Cook(models.Model):
 		send_mail(subject, message, from_email, recipient_list)
 		return True
 
-	def get_cuisines(self):
-		cuisines = ''
-		for cuisine in self.cuisines.all()[:3]:
-			cuisines += str(cuisine)
-			cuisines += ' '
-		return cuisines 
-
-	def get_areas(self):
-		areas = ''
-		for area in self.areas.all()[:3]:
-			areas += str(area)
-			areas += '\n'
-		return areas
-
-
 
 class Meal(models.Model):
 	name = models.CharField(max_length=50, blank=False)
@@ -122,7 +108,7 @@ class Meal(models.Model):
 admin.site.register(Area)
 admin.site.register(Cuisines)
 admin.site.register(Meal)
-
+admin.site.register(CookType)
 
 
 # admin.site.register(Profile)
