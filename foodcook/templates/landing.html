@@ -4,7 +4,7 @@
 
 {% block auth %}
 					{% if not user.is_authenticated %}
-						<li  style='color:red; margin-top:15px; margin-right:5px;'>Sign up to offer cooking services </li>
+						<li  style='color:red; margin-top:15px; margin-right:5px;'>Sign up to cook for people </li>
 						<li><a class="btn" href="{% url 'account_signup' %}?next={% url 'new_profile_view' %}" style="background-color:red; color:white">SIGN UP</a></li>
 						<li><a class="btn" href="{% url 'account_login' %}" style="background-color:white; color:red">SIGN IN</a></li>
 					{% else %}
