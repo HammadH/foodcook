@@ -4,7 +4,7 @@
 
 {% block auth %}
 					{% if not user.is_authenticated %}
-						<li class='active'><a href="{% url 'account_signup' %}?next={% url 'new_profile_view' %}" style='color:red'>Good at cooking?</a> </li>
+						<li  style='color:red; margin-top:15px; margin-right:5px;'>Sign up to offer cooking services </li>
 						<li><a class="btn" href="{% url 'account_signup' %}?next={% url 'new_profile_view' %}" style="background-color:red; color:white">SIGN UP</a></li>
 						<li><a class="btn" href="{% url 'account_login' %}" style="background-color:white; color:red">SIGN IN</a></li>
 					{% else %}
@@ -32,6 +32,8 @@
              </button></span>
              </div>
          </form>
+         <h3 class='lead' style='margin-top:30px;'>or</h3>
+         <a class='btn btn-danger' href="{% url 'cooks_list_view' %}"><h4 class='thin'>Find cooks around me</h4></a>
 		</div>
 
 		
@@ -45,7 +47,7 @@
 	
 	<div class="container text-center">
 		<br> <br>
-		<h2 class="thin" >The best place to discover personal cooks for you.</h2>
+		<h2 class="thin" >The best place to discover people to cook for you.</h2>
 		<p class="text-muted">
 			<br> 
 		

@@ -127,6 +127,8 @@
 							{% for area in cook.areas.all|slice:":3" %}
 							{{area}}<br>
 							{% endfor %}
+							<br>
+							<h6>{{cook.area_info}}</h6>
 						</td>
 
 						<td>
@@ -147,7 +149,7 @@
 						
 						</td>
 						<td >
-							<p>{{cook.min_price}} - {{cook.max_price}}</p>
+							<p>{{cook.min_price}} AED - {{cook.max_price}} AED</p>
 						
 						<td><a class="btn btn-default" href="{% url 'cooks_detail_view' pk=cook.id %}">Contact</a></td>
 

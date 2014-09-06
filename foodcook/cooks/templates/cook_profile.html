@@ -41,6 +41,8 @@
 			{% if form.errors %}
 			<div class='alert alert-danger'><p>SOME FIELDS ARE MISSING!</p></div>
 			{% endif %}
+
+			<h2>Become a cook</h2><br>
 		<img src="{% static 'default/profile1.png' %}" class="img-thumbnail" style="width:150px;height:150px; margin:50px;" id='img_id' alt=>
 			{{form.image}}
 				<br>
@@ -107,6 +109,10 @@
 					 <b style='margin-left:10px;margin-right:10px;'>to</b> 		
 					{{form.max_price}} AED
 				</div>
+				{% if form.min_price.errors or form.max_price.errors %}
+				<div class='alert alert-danger'><p>Please enter a price range.</p></div>
+				{% endif %}
+
 				<p style='color:blue'>If you are an everyday cook, enter a price range for one meal. Eg: if you wish to charge 15 AED for one meal then enter 10-20.</p><p style='color:blue'>If you are a special cook, enter a price range for one time cooking. Eg: if you wish to charge 130 AED for one time cooking then enter 100-150.</p><br><br> 
 				 
 			

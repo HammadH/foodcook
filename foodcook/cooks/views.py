@@ -50,12 +50,7 @@ class CookDetailsView(DetailView):
 			return HttpResponseRedirect(reverse('cooks_list_view'))
 		else:
 			pass
-			
-			
-	
-	
-
-
+			 
 detail_view = CookDetailsView.as_view()
 
 class DisplayCooks(FormMixin, ListView):
@@ -76,15 +71,6 @@ class DisplayCooks(FormMixin, ListView):
 		else:
 			return Cook.objects.all()
 
-		
-
-	def form_valid(self, form):
-		import pdb;pdb.set_trace()
-
-	
-
-
-
 list_view = DisplayCooks.as_view()	 
 
 
@@ -95,11 +81,10 @@ class CongratsView(LoginRequiredMixin, TemplateView):
 congrats_view = CongratsView.as_view()
 
 class EditProfileView(LoginRequiredMixin, UpdateView):
+	
 	model = Cook
 	form_class = NewCookProfileForm
 	template_name = 'cook_profile_update.html'
-
-
 
 	def get_object(self, queryset=None):
 		try:
