@@ -45,7 +45,7 @@ class CookType(models.Model):
 
 class Cook(models.Model):
 	user = models.ForeignKey(User, unique=True, blank=False)
-	image = ImageField("Profile picture", upload_to=get_profile_image_path, blank=True, default=settings.DEFAULT_PROFILE_IMAGE_PATH)
+	image = ImageField("Profile picture", upload_to=get_profile_image_path, blank=True, max_length=1000,default=settings.DEFAULT_PROFILE_IMAGE_PATH)
 	mobile = models.CharField(max_length=10, blank=True)
 	intro = models.TextField(blank=True)
 	areas = models.ManyToManyField(Area)

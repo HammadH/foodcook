@@ -121,41 +121,57 @@
   		</div>
   		{% endif %}
 
-  		<!-- <div class='row text-center'>
-  		<h4>ACTIVITY STREAM..</h4>
-		</div>
+  		
 
-		<div class='row' style="margin:20px;">
+		<div class='row text-center' style="margin:20px;">
 		{% if object.user == user %}
-			<a class='btn btn-default ' href="{% url 'new_meal' %}">New</a>
+			<a class='btn btn-default ' href="{% url 'new_meal' %}">Add recent cooking photos</a>
  		{% endif %}
  		</div>
   			
- 		<div class='text-center'>
+ 		{% if meals %}
+ 		<div class='text-center' style='padding:25px'>
+ 		{% if object.user == user %}
+ 		<h2 class='thin'>Your recent cooking</h2>
+ 		{% else %}
+ 		<h2 class='thin'>{{object.user.first_name}}'s recent cooking</h2>	
+		
+		{% endif %}
 		{% for meal in meals %}
-			{% thumbnail meal.image  "200" crop="center" as im %}
+		<div class='row' style="margin:20px;">
+			<!-- {% thumbnail meal.image  "3000x3000" crop="center" as im %}
     			<img src="{{ meal.image.url }}"  width="{{ im.width }}" height="{{ im.height }}">
-			 {% endthumbnail %}
+			 {% endthumbnail %} -->
+			<img src = "{{meal.image.url}}">
 			 <br>
 				{% if object.user == user %}	
 				<a href="{{meal.get_absolute_url}}" >{{meal}}</a>
 				{% else %}
 				<p>{{meal}}</p>
 				{% endif %}
+		</div>
 		{% endfor %}
 	</div>
-	 -->
+
+
+	{% else %}
+
+{% if object.user == user %}
+<div class='well text-center' style="padding:30px">
+		<h3 class='thin'>You have no cooking activity yet, click the button above to post some pictures..</h3>
+	</div>
+
+{% else %}
+	<div class='well text-center' style="padding:30px">
+		<h3 class='thin'>{{object.user.first_name}} has no cooking activity..</h3>
+	</div>
+
+{% endif %}	
+
+		{% endif %}
 
 	</div>
 
 	</div>
-
-
-
-
-
-
-
-
 </div>
 {% endblock %}
