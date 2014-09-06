@@ -102,8 +102,8 @@
 					<th>Cuisines</th>
 					<th>Neighbourhood</th>
 					<th>Availability</th>
-					<th></th>
-					<th></th>
+					<th>Type</th>
+					<th>Price</th>
 					<th></th>
 					<th></th>	
 				</tr>
@@ -143,17 +143,11 @@
 							{% endif %}
 						</td>
 						<td>
-							{% if cook.is_regular %}
-							<p>Regular Cooking</p>
-							<p>{{cook.price_regular}}</p>
-							{% endif %}
+							<p>{{cook.cook_type}}</p>
+						
 						</td>
 						<td >
-							{% if cook.is_special %}
-							<p>Special Cooking</p>
-							<p>{{cook.price_special}}</p>
-							{% endif %}
-						</td>
+							<p>{{cook.min_price}} - {{cook.max_price}}</p>
 						
 						<td><a class="btn btn-default" href="{% url 'cooks_detail_view' pk=cook.id %}">Contact</a></td>
 

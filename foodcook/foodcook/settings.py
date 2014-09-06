@@ -31,6 +31,8 @@ SECRET_KEY = 'ib#ka8%541uv-r&3!8y=pmefh_o5*m1j5+f78qfuhyx18!eqec'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
+INTERNAL_IPS = ['127.0.0.1',]
+
 TEMPLATE_DEBUG = True
 
 ALLOWED_HOSTS = []
