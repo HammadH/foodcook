@@ -1,0 +1,31 @@
+{% extends 'base.html' %}
+{% load bootstrap3 %}
+
+
+{% block contact %}
+
+
+<div class="row" style="margin-top:150px;">
+			<div class='col-lg-3'>
+			</div>
+
+			<div class='col-lg-6'>
+			<div class="panel panel-default" style='padding:20px;'>
+				<h4>Contact {{object.full_name}}</h4>	
+					<form method="POST">{% csrf_token %}
+						{% bootstrap_form form %}
+						<input type="hidden" name='cook_id' value="{{object.id}}"/>
+						<button class='btn btn-primary' type='submit'>Send</buttons>
+					</form>
+				</div>
+  			
+  			</div>
+
+  		<div class='col-lg-3'>
+			</div>
+				
+  		</div>
+
+
+{% endblock %}
+

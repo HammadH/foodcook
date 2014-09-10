@@ -1,5 +1,6 @@
 {% extends "base.html" %}
 {% load staticfiles %}
+{% load thumbnail %}
 
 
 {% block auth %}
@@ -19,20 +20,96 @@
 				
 
 				<img src="{% static 'default/timesbanner2.jpg' %}"/>
-				<h1 class="thin ">The best place to cook at home and make money in UAE.</h1>
+				<h1 class="thin ">The best place to cook and make money in UAE.</h1>
 				
 	
 
       <a class='btn btn-warning' href="{% url 'account_signup' %}?next={% url 'new_profile_view' %}" style='margin:20px;'><h4 class='thin'>Become a cook</h4></a>
 
-        <h3 class='lead' style='margin-top:5px;'>or</h3>
+      </div>
+
+        <h3 class='lead text-center' style='margin-top:5px;'>or</h3>
+
+       <h2 class='thin text-center' style='margin-bottom:40px;'>Find people to cook for you.</h2>
+
+      <div class='row'>
+
+        <table class='table table-hover '>
+				
+						
+				
+				<tr>
+					<th></th>
+					<th></th>
+					<th>Cuisines</th>
+					<th>Neighbourhood</th>
+					<th>Availability</th>
+					<th>Type</th>
+					<th>Price</th>
+					<th></th>
+					<th></th>	
+				</tr>
+					{% for cook in object_list %}
+
+						
+					
+						<tr>
+							<td>
+							{% thumbnail cook.image "110x110" crop="center" as im %}
+    							<img src="{{ cook.image.url }}" class='img-thumbnail' width="{{ im.width }}" height="{{ im.height }}">
+							{% endthumbnail %}
+						</td>
+						<td><b>{{cook.user.get_full_name}}</b></td>
+						<td>
+							{% for cuisine in cook.cuisines.all|slice:":3" %}
+							{{cuisine}}<br>
+							{% endfor %}
+						</td>
+						<td>
+							{% for area in cook.areas.all|slice:":3" %}
+							{{area}}<br>
+							{% endfor %}
+							<h6>{{cook.area_info}}</h6>
+						</td>
+
+						<td>
+							{% if cook.breakfast %}
+							<p>Breakfast</p>
+							{% endif %}
+						
+							{% if cook.lunch %}
+							<p>Lunch</p>
+							{% endif %}
+							
+							{% if cook.dinner %}
+							<p>Dinner</p>
+							{% endif %}
+						</td>
+						<td>
+							<p>{{cook.cook_type}}</p>
+						
+						</td>
+						<td >
+							<p>{{cook.min_price}} AED - {{cook.max_price}} AED</p>
+						
+						<td><a class="btn btn-default" href="{% url 'cooks_detail_view' pk=cook.id %}">Contact</a></td>
+
+					</tr>
+
+
+					{% endfor %}
+				</table>
+
+			
+
+
     </div>
 
         <div class='row'>
         	<div class='col-lg-4'>
         	</div>
-       <div class='col-lg-4 '>
-       		<h2 class="lead text-center" style='margin-top:5px;' >Discover people to cook for you.</h2>
+       <div class='col-lg-4' style="margin:40px;">
+       	<h2 class="lead text-center" style='margin-top:5px;' >Discover people to cook for you.</h2>
 		<form method="GET" action="{% url 'cooks_list_view' %}">
 			 <div class='input-group'>
 	            {{form}}
@@ -42,6 +119,9 @@
              </button></span>
              </div>
          </form>
+       		
+
+       		
          <!-- <h3 class='lead' style='margin-top:30px;'>or</h3>
          <a class='btn btn-danger' href="{% url 'cooks_list_view' %}"><h4 class='thin'>Find cooks around me</h4></a> -->
 		</div>
