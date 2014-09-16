@@ -1,10 +1,12 @@
+import json
+
 from django.shortcuts import render
 from django.core.urlresolvers import reverse
 from django.http import HttpResponseRedirect
 from django.views.generic import CreateView, TemplateView, DetailView, View
 from django.views.generic.edit import ModelFormMixin, FormView, UpdateView, FormMixin
 from django.views.generic.list import ListView
-from django.http import HttpResponseRedirect
+from django.http import HttpResponseRedirect, HttpResponse
 
 from utils import LoginRequiredMixin
 
@@ -56,7 +58,6 @@ detail_view = CookDetailsView.as_view()
 class DisplayCooks(FormMixin, ListView):
 	model = Cook
 	template_name = 'cooks_list.html'
-	
 
 	def get_context_data(self, **kwargs):
 		context = super(DisplayCooks, self).get_context_data(**kwargs)
@@ -144,3 +145,13 @@ class DeleteMealView(LoginRequiredMixin, View):
 
 delete_meal = DeleteMealView.as_view()
 
+def mobile_click_counter(request):
+	if request.is_ajax():
+		try:
+			MobileClickLead.objects.create(cook=Cook.objects.get(id=int(request.GET.get('id'))))
+			return HttpResponse(json.dumps({'status':'success'}), content_type='application/json')
+		except:
+			return HttpResponse(json.dumps({'status':'failed'}), content_type='application/json')
+	
+
+		

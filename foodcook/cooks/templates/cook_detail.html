@@ -1,6 +1,7 @@
 {% extends 'base.html' %}
 {% load bootstrap3 %}
 {% load thumbnail %}
+ 
 
 
 
@@ -34,9 +35,14 @@
 
 		<div class='row text-center' style='width:80%'>
 			<div class='panel panel-info' > 
-			 <h4 >Mobile</h4>	
-			 <p>{{object.mobile}}</p>		 
+			 <h4>Mobile</h4>	
+			 {% if object.mobile %}
+			 <a id=mobile_button class='btn btn-default' style='margin:5px;'>Show number</a>	 
+			 {% else %}
+			 <p style='text-color:red'>No mobile provided.</p>
+			 {% endif %}
 			</div>
+
 		</div>
 
 		<div class='row text-center' style='width:80%'>
@@ -174,4 +180,21 @@
 
 	</div>
 </div>
+
+<script>
+$(document).ready(function(){
+	var mobile = "{{object.mobile}}"
+	$('#mobile_button').click(function(){
+		
+		// remove button
+		$(this).replaceWith('<p>'+mobile+'</p>');
+
+		// make ajax post
+		$.ajax({url:"{% url 'count_mobile_click_lead' %}", 
+			data:{id:"{{object.id}}"
+		},
+		})
+	})
+});
+</script>
 {% endblock %}

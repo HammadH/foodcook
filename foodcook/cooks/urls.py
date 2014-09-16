@@ -18,7 +18,7 @@ urlpatterns = patterns('',
 	url(r'^meal/edit/(?P<pk>\d+)$', views.edit_meal, name='edit_meal'),
 	url(r'^meal/delete/(?P<pk>\d+)$', views.delete_meal, name='delete_meal'),
 	# url(r'^sort/$', views.sort_list, name='sort_list'),
-
+	url(r'^mobile_click/', views.mobile_click_counter, name='count_mobile_click_lead'),
 
 	# url(r'^new/congrats/$', views.congrats_view, name='congrats_view'),
 

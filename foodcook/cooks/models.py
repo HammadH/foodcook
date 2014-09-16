@@ -105,6 +105,13 @@ class Meal(models.Model):
 	def get_absolute_url(self):
 		return reverse('edit_meal', kwargs={'pk':str(self.id)})
 
+class MobileClickLead(models.Model):
+	cook = models.ForeignKey(Cook)
+	created_at = models.DateTimeField(auto_now_add=True)
+
+	def __unicode__(self):
+		return 'mobile click lead for %s' %self.cook
+
 admin.site.register(Area)
 admin.site.register(Cuisines)
 admin.site.register(Meal)
