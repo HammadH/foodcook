@@ -116,6 +116,7 @@ admin.site.register(Area)
 admin.site.register(Cuisines)
 admin.site.register(Meal)
 admin.site.register(CookType)
+admin.site.register(MobileClickLead)
 
 
 # admin.site.register(Profile)
