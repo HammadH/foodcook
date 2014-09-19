@@ -66,9 +66,7 @@
 							{% endfor %}
 						</td>
 						<td>
-							{% for area in cook.areas.all|slice:":3" %}
-							{{area}}<br>
-							{% endfor %}
+							{{cook.area}}<br>
 							<h6>{{cook.area_info}}</h6>
 						</td>
 
