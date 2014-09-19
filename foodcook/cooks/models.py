@@ -23,11 +23,12 @@ def get_meal_image_path(instance, filename):
 
 class Area(models.Model):
 	name = models.CharField(max_length=100, blank=False)
+	created_at = models.DateTimeField(auto_now_add=True, null=True)
 
 	def __unicode__(self):
-		return self.name
+		return self.name.split('-')[0]
 
-class Cuisines(models.Model):
+class Cuisine(models.Model):
 	name = models.CharField(max_length=100, blank=False)
 
 	def __unicode__(self):
@@ -48,11 +49,12 @@ class Cook(models.Model):
 	image = ImageField("Profile picture", upload_to=get_profile_image_path, blank=True, max_length=1000,default=settings.DEFAULT_PROFILE_IMAGE_PATH)
 	mobile = models.CharField(max_length=10, blank=True)
 	intro = models.TextField(blank=True)
-	areas = models.ManyToManyField(Area)
-	cuisines = models.ManyToManyField(Cuisines, blank=False)
-	breakfast = models.BooleanField(blank=False)
-	lunch = models.BooleanField(blank=False)
-	dinner = models.BooleanField(blank=False)
+	place_slug = models.CharField(max_length=150, null=True, blank=False)
+	area = models.ForeignKey(Area, null=True, blank=True)
+	cuisines = models.ManyToManyField(Cuisine, blank=False, null=True)
+	breakfast = models.BooleanField(blank=False, default=False)
+	lunch = models.BooleanField(blank=False, default=False)
+	dinner = models.BooleanField(blank=False, default=False)
 	min_price = models.IntegerField(blank=False, null=True)
 	max_price = models.IntegerField(blank=False, null=True)
 	area_info = models.TextField(blank=True)
@@ -113,7 +115,7 @@ class MobileClickLead(models.Model):
 		return 'mobile click lead for %s' %self.cook
 
 admin.site.register(Area)
-admin.site.register(Cuisines)
+admin.site.register(Cuisine)
 admin.site.register(Meal)
 admin.site.register(CookType)
 admin.site.register(MobileClickLead)
