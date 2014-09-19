@@ -20,7 +20,6 @@ class NewCookProfileView(LoginRequiredMixin, CreateView):
 	template_name = 'cook_profile.html'
 
 	def form_valid(self, form):
-		import pdb;pdb.set_trace()
 		data = form.cleaned_data
 		self.object = form
 		self.object.instance.user = self.request.user
