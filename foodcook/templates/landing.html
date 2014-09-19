@@ -119,8 +119,7 @@
              </button></span>
              </div>
          </form>
-         <input style='margin:10px;' class='form-class' id="pac-input" class="controls" type="text"
-        placeholder="Enter a location">
+       
        		
 
        		
@@ -138,11 +137,11 @@
 
 </div>
 
-	<
+
 
 	<script src="https://maps.googleapis.com/maps/api/js?v=3.exp&libraries=places"></script>
 	<script>
-	var input = document.getElementById('pac-input');
+	var input = document.getElementById('location_input');
 	var types = []
 	var autocomplete = new google.maps.places.Autocomplete(input);
 	autocomplete.setTypes(types)

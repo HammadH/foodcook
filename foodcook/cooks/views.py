@@ -20,15 +20,20 @@ class NewCookProfileView(LoginRequiredMixin, CreateView):
 	template_name = 'cook_profile.html'
 
 	def form_valid(self, form):
+		import pdb;pdb.set_trace()
+		data = form.cleaned_data
 		self.object = form
 		self.object.instance.user = self.request.user
-		self.object.instance.save()    #TODO: remove this save()
-		for area in form.cleaned_data.get('areas'):
-			self.object.instance.areas.add(area)
-		for cuisine in form.cleaned_data.get('cuisines'):
+
+		  #TODO: remove this save()
+		self.object.instance.area,created_new = Area.objects.get_or_create(name=data.get('place_slug'))
+		self.object.instance.save()
+		for cuisine in data.get('cuisines'):
 			self.object.instance.cuisines.add(cuisine)
 		self.object.instance.save()
 		return HttpResponseRedirect(reverse('cooks_detail_view', kwargs={'pk':self.object.instance.id}))
+
+	
 
 
 

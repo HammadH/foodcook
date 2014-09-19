@@ -22,6 +22,8 @@ BASE_DIR = os.path.dirname(os.path.dirname(__file__))
 
 
 
+
+
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/1.6/howto/deployment/checklist/
 
@@ -50,7 +52,6 @@ INSTALLED_APPS = (
     'sorl.thumbnail',
     'autocomplete_light',
     'bootstrap3',
-    'south',
     'cooks',
    
 )
@@ -107,7 +108,7 @@ STATICFILES_DIRS = (os.path.join(BASE_DIR, 'static'),)
 
 STATIC_ROOT = os.path.join(BASE_DIR, 'static_root')
 
-TEMPLATE_DIRS= os.path.join(BASE_DIR, 'templates')
+TEMPLATE_DIRS= (os.path.join(BASE_DIR, 'templates'),)
 
 DEFAULT_PROFILE_IMAGE_PATH = os.path.join(BASE_DIR, 'media/default/profile1.png')
 
@@ -115,6 +116,7 @@ MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 
 MEDIA_URL = '/media/'
 
+# LOGIN_REDIRECT_URL = reverse('check_and_login')
 
 EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
 EMAIL_HOST = 'smtp.webfaction.com'
@@ -168,6 +170,5 @@ ACCOUNT_AUTHENTICATION_METHOD = "email"
 
 ACCOUNT_SIGNUP_PASSWORD_VERIFICATION = False
 
-LOGIN_REDIRECT_URL = reverse('check_and_login')
 
 

@@ -33,7 +33,7 @@ class NewCookProfileForm(autocomplete_light.ModelForm):
 		exclude = ['user', 'created_at', 'updated_at']
 		widgets = {
 		'image': ImageWidget(attrs={'onchange':'upload_img(this)'}),
-		'cuisines':MultipleChoiceWidget('CuisinesAutocomplete', attrs={'class':'form-control', 'placeholder':'eg. Chinese, Italian'}),
+		'cuisines':MultipleChoiceWidget('CuisineAutocomplete', attrs={'class':'form-control', 'placeholder':'eg. Chinese, Italian'}),
 		'mobile': forms.TextInput(attrs={'class':'form-control', 'placeholder':'eg. 0552051301'}),
 		'intro': forms.Textarea(attrs={'class':'form-control', 'placeholder':'I cook different meals everyday. My food is very healthy and you can contact me anytime..', 'rows':3}),
 		# 'breakfast': forms.BooleanField(widget=forms.CheckboxInput(attrs={'class':'form-control'})),
@@ -42,7 +42,7 @@ class NewCookProfileForm(autocomplete_light.ModelForm):
 		'cook_type': forms.RadioSelect(attrs={'class':'form-control',}, ),
 		'min_price': forms.NumberInput(attrs={'class':'form-control', 'style':'width:60px;'}),
 		'max_price': forms.NumberInput(attrs={'class':'form-control', 'style':'width:60px;'}),
-		'areas': MultipleChoiceWidget('AreaAutocomplete', attrs={'class':'form-control', 'placeholder':'eg. Dubai Marina, JLT'}),
+		'place_slug': forms.TextInput(attrs={'class':'form-control', 'placeholder':'Type your location and select..', 'id':'place-input'}),
 		'area_info': forms.TextInput(attrs={'class':'form-control', 'placeholder':'eg. Marina Pinnacle, near Marina Walk'}),
 		}
 		
@@ -57,7 +57,7 @@ class MealForm(forms.ModelForm):
 
 
 class CookSearchForm(forms.Form):
-	area = forms.CharField(label='',widget=TextWidget('AreaAutocomplete', attrs={'class':'form-control', 'placeholder':'Enter a neighbourhood to search cooks..'},))
+	area = forms.CharField(label='',widget=forms.TextInput(attrs={'class':'form-control', 'placeholder':'Enter your location..','id':'location_input'},))
 	
 
 
