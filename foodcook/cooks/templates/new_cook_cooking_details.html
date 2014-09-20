@@ -52,8 +52,8 @@ body { padding-top: 20px; }
       <div class="carousel-inner">
       
         <div class="item active">
-          <div class='col-md-4'>
-					<h3 class='thin'>Cooking Details</h3>
+          <div class='col-md-12'>
+			
 				
 				<div class="form-inline" style="margin-top:20px;">
 					<h4 class='thin'>What can you provide?</h4>
@@ -81,8 +81,8 @@ body { padding-top: 20px; }
         </div><!-- End Item -->
  
          <div class="item" >
-         	<div class='col-md-4'>
-				<h3 class='thin'>Price Details</h3>
+         	<div class='col-md-12'>
+		
 
 				<h4 class='thin' style="margin-top:20px;">Select cook type</h4>
 				<div class='form-inline'>
@@ -98,17 +98,27 @@ body { padding-top: 20px; }
 					 <b style='margin-left:10px;margin-right:10px;'>to</b> 		
 					{{form.max_price}} AED
 				</div>
+
+				<h4 class='thin' id='help_text_price_input_1' style='color:maroon'>If you are an everyday cook, enter a price range for one meal. Eg: if you wish to charge 15 AED for one meal then enter 10-20.</h4><h4 id='help_text_price_input_2' class='thin' style='color:grey'>If you are a special cook, enter a price range for one time cooking. Eg: if you wish to charge 130 AED for one time cooking then enter 100-150.</h4><br><br>
 			</div>
 
           
         </div><!-- End Item -->
         
         <div class="item">
-          <div class='col-md-4'>		
+          <div class='col-md-12'>		
+				<div class='col-md-6'>
+
+
+				<h4 class='thin' style="margin-top:20px;">Enter your mobile (optional)</h4>
+				{{form.mobile}}
+			
+				
+
 				<h4 class='thin' style="margin-top:40px;">Please select your neighbourhood</h4>
-				<div style'width:25%'>
+			
 					{{form.place_slug}}
-				</div>
+			
 
 
 				
@@ -121,10 +131,13 @@ body { padding-top: 20px; }
 				<b>Additional area information (building name or subcommunity)</b>
 				{{form.area_info}}
 				<br><br>
+			</div>
+			<div class='col-md-6' style='margin-top:50px'>
 
 				<div class='pull-right' style="margin:;">
 				<button class="btn btn-lg btn-danger " type="submit">Finish</button>
 				</div>
+			</div>	
 
 				</div>
 
@@ -154,7 +167,7 @@ body { padding-top: 20px; }
 	</div>
 </div>
 	
-	</div>	
+		
 	</div>	
 			
 
@@ -182,6 +195,24 @@ body { padding-top: 20px; }
 		}
 		clickEvent = false;
 	});
+
+	$('#help_text_price_input_1').hide();
+	$('#help_text_price_input_2').hide();
+
+	$('#min_price').click(function(){
+		$('#help_text_price_input_1').show()
+		$('#help_text_price_input_2').show()
+	}
+	);
+
+	$(document).on("keypress", 'form', function(e){
+		var code = e.keyCode || e.which;
+		if (code == 13) {
+			e.preventDefault();
+			return false;
+		}
+	});
+
 });
 
 	var input = document.getElementById('place-input');
