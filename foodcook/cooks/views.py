@@ -20,7 +20,6 @@ class CookSignUpView_CookingDetails(LoginRequiredMixin,  CreateView):
 	template_name = 'new_cook_cooking_details.html'
 
 	def form_valid(self, form):
-		import pdb;pdb.set_trace()
 		data = form.cleaned_data
 		self.object = form
 		self.object.instance.user = self.request.user
@@ -32,9 +31,6 @@ class CookSignUpView_CookingDetails(LoginRequiredMixin,  CreateView):
 			self.object.instance.cuisines.add(cuisine)
 		self.object.instance.save()
 		return HttpResponseRedirect(reverse('cooks_detail_view', kwargs={'pk':self.object.instance.id}))
-
-	def form_invalid(self, form):
-		import pdb;pdb.set_trace()
 
 new_cook_cooking_details = CookSignUpView_CookingDetails.as_view()
 
