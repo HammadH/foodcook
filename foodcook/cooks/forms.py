@@ -39,7 +39,7 @@ class NewCookProfileForm(autocomplete_light.ModelForm):
 		# 'breakfast': forms.BooleanField(widget=forms.CheckboxInput(attrs={'class':'form-control'})),
 		# 'lunch': forms.TextInput(attrs={'class':'form-control', 'placeholder':'eg. 0552051301'}),
 		# 'dinner': forms.TextInput(attrs={'class':'form-control', 'placeholder':'eg. 0552051301'}),
-		'cook_type': forms.RadioSelect(attrs={'class':'form-control',}, ),
+		'cook_type': forms.RadioSelect(attrs={'class':'form-control ', 'style':'margin-left:10px;'}, ),
 		'min_price': forms.NumberInput(attrs={'class':'form-control', 'style':'width:60px;'}),
 		'max_price': forms.NumberInput(attrs={'class':'form-control', 'style':'width:60px;'}),
 		'place_slug': forms.TextInput(attrs={'class':'form-control', 'placeholder':'Type your location and select..', 'id':'place-input'}),

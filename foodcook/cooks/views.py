@@ -4,7 +4,7 @@ from django.shortcuts import render
 from django.core.urlresolvers import reverse
 from django.http import HttpResponseRedirect
 from django.views.generic import CreateView, TemplateView, DetailView, View
-from django.views.generic.edit import ModelFormMixin, FormView, UpdateView, FormMixin
+from django.views.generic.edit import ModelFormMixin, FormView, UpdateView, FormMixin, BaseCreateView
 from django.views.generic.list import ListView
 from django.http import HttpResponseRedirect, HttpResponse
 
@@ -15,11 +15,12 @@ from cooks.forms import *
 
 
 
-class NewCookProfileView(LoginRequiredMixin, CreateView):
+class CookSignUpView_CookingDetails(LoginRequiredMixin,  CreateView):
 	form_class = NewCookProfileForm
-	template_name = 'cook_profile.html'
+	template_name = 'new_cook_cooking_details.html'
 
 	def form_valid(self, form):
+		import pdb;pdb.set_trace()
 		data = form.cleaned_data
 		self.object = form
 		self.object.instance.user = self.request.user
@@ -32,11 +33,12 @@ class NewCookProfileView(LoginRequiredMixin, CreateView):
 		self.object.instance.save()
 		return HttpResponseRedirect(reverse('cooks_detail_view', kwargs={'pk':self.object.instance.id}))
 
-	
+	def form_invalid(self, form):
+		import pdb;pdb.set_trace()
+
+new_cook_cooking_details = CookSignUpView_CookingDetails.as_view()
 
 
-
-profile_view = NewCookProfileView.as_view()
 
 class CookDetailsView(DetailView):
 	model = Cook
