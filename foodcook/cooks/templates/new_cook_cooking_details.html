@@ -1,0 +1,193 @@
+{% extends 'base.html' %}
+{% load staticfiles %}
+
+
+
+
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.0/jquery.js" type="text/javascript"></script>
+
+
+
+
+<link rel="stylesheet" type="text/css" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
+{% block profile_links %}
+{% include 'autocomplete_light/static.html' %}
+{% endblock %}
+
+{% block profile_form %}
+<style>
+body { padding-top: 20px; }
+#myCarousel .nav a small {
+    display:block;
+}
+#myCarousel .nav {
+	background:#eee;
+}
+#myCarousel .nav a {
+    border-radius:0px;
+}
+</style>
+<div class="container" style="margin-top:70px;">
+	<div class="row">
+		<div class='col-lg-12'>
+
+		
+
+		<h2 class='thin'>Create your cooking profile</h2>
+		
+		<form  class="form-group" method = "post" enctype='multipart/form-data'>{% csrf_token %}
+		
+			 <div id="myCarousel" class="carousel slide" data-ride="carousel">
+
+			 	<div class='row' style='margin-top:25px;'>
+    	<ul class="nav nav-pills nav-justified">
+          <li data-target="#myCarousel" data-slide-to="0" class="active"><a href="#">Cooking Details</a></li>
+          <li data-target="#myCarousel" data-slide-to="1"><a href="#">Price Details</a></li>
+          <li data-target="#myCarousel" data-slide-to="2"><a href="#">Place Details</a></li>
+         
+        </ul>
+		</div>
+    
+      <!-- Wrapper for slides -->
+      <div class="carousel-inner">
+      
+        <div class="item active">
+          <div class='col-md-4'>
+					<h3 class='thin'>Cooking Details</h3>
+				
+				<div class="form-inline" style="margin-top:20px;">
+					<h4 class='thin'>What can you provide?</h4>
+					<div style="margin:10px;">
+					<h5 class='thin'>Breakfast: {{form.breakfast}}</h5>
+					</div>
+
+					<div style="margin:10px;">
+					<h5 class='thin'>Lunch: {{form.lunch}}</h5>
+					</div>
+
+					<div style="margin:10px;">
+					<h5 class='thin'>Dinner: {{form.dinner}}</h5>
+					</div>
+					<br>
+					
+				</div>
+
+				<h4 class='thin'>What cuisines do you cook best?</h4>		
+				<div style='margin:15px;'>{{form.cuisines}}</div>
+				<br>
+
+			</div>
+          
+        </div><!-- End Item -->
+ 
+         <div class="item" >
+         	<div class='col-md-4'>
+				<h3 class='thin'>Price Details</h3>
+
+				<h4 class='thin' style="margin-top:20px;">Select cook type</h4>
+				<div class='form-inline'>
+					{% for type in form.cook_type %}
+					{{type}}
+					{% endfor %}
+				</div>
+
+
+				<h4 class='thin' style="margin-top:40px;">Enter a price range for your cooking service</h4>				
+					<div class="form-inline" style="margin-top:35px;">
+					{{form.min_price}}  AED
+					 <b style='margin-left:10px;margin-right:10px;'>to</b> 		
+					{{form.max_price}} AED
+				</div>
+			</div>
+
+          
+        </div><!-- End Item -->
+        
+        <div class="item">
+          <div class='col-md-4'>		
+				<h4 class='thin' style="margin-top:40px;">Please select your neighbourhood</h4>
+				<div style'width:25%'>
+					{{form.place_slug}}
+				</div>
+
+
+				
+				<br>
+				{% if form.areas.errors %}
+				<div class='alert alert-danger'><p>Please select a neighbourhood.</p></div>
+				{% endif %}
+				<br>
+
+				<b>Additional area information (building name or subcommunity)</b>
+				{{form.area_info}}
+				<br><br>
+
+				<div class='pull-right' style="margin:;">
+				<button class="btn btn-lg btn-danger " type="submit">Finish</button>
+				</div>
+
+				</div>
+
+				
+				
+        </div><!-- End Item -->
+        
+        
+      </div><!-- End Carousel Inner -->
+
+
+
+
+
+    </div><!-- End Carousel -->
+
+			
+
+
+
+			
+
+			
+				
+		</form>
+	
+	</div>
+</div>
+	
+	</div>	
+	</div>	
+			
+
+		<script>
+
+		$(document).ready( function() {
+    $('#myCarousel').carousel({
+		interval:   0
+	});
+	
+	var clickEvent = false;
+	$('#myCarousel').on('click', '.nav a', function() {
+			clickEvent = true;
+			$('.nav li').removeClass('active');
+			$(this).parent().addClass('active');		
+	}).on('slid.bs.carousel', function(e) {
+		if(!clickEvent) {
+			var count = $('.nav').children().length -1;
+			var current = $('.nav li.active');
+			current.removeClass('active').next().addClass('active');
+			var id = parseInt(current.data('slide-to'));
+			if(count == id) {
+				$('.nav li').first().addClass('active');	
+			}
+		}
+		clickEvent = false;
+	});
+});
+
+	var input = document.getElementById('place-input');
+	var types = []
+	var autocomplete = new google.maps.places.Autocomplete(input);
+	autocomplete.setTypes(types)
+	</script>
+
+{% endblock %}
