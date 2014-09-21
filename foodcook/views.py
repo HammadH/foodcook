@@ -5,7 +5,7 @@ from django.core.urlresolvers import reverse
 from django.http import HttpResponseRedirect
 from django.core.mail import send_mail
 
-from cooks.forms import CookSearchForm, EmailForm
+from cooks.forms import CookSearchForm, EmailLead
 from cooks.models import Cook
 
 class LandingView(FormMixin, ListView):
@@ -38,7 +38,7 @@ check_and_login = LoginCheck.as_view()
 
 
 class ContactView(FormView):
-	form_class = EmailForm
+	form_class = EmailLead
 	template_name = 'contact.html'
 
 	def form_valid(self, form):

@@ -61,8 +61,8 @@ class CookSearchForm(forms.Form):
 	
 
 
-class EmailForm(forms.Form):
+class EmailLead(forms.ModelForm):
 	email = forms.EmailField(widget=forms.EmailInput(attrs={'placeholder':'Enter your email'}))
 	message = forms.CharField(widget=forms.Textarea(attrs={'rows':3}))
-
+	exclude = ['cook']
 
