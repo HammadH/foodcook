@@ -43,14 +43,17 @@ class CookDetailsView(DetailView):
 
 	def get_context_data(self, **kwargs):
 		kwargs['meals'] = self.object.meals.all()
-		kwargs['form'] = EmailForm()
+		kwargs['form'] = EmailLeadForm()
 		return kwargs
 
 	def post(self, request, *args, **kwargs):
-		form = EmailForm(request.POST)
+		form = EmailLeadForm(request.POST)
 		if form.is_valid():
 			cook = Cook.objects.get(id=request.POST.get('cook_id'))
-			cook.send_email(form.cleaned_data)
+			data = form.cleaned_data
+			cook.send_email(data)
+			email_lead = EmailLead(cook=cook, email=data['email'], message=data['message'])
+			email_lead.save()			
 			return HttpResponseRedirect(reverse('cooks_list_view'))
 		else:
 			pass
@@ -64,6 +67,7 @@ class DisplayCooks(FormMixin, ListView):
 	def get_context_data(self, **kwargs):
 		context = super(DisplayCooks, self).get_context_data(**kwargs)
 		context['form'] = CookSearchForm()
+		context['subscription_form'] = UserSubscriptionForm()
 		return context
 
 	def get_queryset(self):
@@ -73,6 +77,21 @@ class DisplayCooks(FormMixin, ListView):
 			return Cook.objects.filter(area__name__icontains=area)
 		else:
 			return Cook.objects.all()
+
+
+	def post(self, request, *args, **kwargs):
+		form = UserSubscriptionForm(request.POST)
+		if form.is_valid():
+			try:
+				area, created = Area.objects.get_or_create(name=self.request.GET.get('area'))
+			except:
+				return HttpResponseRedirect('/')
+			new_subscription = UserSubscription(area=area, email=form.cleaned_data['email'])
+			new_subscription.save()
+			return HttpResponseRedirect('/')
+		else:
+			return HttpResponseRedirect('/')
+
 
 list_view = DisplayCooks.as_view()	 
 

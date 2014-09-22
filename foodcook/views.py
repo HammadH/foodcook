@@ -45,7 +45,7 @@ class ContactView(FormView):
 
 		data = form.cleaned_data
 
-		subject = 'Someone contacting from 44Cooks'
+		subject = 'From 44Cooks'
 		message =  "Message from %s  %s" %(data.get('email'), data.get('message'))
 		from_email = 'findcooks@44Cooks.com'
 
