@@ -17,7 +17,7 @@ from cooks.forms import *
 
 class CookSignUpView_CookingDetails(LoginRequiredMixin,  CreateView):
 	form_class = NewCookProfileForm
-	template_name = 'new_cook_cooking_details.html'
+	template_name = 'new_cook_form.html'
 
 	def form_valid(self, form):
 		data = form.cleaned_data

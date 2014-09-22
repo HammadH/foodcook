@@ -34,7 +34,7 @@ class NewCookProfileForm(autocomplete_light.ModelForm):
 		widgets = {
 		'image': ImageWidget(attrs={'onchange':'upload_img(this)'}),
 		'cuisines':MultipleChoiceWidget('CuisineAutocomplete', attrs={'class':'form-control', 'placeholder':'eg. Chinese, Italian'}),
-		'mobile': forms.TextInput(attrs={'class':'form-control', 'placeholder':'eg. 0552051301'}),
+		'mobile': forms.TextInput(attrs={'class':'form-control', 'placeholder':'eg. 0552051301', }),
 		'intro': forms.Textarea(attrs={'class':'form-control', 'placeholder':'I cook different meals everyday. My food is very healthy and you can contact me anytime..', 'rows':3}),
 		# 'breakfast': forms.BooleanField(widget=forms.CheckboxInput(attrs={'class':'form-control'})),
 		# 'lunch': forms.TextInput(attrs={'class':'form-control', 'placeholder':'eg. 0552051301'}),
