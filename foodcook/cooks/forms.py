@@ -3,7 +3,7 @@ from django import forms
 import autocomplete_light
 from autocomplete_light.widgets import TextWidget, MultipleChoiceWidget, ChoiceWidget
 
-from cooks.models import Cook, Area, Meal
+from cooks.models import Cook, Area, Meal, EmailLead, UserSubscription
 
 from form_utils.widgets import ImageWidget
 # from form_utils.forms import BetterModelForm, BetterModelFormMetaclass
@@ -61,8 +61,23 @@ class CookSearchForm(forms.Form):
 	
 
 
-class EmailLead(forms.ModelForm):
+class EmailLeadForm(forms.ModelForm):
 	email = forms.EmailField(widget=forms.EmailInput(attrs={'placeholder':'Enter your email'}))
 	message = forms.CharField(widget=forms.Textarea(attrs={'rows':3}))
-	exclude = ['cook']
+	
+
+	class Meta:
+		model = EmailLead
+		exclude = ['cook']
+
+
+class EmailForm(forms.Form):
+	email = forms.EmailField(widget=forms.EmailInput(attrs={'placeholder':'Enter your email'}))
+	message = forms.CharField(widget=forms.Textarea(attrs={'rows':3}))
+
+
+class UserSubscriptionForm(forms.ModelForm):
+	class Meta:
+		model = UserSubscription
+		exclude = ['area']
 

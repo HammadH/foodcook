@@ -5,7 +5,7 @@ from django.core.urlresolvers import reverse
 from django.http import HttpResponseRedirect
 from django.core.mail import send_mail
 
-from cooks.forms import CookSearchForm, EmailLead
+from cooks.forms import CookSearchForm, EmailForm
 from cooks.models import Cook
 
 class LandingView(FormMixin, ListView):
@@ -38,14 +38,14 @@ check_and_login = LoginCheck.as_view()
 
 
 class ContactView(FormView):
-	form_class = EmailLead
+	form_class = EmailForm
 	template_name = 'contact.html'
 
 	def form_valid(self, form):
 
 		data = form.cleaned_data
 
-		subject = 'Someone contacting from 44Cooks'
+		subject = 'From 44Cooks'
 		message =  "Message from %s  %s" %(data.get('email'), data.get('message'))
 		from_email = 'findcooks@44Cooks.com'
 

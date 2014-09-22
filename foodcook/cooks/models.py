@@ -115,12 +115,20 @@ class MobileClickLead(models.Model):
 		return 'mobile click lead for %s' %self.cook
 
 class EmailLead(models.Model):
+	'''For cooks; when users contact them'''
 	cook = models.ForeignKey(Cook)
 	email = models.EmailField()
 	message = models.TextField()
 
 	def __unicode__(self):
-		return 'Email lead for %s from %s' %(cook, email)
+		return 'Email lead for %s from %s' %(self.cook, self.email)
+
+class UserSubscription(models.Model):
+	email = models.EmailField()
+	area = models.ForeignKey(Area)
+
+	def __unicode__(self):
+		return self.email
 
 
 admin.site.register(Area)
@@ -129,6 +137,7 @@ admin.site.register(Meal)
 admin.site.register(CookType)
 admin.site.register(MobileClickLead)
 admin.site.register(EmailLead)
+admin.site.register(UserSubscription)
 
 
 # admin.site.register(Profile)
