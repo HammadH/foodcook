@@ -47,16 +47,17 @@ class CookDetailsView(DetailView):
 		return kwargs
 
 	def post(self, request, *args, **kwargs):
-		form = EmailLeadForm(request.POST)
-		if form.is_valid():
-			cook = Cook.objects.get(id=request.POST.get('cook_id'))
-			data = form.cleaned_data
-			cook.send_email(data)
-			email_lead = EmailLead(cook=cook, email=data['email'], message=data['message'])
-			email_lead.save()			
-			return HttpResponseRedirect(reverse('cooks_list_view'))
-		else:
-			pass
+		if request.is_ajax():
+			form = EmailLeadForm(request.POST)
+			if form.is_valid():
+				cook = Cook.objects.get(id=request.POST.get('cook_id'))
+				data = form.cleaned_data
+				cook.send_email(data) #put this in celerey?
+				email_lead = EmailLead(cook=cook, email=data['email'], message=data['message'])
+				email_lead.save()	#and this..		
+				return HttpResponse(json.dumps({'status':'success'}), content_type='application/json')
+			else:
+				return HttpResponse(json.dumps({'status':'failed'}), content_type='application/json')
 			 
 detail_view = CookDetailsView.as_view()
 
@@ -81,14 +82,14 @@ class DisplayCooks(FormMixin, ListView):
 
 	def post(self, request, *args, **kwargs):
 		#implement ajax with mixins
-		
 		if request.is_ajax():
 			try:
 				area, created = Area.objects.get_or_create(name=self.request.GET.get('area'))
 			except:
 				return HttpResponse(json.dumps({'status': 'failed'}), content_type='application/json')
-			new_subscription = UserSubscription(area=area, email=request.POST.get('email'))
-			new_subscription.save()
+			subscription, created = UserSubscription.objects.get_or_create(email=request.POST.get('email'))
+			subscription.areas.add(area)
+			subscription.save()
 			return HttpResponse(json.dumps({'status': 'success'}), content_type='application/json')
 		
 

@@ -100,6 +100,7 @@ class Meal(models.Model):
 	name = models.CharField(max_length=50, blank=False)
 	image = ImageField(upload_to= get_meal_image_path, blank=False)
 	cook = models.ForeignKey(Cook, related_name = 'meals')
+	created_at = models.DateTimeField(auto_now_add=True, null=True)
 
 	def __unicode__(self):
 		return self.name
@@ -119,13 +120,15 @@ class EmailLead(models.Model):
 	cook = models.ForeignKey(Cook)
 	email = models.EmailField()
 	message = models.TextField()
+	created_at = models.DateTimeField(auto_now_add=True, null=True)
 
 	def __unicode__(self):
 		return 'Email lead for %s from %s' %(self.cook, self.email)
 
 class UserSubscription(models.Model):
 	email = models.EmailField()
-	area = models.ForeignKey(Area, null=True, blank=True)
+	areas = models.ManyToManyField(Area, null=True, blank=True)
+	created_at = models.DateTimeField(auto_now_add=True, null=True)
 
 	def __unicode__(self):
 		return self.email

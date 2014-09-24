@@ -116,7 +116,7 @@
 		<div class="row" >
 			<div class="panel panel-default" style='padding:20px;'>
 				<h4>Contact {{object.full_name}}</h4>	
-					<form method="POST">{% csrf_token %}
+					<form id="email_form" method="POST">{% csrf_token %}
 						{% bootstrap_form form %}
 						<input type="hidden" name='cook_id' value="{{object.id}}"/>
 						<button class='btn btn-primary' type='submit'>Send</buttons>
@@ -195,6 +195,23 @@ $(document).ready(function(){
 		},
 		})
 	})
+
+	$("#email_form").submit(function(e){
+		$.ajax({
+			type:"POST",
+			dataType:"json",
+			data:$("#email_form").serialize(),
+			success:function(data){
+				if(data['status']=='success'){
+					$("#email_form").replaceWith("<div class='panel panel-success'><div class='alert alert-success'><h4>Your message was successfully sent!</h4></div></div>");
+				}
+				else{
+					$("#email_form").replaceWith("<div class='panel panel-danger'><div class='alert alert-danger'><h4>Your message was could not be sent..</h4></div></div>");
+				}
+				}
+			})
+		e.preventDefault();
+	});
 });
 </script>
 
