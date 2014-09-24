@@ -1,5 +1,6 @@
 {% extends 'base.html' %}
 {% load staticfiles %}
+{% load thumbnail %}
 
 
 
@@ -16,33 +17,53 @@
 
 {% block profile_form %}
 
-<div class="container" style="margin-top:100px;">
-	<div class="row ">
-		<div class='col-lg-12'>
-
-		
-
-		
-		
-		<div class='col-lg-3'>
-		</div>
+<div class="container text-center" style="margin-top:120px;">
+	<h2 class='thin'>Reach over 500 people who want your food!</h2>
 
 
-		<div class='col-lg-6 text-center well' style='margin-top:25px;'>
-			<div class='alert alert-info'>
-			<h3 class='thin'>Reach over 580 people who want your food,</h3>
 
-			<h3 class='thin'>by creating this cooking profile!</h3>
-		</div>
-		<form  class="form-group" method = "post" enctype='multipart/form-data' style='margin-top:50px;'>{% csrf_token %}
-	
-						 
-				<h4 class='thin' style="margin-top:20px;">Enter your mobile (optional)</h4>
-				{{form.mobile}}
-		
-  
+
+
 				
-				<div class="form-inline" style="margin-top:20px;">
+<form method = "post" enctype='multipart/form-data'>{% csrf_token %}
+	<div class="row text-center" style='margin-top:25px;'>
+		
+
+	<div class='col-lg-3 text-center'>
+
+			 
+			
+    			<img src="{% static 'default/profile1.png' %}" class="img-thumbnail" style="width:150px;height:150px; margin:50px;" id='img_id' alt=>
+			 	{{form.image}}
+		
+			
+			</div>
+	
+		
+		<div class='col-lg-6'>
+		
+	
+
+		
+			<div class='row text-center'>
+			<div class='panel panel-info' style='padding:15px;'> 
+			 <h4 class='thin'>Mobile</h4>	
+			 {{form.mobile}}
+			</div>
+
+		</div>
+
+		<div class='row text-center' >
+			<div class='panel panel-info' style='padding:15px;'> 
+			 <h4 class='thin'>Cusines</h4>	
+			 {{form.cuisines}} 
+			</div>
+		</div>
+
+		
+		<div class='row text-center' >
+			<div class='panel panel-info' style='padding:15px;'> 
+			<div class="form-inline" style="margin-top:20px;">
 					<h4 class='thin'>What can you provide?</h4>
 					<div style="margin:10px;">
 					<h5 class='thin'>Breakfast: {{form.breakfast}}</h5>
@@ -57,66 +78,84 @@
 					</div>
 					<br>
 					
-				</div>
-
-				<h4 class='thin'>What cuisines do you cook best?</h4>		
-				<div style='margin:15px;'>{{form.cuisines}}</div>
-				<br>
+				</div>	 
+			</div>
+			</div>
 
 
-				<h4 class='thin' style="margin-top:20px;">Select cook type</h4>
+		
+
+		
+		<div class='row text-center'>
+			<div class='panel panel-info' style='padding:15px;'> 
+			 <h4 class='thin' style="margin-top:20px;">Select cook type</h4>
 				<div class='form-inline'>
 					{% for type in form.cook_type %}
 					{{type}}
 					{% endfor %}
-				</div>
+				</div>		 
+			</div>
+		</div>
 
-
-				<h4 class='thin' style="margin-top:40px;">Enter a price range for your cooking service</h4>				
+		<div class='row text-center'>
+		<div class='panel panel-info' style='padding:15px;'>
+	<h4 class='thin' style="margin-top:40px;">Enter a price range for your cooking service</h4>				
 					<div class="form-inline" style="margin-top:35px;">
 					{{form.min_price}}  AED
 					 <b style='margin-left:10px;margin-right:10px;'>to</b> 		
 					{{form.max_price}} AED
 				</div>
+				<br>
 
 				<h4 class='thin' id='help_text_price_input_1' style='color:maroon'>If you are an everyday cook, enter a price range for one meal. Eg: if you wish to charge 15 AED for one meal then enter 10-20.</h4><h4 id='help_text_price_input_2' class='thin' style='color:grey'>If you are a special cook, enter a price range for one time cooking. Eg: if you wish to charge 130 AED for one time cooking then enter 100-150.</h4><br><br>
+			</div>
+		</div>
+
+		<div class='row text-center'>
+
+			<div class='panel panel-info' style='padding:15px;'> 
+				 <h4 class='thin'>Neighbourhood</h4>	
+			 {{form.place_slug}}	 
+			<br>
+			<h4 class='thin'>Building/Sub-community</p>
+			{{form.area_info}}
+				</div>
+			</div>
+
+
+
+			<div class='row text-center'>
+
+			<div class='panel panel-info' style='padding:15px;'>
+				<h4 class='thin'>What should people know about your cooking?</h4>
+				{{form.intro}}
+				</div>
+
+				<button class='btn btn-lg'  type="submit" style="background-color:#CF3030; color:white; margin:50px;">I am ready!</button>
 			
-				
-
-				<h4 class='thin' style="margin-top:40px;">Please select your neighbourhood</h4>
 			
-					{{form.place_slug}}
-			
-
-
-				
-				<br>
-				{% if form.areas.errors %}
-				<div class='alert alert-danger'><p>Please select a neighbourhood.</p></div>
-				{% endif %}
-				<br>
-
-				<b>Additional area information (building name or subcommunity)</b>
-				{{form.area_info}}
-				<br><br>
 		
 
-		
-				<button class="btn btn-lg btn-danger " type="submit">Finish</button>
-				
-		</form>
-	</div>
-	<div class='col-lg-3'>
-	</div>
-
-	</div>
 </div>
-	
-		
-	</div>	
-			
 
-		<script>
+	</div>
+
+
+
+	</div>
+
+
+	<div class='col-lg-3'>
+		
+		
+		</div>
+
+	
+</form>
+
+</div>
+
+<script>
 	$('#help_text_price_input_1').hide();
 	$('#help_text_price_input_2').hide();
 
