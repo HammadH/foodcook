@@ -125,7 +125,7 @@ class EmailLead(models.Model):
 
 class UserSubscription(models.Model):
 	email = models.EmailField()
-	area = models.ForeignKey(Area)
+	area = models.ForeignKey(Area, null=True, blank=True)
 
 	def __unicode__(self):
 		return self.email

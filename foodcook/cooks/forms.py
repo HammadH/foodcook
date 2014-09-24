@@ -80,4 +80,8 @@ class UserSubscriptionForm(forms.ModelForm):
 	class Meta:
 		model = UserSubscription
 		exclude = ['area']
+		widgets = {
+		'email':forms.EmailInput(attrs={'class':'form-control', 'placeholder':'YOUR EMAIL ADDRESS', 'style':'height:40px;'})
+		}
+
 

@@ -28,12 +28,13 @@
 		</div>
 		
 		<div class='col-lg-6 text-center'>
-			<form method="GET">
-		
-			
-				{{form}}
+
 				 
               {% if object_list.count > 1 %}
+
+              <form method="GET">
+				{{form}}
+			  </form>
               
               	<form method='GET' >
               		<div class="col-md-4" style="margin-top:10px;">
@@ -57,43 +58,82 @@
   						<option>Special cooks</option>
   					</select>
   					</div>
+  					</form>
 
+  					{% endif %}
 
   					</div>
-  				</from>
-              {% endif %}
+  			
               
-            <!--   <button class="btn btn-default" type="submit" style='height:34px;'> -->
-              
-            <!--  </button> -->
-          
-           
-			
-		</form>
-	</div>
+
 		<div class="col-xs-3">
 		</div>
 	
-	</div> <!-- row -->
+		</div> <!-- row -->
+	
+
+{% if object_list.count == 0 %}
+	
+	
+	<div class="row text-center" style="background-color:;">
+		
+		<h4 class='thin'> Sorry! No one's cooking here at the moment..</h4>
+		<h3 class='thin'>But you can subscribe to this area and we'll let you know when someone cooks.</h3>
 
 
-	{% if object_list.count == 0 %}
-	<div class='container'>
-	<div class="row text-center" style="margin-top:30px;">
-		<h3 class='thin'> Sorry! No cooks have registered in this nieghbourhood yet...</h3>
-			<br>
-		<h3 class='thin'> Give us your email and we'll inform you when cooks sign up for this area.</h3>
-		<form class='form-class' method='post'>{% csrf_token %}	
-			{{subscription_form}}
-			<button type='submit'>post</button>
+		<div class='col-md-3' style='background-color:;'>
+		</div>
+
+			<div class='col-lg-6' style='background-color:yellow'>	
+		<form id='subscription_form' method='post'>{% csrf_token %}	
+		
+		 	<div class="input-group">
+      
+    {{subscription_form.email}}
+      
+    <span class="input-group-btn">
+        <button class="btn btn-danger" type="submit">Subscribe!</button>
+      </span>
+    </div><!-- /input-group -->
+            	
 		</form>
-		<h3 class='thin'> Sign up to become the first cook in this neighbourhood.</h3>
-		<a class='btn btn-danger btn-lg thin' style='margin:25px;' href="{% url 'account_signup' %}?next={% url 'new_profile_view' %}">Become a cook</a>
-	</div>
+		</div>
+
+
+<div class='col-md-3'>
 </div>
+
+</div>
+			
+		
+		
+<div class="row text-center" style="margin-top:130px;background-color:;">
+	<h4 class='thin'><i>Try searching a different area?</i></h4>
+<div class='col-md-3'></div>
+
+<div class='col-lg-6'>
+ 		<form method="GET">
+			{{form}}
+		</form>
+
+</div>
+
+<div class='col-md-3'></div>
+
+</div>	
+	
+
+
+	
+
 	{% else %}
 	
 	<div class='container' style='margin-top:-70px;'>
+
+		 <form method="GET">
+				{{form}}
+			  </form>
+
 		<h3 class='thin text-center' style='margin-top:-10px; margin-bottom:25px;'>Found {{object_list.count}} cooks..</h3>
 
 
@@ -178,4 +218,28 @@
 	</div>
 </div>
 </div>
+
+<script>
+$(document).ready(function(){
+
+	$('#subscription_form').submit(function(){
+		$.ajax({
+			type: 'POST',
+			data: $('#subscription_form').serialize(),
+			success: function(data)
+			{
+				if(data['status']=='success'){
+					$('#subscription_form').replaceWith("<div class='alret alert-success'><p>Subscription successfull!</p></div>");
+				}
+				else{
+					$('#subscription_form').replaceWith("<div class='alret alert-danger'><p>Something went wrong! </p></div>");
+				}
+				
+			},
+		});
+	});
+
+});
+	
+</script>
 {% endblock %}

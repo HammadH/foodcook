@@ -80,18 +80,20 @@ class DisplayCooks(FormMixin, ListView):
 
 
 	def post(self, request, *args, **kwargs):
-		form = UserSubscriptionForm(request.POST)
-		if form.is_valid():
-			try:
-				area, created = Area.objects.get_or_create(name=self.request.GET.get('area'))
-			except:
-				return HttpResponseRedirect('/')
-			new_subscription = UserSubscription(area=area, email=form.cleaned_data['email'])
-			new_subscription.save()
-			return HttpResponseRedirect('/')
-		else:
-			return HttpResponseRedirect('/')
-
+		#implement ajax with mixins
+		if request.is_ajax():
+			form = UserSubscriptionForm(request.POST)
+			if form.is_valid():
+				
+				try:
+					area, created = Area.objects.get_or_create(name=self.request.GET.get('area'))
+				except:
+					return HttpResponse(json.dumps({'status': 'failed'}), content_type='application/json')
+				new_subscription = UserSubscription(area=area, email=form.cleaned_data['email'])
+				new_subscription.save()
+				return HttpResponse(json.dumps({'status': 'success'}), content_type='application/json')
+			else:
+				return HttpResponse(json.dumps({'status': 'failed'}), content_type='application/json')
 
 list_view = DisplayCooks.as_view()	 
 
@@ -167,6 +169,7 @@ class DeleteMealView(LoginRequiredMixin, View):
 delete_meal = DeleteMealView.as_view()
 
 def mobile_click_counter(request):
+
 	if request.is_ajax():
 		try:
 			MobileClickLead.objects.create(cook=Cook.objects.get(id=int(request.GET.get('id'))))
