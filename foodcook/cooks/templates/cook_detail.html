@@ -7,12 +7,12 @@
 
 	{% block auth %}
 					{% if not user.is_authenticated %}
-						<li class='active'><a href="{% url 'account_signup' %}?next={% url 'new_profile_view' %}" style='color:red'>Good at cooking?</a> </li>
-						<li><a class="btn" href="{% url 'account_signup' %}?next={% url 'new_profile_view' %}" style="background-color:red; color:white">SIGN UP</a></li>
-						<li><a class="btn" href="{% url 'account_login' %}" style="background-color:red; color:white">SIGN IN</a></li>
+						<li class='active'><a href="{% url 'account_signup' %}?next={% url 'new_profile_view' %}" style='color:#CF3030'>Good at cooking?</a> </li>
+						<li><a class="btn" href="{% url 'account_signup' %}?next={% url 'new_profile_view' %}" style="background-color:#CF3030; color:white">SIGN UP</a></li>
+						<li><a class="btn" href="{% url 'account_login' %}" style="background-color:#CF3030; color:white">SIGN IN</a></li>
 					{% else %}
-					<li><a class="btn" href="{% url 'edit_profile_view' %}" style="background-color:white; color:red">EDIT PROFILE</a></li>
-					<li><a class="btn" href="{% url 'account_logout' %}" style="background-color:red; color:white">LOGOUT</a></li>
+					<li><a class="btn" href="{% url 'edit_profile_view' %}" style="background-color:white; color:#CF3030">EDIT PROFILE</a></li>
+					<li><a class="btn" href="{% url 'account_logout' %}" style="background-color:#CF3030; color:white">LOGOUT</a></li>
 					{% endif %}
 		{% endblock %}
 
