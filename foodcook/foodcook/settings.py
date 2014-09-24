@@ -13,7 +13,7 @@ import os
 
 import django.conf.global_settings as DEFAULT_SETTINGS
 
-from django.core.urlresolvers import reverse
+from django.core.urlresolvers import reverse_lazy
 
 
 
@@ -116,7 +116,7 @@ MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 
 MEDIA_URL = '/media/'
 
-# LOGIN_REDIRECT_URL = reverse('check_and_login')
+LOGIN_REDIRECT_URL = reverse_lazy('check_and_login')
 
 EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
 EMAIL_HOST = 'smtp.webfaction.com'

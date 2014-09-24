@@ -29,7 +29,35 @@
 
         <h3 class='lead text-center' style='margin-top:5px;'>or</h3>
 
-       <h2 class='thin text-center' style='margin-bottom:40px;'>Find people to cook for you.</h2>
+       <h2 class='thin text-center' style='margin-bottom:20px;'>Find people to cook for you.</h2>
+
+         <div class='row' style="margin-bottom:50px;">
+        	<div class='col-lg-4'>
+        	</div>
+       <div class='col-lg-4'>
+		<form method="GET" action="{% url 'cooks_list_view' %}"  >
+			 <div class='input-group'>
+	            {{form}}
+				<span class="input-group-btn">
+					<button class="btn btn-default" type="submit" style='height:34px;'>
+              <span class="fa fa-search"></span>
+             </button></span>
+             </div>
+         </form>
+       
+       		
+
+       		
+         <!-- <h3 class='lead' style='margin-top:30px;'>or</h3>
+         <a class='btn btn-danger' href="{% url 'cooks_list_view' %}"><h4 class='thin'>Find cooks around me</h4></a> -->
+		</div>
+
+		
+
+	<div class='col-lg-4'>
+	</div>	
+		</div>
+	</div>
 
       <div class='row'>
 
@@ -102,34 +130,7 @@
 
     </div>
 
-        <div class='row'>
-        	<div class='col-lg-4'>
-        	</div>
-       <div class='col-lg-4' style="margin:40px;">
-       	<h2 class="lead text-center" style='margin-top:5px;' >Discover people to cook for you.</h2>
-		<form method="GET" action="{% url 'cooks_list_view' %}">
-			 <div class='input-group'>
-	            {{form}}
-				<span class="input-group-btn">
-					<button class="btn btn-default" type="submit" style='height:34px;'>
-              <span class="fa fa-search"></span>
-             </button></span>
-             </div>
-         </form>
-       
-       		
-
-       		
-         <!-- <h3 class='lead' style='margin-top:30px;'>or</h3>
-         <a class='btn btn-danger' href="{% url 'cooks_list_view' %}"><h4 class='thin'>Find cooks around me</h4></a> -->
-		</div>
-
-		
-
-	<div class='col-lg-4'>
-	</div>	
-		</div>
-	</div>
+      
 
 
 </div>
