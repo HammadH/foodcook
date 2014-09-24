@@ -77,14 +77,14 @@
 	
 	<div class="row text-center" style="background-color:;">
 		
-		<h4 class='thin'> Sorry! No one's cooking here at the moment..</h4>
-		<h3 class='thin'>But you can subscribe to this area and we'll let you know when someone cooks.</h3>
+		<h4 class='thin'> We are still finding cooks in this area.. :[</h4>
+		<h3 class='thin'>Subscribe and we'll let you know when someone cooks.</h3>
 
 
 		<div class='col-md-3' style='background-color:;'>
 		</div>
 
-			<div class='col-lg-6' style='background-color:yellow'>	
+			<div class='col-lg-6' style='background-color:'>	
 		<form id='subscription_form' method='post'>{% csrf_token %}	
 		
 		 	<div class="input-group">
@@ -222,21 +222,24 @@
 <script>
 $(document).ready(function(){
 
-	$('#subscription_form').submit(function(){
+	$('#subscription_form').submit(function(e){
 		$.ajax({
 			type: 'POST',
 			data: $('#subscription_form').serialize(),
+			dataType: "json",
 			success: function(data)
 			{
 				if(data['status']=='success'){
-					$('#subscription_form').replaceWith("<div class='alret alert-success'><p>Subscription successfull!</p></div>");
+					$('#subscription_form').replaceWith("<div class='panel panel-success'><div class='alert alert-success'><h4>Subscription successfull!</h4></div></div>");
 				}
 				else{
-					$('#subscription_form').replaceWith("<div class='alret alert-danger'><p>Something went wrong! </p></div>");
+					$('#subscription_form').replaceWith("<div class='panel panel-error'><div class='alret alert-danger'><p>Something went wrong! </p></div></div>");
 				}
 				
 			},
 		});
+	e.preventDefault();
+
 	});
 
 });
