@@ -32,7 +32,7 @@ class NewCookProfileForm(autocomplete_light.ModelForm):
 		#fields = ('image', 'full_name', 'intro')
 		exclude = ['user', 'created_at', 'updated_at']
 		widgets = {
-		'image': ImageWidget(attrs={'onchange':'upload_img(this)'}),
+		'image': forms.FileInput(attrs={'onchange':'upload_img(this)'}),
 		'cuisines':MultipleChoiceWidget('CuisineAutocomplete', attrs={'class':'form-control', 'placeholder':'eg. Chinese, Italian'}),
 		'mobile': forms.TextInput(attrs={'class':'form-control', 'placeholder':'eg. 0552051301', }),
 		'intro': forms.Textarea(attrs={'class':'form-control', 'placeholder':'I cook different meals everyday. My food is very healthy and you can contact me anytime..', 'rows':3}),
