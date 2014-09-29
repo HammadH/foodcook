@@ -1,0 +1,97 @@
+{% load thumbnail %}
+
+
+
+      <div class='row'>
+
+        <table class='table table-hover '>
+				
+						
+				
+				<tr>
+					<th></th>
+					<th></th>
+					<th>Cuisines</th>
+					<th>Neighbourhood</th>
+					<th>Availability</th>
+					<th>Type</th>
+					<th>Price</th>
+					<th></th>
+					<th></th>	
+				</tr>
+					{% for cook in object_list %}
+
+						
+					
+						<tr class='clickableRow' href="{% url 'cooks_detail_view' pk=cook.id %}" style='cursor:pointer'>
+							<td>
+							{% thumbnail cook.image "110x110" crop="center" as im %}
+    							<img src="{{ cook.image.url }}" class='img-thumbnail' width="{{ im.width }}" height="{{ im.height }}">
+							{% endthumbnail %}
+						</td>
+						<td><b>{{cook.user.get_full_name}}</b></td>
+						<td>
+							{% for cuisine in cook.cuisines.all|slice:":3" %}
+							{{cuisine}}<br>
+							{% endfor %}
+						</td>
+						<td>
+							{{cook.area}}<br>
+							<h6>{{cook.area_info}}</h6>
+						</td>
+
+						<td>
+							{% if cook.breakfast %}
+							<p>Breakfast</p>
+							{% endif %}
+						
+							{% if cook.lunch %}
+							<p>Lunch</p>
+							{% endif %}
+							
+							{% if cook.dinner %}
+							<p>Dinner</p>
+							{% endif %}
+						</td>
+						<td>
+							<p>{{cook.cook_type}}</p>
+						
+						</td>
+						<td >
+							<p>{{cook.min_price}} AED - {{cook.max_price}} AED</p>
+						</td>
+						
+							
+						
+							<!-- 
+							{% for meal in cook.meals.all|slice:":2" %}
+							<td>
+								{% thumbnail meal.image  "75x75" crop="center" as im %}
+    								<img src="{{ meal.image.url }}" class='img-thumbnail' width="{{ im.width }}" height="{{ im.height }}">
+			 					{% endthumbnail %}
+			 			</td>
+							{% endfor %} -->
+						
+
+				
+						
+
+					</tr>
+					
+
+
+					{% endfor %}
+				</table>
+
+			
+
+
+    </div>
+
+<script>
+jQuery(document).ready(function($) {
+      $(".clickableRow").click(function() {
+            window.document.location = $(this).attr("href");
+      });
+});
+</script>
