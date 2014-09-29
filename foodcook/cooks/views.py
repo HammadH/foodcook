@@ -86,7 +86,10 @@ class DisplayCooks(FormMixin, ListView):
 			try:
 				area, created = Area.objects.get_or_create(name=self.request.GET.get('area'))
 			except:
-				return HttpResponse(json.dumps({'status': 'failed'}), content_type='application/json')
+				try:
+					area, created = Area.objects.get_or_create(name=self.request.POST.get('location'))
+				except:
+					return HttpResponse(json.dumps({'status': 'failed'}), content_type='application/json')
 			subscription, created = UserSubscription.objects.get_or_create(email=request.POST.get('email'))
 			subscription.areas.add(area)
 			subscription.save()

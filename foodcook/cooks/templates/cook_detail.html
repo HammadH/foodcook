@@ -57,9 +57,9 @@
 		<div class='row text-center' style='width:80%'>
 			<div class='panel panel-info' > 
 			 <h4 >Neighbourhood</h4>	
-			 {% for area in object.areas.all %}
-			 <p>{{area}}</p>
-			{% endfor %}
+			
+			 <p>{{object.area}}</p>
+			
 			<p><i>{{object.area_info}}</i></p>		 
 			</div>
 		</div>
@@ -129,7 +129,7 @@
 
   		
 
-		<div class='row text-center' style="margin:20px;">
+		<div class='row text-center' style="margin:;">
 		{% if object.user == user %}
 			<a class='btn btn-default ' href="{% url 'new_meal' %}">Add recent cooking photos</a>
  		{% endif %}
@@ -143,12 +143,15 @@
  		<h2 class='thin'>{{object.user.first_name}}'s recent cooking</h2>	
 		
 		{% endif %}
-		{% for meal in meals %}
-		<div class='row' style="margin:20px;">
-			<!-- {% thumbnail meal.image  "3000x3000" crop="center" as im %}
-    			<img src="{{ meal.image.url }}"  width="{{ im.width }}" height="{{ im.height }}">
-			 {% endthumbnail %} -->
-			<img src = "{{meal.image.url}}">
+		
+			{% for meal in meals %}
+			<div class='row' style="margin:15px;">
+			
+			{% thumbnail meal.image  "400x400" crop="center" as im %}
+    			<img src="{{ meal.image.url }}"  class='img-thumbnail' width="{{ im.width }}" height="{{ im.height }}">
+			 {% endthumbnail %}
+			
+		
 			 <br>
 				{% if object.user == user %}	
 				<a href="{{meal.get_absolute_url}}" >{{meal}}</a>

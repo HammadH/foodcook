@@ -6,7 +6,7 @@ from django.http import HttpResponseRedirect
 from django.core.mail import send_mail
 
 from cooks.forms import CookSearchForm, EmailForm
-from cooks.models import Cook
+from cooks.models import Cook, UserSubscription
 
 class LandingView(FormMixin, ListView):
 	template_name = 'landing.html'
@@ -19,6 +19,8 @@ class LandingView(FormMixin, ListView):
 
 	def form_valid(self, form):
 		return reverse('cooks_list_view')
+
+
 
 landing_view = LandingView.as_view()
 

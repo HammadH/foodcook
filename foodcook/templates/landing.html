@@ -20,8 +20,9 @@
 				
 
 				<img src="{% static 'default/timesbanner2.jpg' %}"/>
+				 <h1 class="thin ">The best place to find home cooks for everyday food.</h1>
 			
-				 <h2 class='thin text-center' style='margin-bottom:20px;'>Find people to cook for you.</h2>
+				 <h3 class='thin text-center' style='margin-bottom:20px;'>Search for cooks in your area.</h3>
 
   <div class='row' style="margin-bottom:20px;">
         	<div class='col-lg-4'>
@@ -54,15 +55,27 @@
 
         <h3 class='lead text-center' style='margin-top:5px;'>or</h3>
 
-        <a class='btn btn-danger' href="{% url 'account_signup' %}?next={% url 'new_profile_view' %}" style='margin:;'><h4 class='thin'>Become a cook</h4></a>
+        <a class='btn btn-danger' href="{% url 'account_signup' %}?next={% url 'new_profile_view' %}" style='background:#CF3030;'><h4 class='thin'>Become a cook</h4></a>
          
 
       
+</div>
+</div>
+      
+		</div>		
 
-       <h1 class="thin ">The best place to find people to cook for you.</h1>
-				
-		
-			<h3 class='thin'>Hundreds of people use 44Cooks to cook and find amazing cooks.</h3>
+	<div class='row text-center' style='padding:35px;background-color:#384452;'>
+
+			<h3 class='thin' style='color:white'>Hundreds of people now use 44Cooks to cook and find amazing cooks around them.</h3>
+			<form class='form-inline' method='post' id='subscription_form'>{% csrf_token %}
+				<input type='text' class='form-control' id='location_input_1' name='location' style='margin:10px;' placeholder='Enter your location'/>
+				<input type='text' class='form-control' id='email_input' name='email' style='margin:10px;' placeholder='Your email'/>
+				<button class='btn btn-primary' type='submit'>Subscribe</button>
+				<h4 class='thin' style='color:white'>Subscribe and get notified when someone starts cooking in your area.</h4>
+			</form>
+
+</div>
+
 
 
 	
@@ -70,97 +83,58 @@
 
      		
   		
-  	</div>
+  	<div class='container' style="margin-top:50px;">
+  		<div class='row'>
 
-			
-
+		<h3 class='thin text-center'>Featured Cooks from UAE</h3>
+	
+{% include 'cooks_list_block.html' %}
        
 
 
-      <div class='row'>
-
-        <table class='table table-hover '>
-				
-						
-				
-				<tr>
-					<th></th>
-					<th></th>
-					<th>Cuisines</th>
-					<th>Neighbourhood</th>
-					<th>Availability</th>
-					<th>Type</th>
-					<th>Price</th>
-					<th></th>
-					<th></th>	
-				</tr>
-					{% for cook in object_list %}
-
-						
-					
-						<tr>
-							<td>
-							{% thumbnail cook.image "110x110" crop="center" as im %}
-    							<img src="{{ cook.image.url }}" class='img-thumbnail' width="{{ im.width }}" height="{{ im.height }}">
-							{% endthumbnail %}
-						</td>
-						<td><b>{{cook.user.get_full_name}}</b></td>
-						<td>
-							{% for cuisine in cook.cuisines.all|slice:":3" %}
-							{{cuisine}}<br>
-							{% endfor %}
-						</td>
-						<td>
-							{{cook.area}}<br>
-							<h6>{{cook.area_info}}</h6>
-						</td>
-
-						<td>
-							{% if cook.breakfast %}
-							<p>Breakfast</p>
-							{% endif %}
-						
-							{% if cook.lunch %}
-							<p>Lunch</p>
-							{% endif %}
-							
-							{% if cook.dinner %}
-							<p>Dinner</p>
-							{% endif %}
-						</td>
-						<td>
-							<p>{{cook.cook_type}}</p>
-						
-						</td>
-						<td >
-							<p>{{cook.min_price}} AED - {{cook.max_price}} AED</p>
-						
-						<td><a class="btn btn-default" href="{% url 'cooks_detail_view' pk=cook.id %}">Contact</a></td>
-
-					</tr>
-
-
-					{% endfor %}
-				</table>
-
-			
-
-
-    </div>
 
       
 
-
+</div>
 </div>
 
-
-
-	<script src="https://maps.googleapis.com/maps/api/js?v=3.exp&libraries=places"></script>
 	<script>
 	var input = document.getElementById('location_input');
+	var input_1 = document.getElementById('location_input_1');
 	var types = []
 	var autocomplete = new google.maps.places.Autocomplete(input);
+	var autocomplete_1 = new google.maps.places.Autocomplete(input_1);
 	autocomplete.setTypes(types)
+	
+	
+	$(document).on("keypress", '#subscription_form', function(e){
+		var code = e.keyCode || e.which;
+		if (code == 13) {
+			e.preventDefault();
+			return false;
+		}
+	});
+
+	$("#subscription_form").submit(function(e){
+		$.ajax({
+			url:"{% url 'cooks_list_view' %}",
+			type:'POST',
+			dataType:'json',
+			data:$("#subscription_form").serialize(),
+			success:function(data){
+				if(data['status']=='success'){
+					$("#subscription_form").replaceWith("<h4 class='thin' style='color:orange'>Subscription successful!</h4>");
+				}
+				else
+				{
+					$('#subscription_form').replaceWith("<h4 class='thin' style='color:red'>Something went wrong!</h4> ");
+				}
+			}
+		});
+		e.preventDefault();
+	});
+
+
 	</script>
 	
 

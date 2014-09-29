@@ -230,10 +230,10 @@ $(document).ready(function(){
 			success: function(data)
 			{
 				if(data['status']=='success'){
-					$('#subscription_form').replaceWith("<div class='panel panel-success'><div class='alert alert-success'><h4>Subscription successfull!</h4></div></div>");
+					$('#subscription_form').replaceWith("<h4 class='thin' style='color:green;'>Subscription successfull!</h4>");
 				}
 				else{
-					$('#subscription_form').replaceWith("<div class='panel panel-error'><div class='alret alert-danger'><p>Something went wrong! </p></div></div>");
+					$('#subscription_form').replaceWith("<h4 class='thin' style='color:red;'>Something went wrong!</h4>");
 				}
 				
 			},
