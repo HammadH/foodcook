@@ -122,6 +122,13 @@ class EditProfileView(LoginRequiredMixin, UpdateView):
 	def get_success_url(self):
 		return reverse('cooks_detail_view', kwargs={'pk':self.object.id})
 
+	def form_valid(self, form):
+		data = form.cleaned_data
+		area, created = Area.objects.get_or_create(name=data['place_slug'])
+		form.instance.area = area
+		form.instance.save()
+		return super(EditProfileView, self).form_valid(form)
+
 edit_profile_view = EditProfileView.as_view()
 
 
@@ -177,6 +184,11 @@ def mobile_click_counter(request):
 			return HttpResponse(json.dumps({'status':'success'}), content_type='application/json')
 		except:
 			return HttpResponse(json.dumps({'status':'failed'}), content_type='application/json')
+
+
+
+
+	
 	
 
 		
