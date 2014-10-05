@@ -1,4 +1,4 @@
-from django.views.generic import View
+from django.views.generic import View, TemplateView
 from django.views.generic.edit import FormMixin, FormView
 from django.views.generic.list import ListView
 from django.core.urlresolvers import reverse
@@ -57,3 +57,8 @@ class ContactView(FormView):
 		return HttpResponseRedirect('/')
 
 contact_view = ContactView.as_view()
+
+class BlogView(TemplateView):
+	template_name = 'intro_blog.html'
+
+intro_blog = BlogView.as_view()

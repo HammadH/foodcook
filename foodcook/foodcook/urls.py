@@ -23,6 +23,7 @@ urlpatterns = patterns('',
 	url(r'^autocomplete/', include('autocomplete_light.urls')),
 	url(r'^accounts/', include('allauth.urls')),
 	url(r'^cooks/', include('cooks.urls')),
+	url(r'^what-is-44cooks/$', 'views.intro_blog', name='intro_blog'),
 	
 )+ static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
 
