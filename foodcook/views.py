@@ -11,9 +11,11 @@ from cooks.models import Cook, UserSubscription
 class LandingView(FormMixin, ListView):
 	template_name = 'landing.html'
 	model = Cook
+	queryset = Cook.objects.filter(is_featured=False)
 	
 	def get_context_data(self, **kwargs):
 		context = super(LandingView, self).get_context_data(**kwargs)
+		context['featured_cooks'] = Cook.objects.filter(is_featured=True)[:3]
 		context['form'] = CookSearchForm()
 		return context
 

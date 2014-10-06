@@ -61,6 +61,7 @@ class Cook(models.Model):
 	cook_type = models.ForeignKey(CookType, blank=False, null=True, default='Unspecified')
 	created_at = models.DateTimeField(auto_now_add=True)
 	updated_at = models.DateTimeField(blank=True, null=True) # when the cook updates profile.
+	is_featured = models.BooleanField(blank=True, default=False)
 	
 
 
@@ -70,6 +71,9 @@ class Cook(models.Model):
 	def get_absolute_url(self):
 		from django.core.urlresolvers import reverse
 		return reverse('cooks_detail_view', kwargs={'pk':str(self.id)})
+
+	def get_price_range(self):
+		return "%s-%s AED" %(self.min_price, self.max_price)
 
 	@staticmethod
 	def get_search_queryset(params):

@@ -4,89 +4,78 @@
 
       <div class='row'>
 
-        <table class='table table-hover '>
-				
-						
-				
-				<tr>
-					<th></th>
-					<th></th>
-					<th>Cuisines</th>
-					<th>Neighbourhood</th>
-					<th>Availability</th>
-					<th>Type</th>
-					<th>Price</th>
-					<th></th>
-					<th></th>	
-				</tr>
-					{% for cook in object_list %}
+      	{% for cook in object_list %}
 
-						
-					
-						<tr class='clickableRow' href="{% url 'cooks_detail_view' pk=cook.id %}" style='cursor:pointer'>
-							<td>
-							{% thumbnail cook.image "110x110" crop="center" as im %}
-    							<img src="{{ cook.image.url }}" class='img-thumbnail' width="{{ im.width }}" height="{{ im.height }}">
-							{% endthumbnail %}
-						</td>
-						<td><b>{{cook.user.get_full_name}}</b></td>
-						<td>
-							{% for cuisine in cook.cuisines.all|slice:":3" %}
-							{{cuisine}}<br>
+   <div class="block-update-card status col-xs-12" style='margin-bottom:5px;background-color:;' >
+  <a href="{% url 'cooks_detail_view' pk=cook.id %}" style='cursor:pointer; color:#555'>
+ <div class="update-card-body"  style='background-color:red;' >
+    	<div class="pull-left" >
+        {% thumbnail cook.image "110x110" crop="center" as im %}
+                <img class="img-thumbnail" src="{{ cook.image.url }}"  width="{{ im.width }}" height="{{ im.height }}">
+              {% endthumbnail %}
+    
+  </div>
+</div>
+<div class="col-xs-2" style='background-color:;'>
+      
+      <h5 class='thin'><b>{{cook.user.first_name}}</b></h5>
+      <h5 class='thin'>{{cook.cook_type}}</h5>
+      <h5 class='thin'>{{cook.get_price_range}}</h5>
+      <h5 class='thin'>{{cook.area}}</h5>
+
+</div>
+<div class="col-xs-1 " style='background-color:;'>
+      {% for cuisine in cook.cuisines.all|slice:":3" %}
+							<h5 class='thin'>{{cuisine}}</h5>
 							{% endfor %}
-						</td>
-						<td>
-							{{cook.area}}<br>
-							<h6>{{cook.area_info}}</h6>
-						</td>
 
-						<td>
-							{% if cook.breakfast %}
-							<p>Breakfast</p>
+</div>
+<div class="col-xs-1 " style='background-color:;'>
+{% if cook.breakfast %}
+							<h5 class='thin'>Breakfast</h5>
 							{% endif %}
 						
 							{% if cook.lunch %}
-							<p>Lunch</p>
+							<h5 class='thin'>Lunch</h5>
 							{% endif %}
 							
 							{% if cook.dinner %}
-							<p>Dinner</p>
+							<h5 class='thin'>Dinner</h5>
 							{% endif %}
-						</td>
-						<td>
-							<p>{{cook.cook_type}}</p>
-						
-						</td>
-						<td >
-							<p>{{cook.min_price}} AED - {{cook.max_price}} AED</p>
-						</td>
-						
-							
-						
-							<!-- 
-							{% for meal in cook.meals.all|slice:":2" %}
-							<td>
-								{% thumbnail meal.image  "75x75" crop="center" as im %}
-    								<img src="{{ meal.image.url }}" class='img-thumbnail' width="{{ im.width }}" height="{{ im.height }}">
-			 					{% endthumbnail %}
-			 			</td>
-							{% endfor %} -->
-						
+						</div>
 
-				
-						
-
-					</tr>
-					
+<div class="col-xs-1 " style='background-color:;'>
+<div class="card-action-pellet btn-toolbar text-center" role="toolbar">
+    <br>
+      <div class="btn-group fa fa-phone" ></div><br><br>
+<div class="btn-group fa fa-envelope"></div>
+      <!-- <div class="btn-group fa fa-magic"></div>
+      <div class="btn-group fa fa-photo"></div>  -->
+    </div>		
+       </div>					
 
 
-					{% endfor %}
-				</table>
+    
+  
+    	
+         <div class=" col-md-5">
+          {% for meal in cook.meals.all|slice:":4" %}
+            {% thumbnail meal.image  "105x105" crop="center" as im %}
+                <img src="{{ meal.image.url }}" class='img-thumbnail' width="{{ im.width }}" height="{{ im.height }}" style='margin:3px;'>
+            {% endthumbnail %}
+          {% endfor %}
+        </div>
+   
+   
+
+  
+</a>
+ </div>
 
 			
+{% endfor %}
 
-
-    </div>
+   </div>
 
 <script>
 jQuery(document).ready(function($) {

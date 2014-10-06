@@ -1,97 +1,47 @@
+{% load thumbnail %}
 
-
-
-<div class="block-update-card status" style='margin-bottom:5px;' >
+{% for cook in featured_cooks %}
+<div class="block-update-card status col-xs-12" style='margin-bottom:5px;' >
+  <a href="{% url 'cooks_detail_view' pk=cook.id %}" style='cursor:pointer; color:#555'>
  <div class="update-card-body col-xs-5">
-    	<a class="pull-left" href="#">
-    <img class="media-object update-card-MDimentions" src="http://3.bp.blogspot.com/-IbEOTNtCMyU/TfCAdHaAxEI/AAAAAAAAA8U/EATib38SSAM/s320/joe-mcelderry.jpg" alt="...">
-  </a>
-      <div class="update-card-body">
-      <h4>Vinothbabu K</h4>
-      <p>This is me. I am a Good Boy.This is the body content of this media.This can be 
-      used as an update panel.</p>
+    	<div class="pull-left" >
+        {% thumbnail cook.image "110x110" crop="center" as im %}
+                <img  class='img-thumbnail' src="{{ cook.image.url }}"  width="{{ im.width }}" height="{{ im.height }}">
+              {% endthumbnail %}
+    
+  </div>
+      <div class="update-card-body text-center">
+      <h5><b>{{cook.user.first_name}}</b></h5>
+      <h5>{{cook.cook_type}}</h5>
+      <h5>{{cook.get_price_range}}</h5>
+      <h5>{{cook.area}}</h5>
+
+
+
     </div>
     </div>
-    <div class="update-card-body col-xs-6	">
-    	<a class="pull-left" href="#">
-    <img class="media-object update-card-MDimentions" src="http://3.bp.blogspot.com/-IbEOTNtCMyU/TfCAdHaAxEI/AAAAAAAAA8U/EATib38SSAM/s320/joe-mcelderry.jpg" alt="...">
-  </a>
-      <div class="update-card-body">
-      <h4>Vinothbabu K</h4>
-      <p>This is me. I am a Good Boy.This is the body content of this media.This can be 
-      used as an update panel.</p>
-    </div>
-    </div>
-    <div class="card-action-pellet btn-toolbar pull-right" role="toolbar">
-  <div class="btn-group fa fa-mail-reply"></div>
-  <div class="btn-group fa fa-map-marker"></div>
-  <div class="btn-group fa fa-magic"></div>
-  <div class="btn-group fa fa-photo"></div>
+    <div class="update-card-body col-md-6" >
+    	
+         <div class="update-card-body" style='background-color:'>
+          {% for meal in cook.meals.all|slice:":3" %}
+            {% thumbnail meal.image  "85x85" crop="center" as im %}
+                <img src="{{ meal.image.url }}" class='img-circle' width="{{ im.width }}" height="{{ im.height }}" style='margin:3px;'>
+            {% endthumbnail %}
+          {% endfor %}
+        </div>
+   
+   
 </div>
-</div>
-
-
-
-<div class="block-update-card status"  style='margin-bottom:5px;'>
-
-    <div class="update-card-body col-xs-5">
-      <a class="pull-left" href="#">
-    <img class="media-object update-card-MDimentions" src="http://3.bp.blogspot.com/-IbEOTNtCMyU/TfCAdHaAxEI/AAAAAAAAA8U/EATib38SSAM/s320/joe-mcelderry.jpg" alt="...">
-  </a>
-      <div class="update-card-body">
-      <h4>Vinothbabu K</h4>
-      <p>This is me. I am a Good Boy.This is the body content of this media.This can be 
-      used as an update panel.</p>
+  <div class="card-action-pellet btn-toolbar text-center" role="toolbar">
+    <br><br>
+      <div class="btn-group fa fa-phone" ></div><br><br>
+<div class="btn-group fa fa-envelope"></div>
+      <!-- <div class="btn-group fa fa-magic"></div>
+      <div class="btn-group fa fa-photo"></div>  -->
     </div>
-    </div>
-    <div class="update-card-body col-xs-6 ">
-      <a class="pull-left" href="#">
-    <img class="media-object update-card-MDimentions" src="http://3.bp.blogspot.com/-IbEOTNtCMyU/TfCAdHaAxEI/AAAAAAAAA8U/EATib38SSAM/s320/joe-mcelderry.jpg" alt="...">
-  </a>
-      <div class="update-card-body">
-      <h4>Vinothbabu K</h4>
-      <p>This is me. I am a Good Boy.This is the body content of this media.This can be 
-      used as an update panel.</p>
-    </div>
-    </div>
-    <div class="card-action-pellet btn-toolbar pull-right" role="toolbar">
-  <div class="btn-group fa fa-mail-reply"></div>
-  <div class="btn-group fa fa-map-marker"></div>
-  <div class="btn-group fa fa-magic"></div>
-  <div class="btn-group fa fa-photo"></div>
+</a>
 </div>
 
-
-</div>
-
-<div class="block-update-card status"  style='margin-bottom:5px;'>
-
-    <div class="update-card-body col-xs-5">
-      <a class="pull-left" href="#">
-    <img class="media-object update-card-MDimentions" src="http://3.bp.blogspot.com/-IbEOTNtCMyU/TfCAdHaAxEI/AAAAAAAAA8U/EATib38SSAM/s320/joe-mcelderry.jpg" alt="...">
-  </a>
-      <div class="update-card-body">
-      <h4>Vinothbabu K</h4>
-      <p>This is me. I am a Good Boy.This is the body content of this media.This can be 
-      used as an update panel.</p>
-    </div>
-    </div>
-    <div class="update-card-body col-xs-6 ">
-      <a class="pull-left" href="#">
-    <img class="media-object update-card-MDimentions" src="http://3.bp.blogspot.com/-IbEOTNtCMyU/TfCAdHaAxEI/AAAAAAAAA8U/EATib38SSAM/s320/joe-mcelderry.jpg" alt="...">
-  </a>
-      <div class="update-card-body">
-      <h4>Vinothbabu K</h4>
-      <p>This is me. I am a Good Boy.This is the body content of this media.This can be 
-      used as an update panel.</p>
-    </div>
-    </div>
-    <div class="card-action-pellet btn-toolbar pull-right" role="toolbar">
-  <div class="btn-group fa fa-mail-reply"></div>
-  <div class="btn-group fa fa-map-marker"></div>
-  <div class="btn-group fa fa-magic"></div>
-  <div class="btn-group fa fa-photo"></div>
-</div>
+{% endfor %}
 
 
-</div>

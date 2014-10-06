@@ -20,15 +20,15 @@
 			<div class="row text-center" style='margin:;'>
 
 				
-				<div class='col-md-5'>
+				<div class='col-md-5' style='background-color:#eee; padding:15px;margin-top:20px;'>
 					<img src="{% static 'default/timesbanner2.jpg' %}" />
 
-					<h3 class='thin text-center' style='margin-bottom:20px;'>Search for cooks in your area</h3>
+					<h3 class='thin text-center' style='margin-bottom:20px;'>Search cooks in your area</h3>
 					<form method="GET" action="{% url 'cooks_list_view' %}">
 			 <div class='input-group'>
 	            {{form}}
 				<span class="input-group-btn">
-					<button class="btn btn-default" type="submit" style='height:34px;'>
+					<button class="btn btn-danger" type="submit" style='height:34px;'>
               <span class="fa fa-search"></span>
              </button></span>
              </div>
@@ -39,68 +39,12 @@
         <h4 class='thin'>Everyday food - Events - Parties - Special occassions</h4>
      	</div>
 
-     <div class=" dynamicTile">
-		<div class="row ">
-    <div class="col-sm-4 col-xs-4">
-    	<div id="tile1" class="tile">
-        
-         <div class="carousel slide" data-ride="carousel">
-          <!-- Wrapper for slides -->
-          <div class="carousel-inner">
-            <div class="item active">
-               <img src="http://handsontek.net/demoimages/tiles/twitter1.png" class="img-responsive"/>
-            </div>
-            <div class="item">
-               <img src="http://handsontek.net/demoimages/tiles/twitter2.png" class="img-responsive"/>
-            </div>
-          </div>
-        </div>
-         
-    	</div>
-	</div>
-	<div class="col-sm-4 col-xs-4">
-		<div id="tile2" class="tile">
-    	 
-         <div class="carousel slide" data-ride="carousel">
-          <!-- Wrapper for slides -->
-          <div class="carousel-inner">
-            <div class="item active">
-              <img src="http://handsontek.net/demoimages/tiles/hot.png" class="img-responsive"/>
-            </div>
-            <div class="item">
-              <img src="http://handsontek.net/demoimages/tiles/hot2.png" class="img-responsive"/>
-            </div>
-            <div class="item">
-              <img src="http://handsontek.net/demoimages/tiles/hot3.png" class="img-responsive"/>
-            </div>
-          </div>
-        </div>
-         
-		</div>
-	</div>
-	<div class="col-sm-4 col-xs-4">
-		<div id="tile3" class="tile">
-    	 
-        <div class="carousel slide" data-ride="carousel">
-          <!-- Wrapper for slides -->
-          <div class="carousel-inner">
-            <div class="item active">
-               <img src="http://handsontek.net/demoimages/tiles/weather2.png" class="img-responsive"/>
-            </div>
-            <div class="item">
-               <img src="http://handsontek.net/demoimages/tiles/weather.png" class="img-responsive"/>
-            </div>
-            </div>
-         </div>
-		</div>
-	</div>
+     	<div  style='margin-top:25px;' class="fb-like" data-href="http://www.44cooks.com" data-layout="box_count" data-action="like" data-show-faces="false" data-share="true"></div>
 
-				</div>
-			</div>
 		</div>
 
-				<div class='col-md-7'>
-					<h5 class='thin'>Today's featured cooks. Hire them now!</h5>
+				<div class='col-md-7 text-center' >
+					<h4 class='thin'>Today's featured cooks</h4>
 						
 					{% include 'cook_card.html' %}
 					
@@ -120,7 +64,7 @@
                         <div class="col-md-3">
                             <img src="{% static 'assets/images/woman-cooking.png' %}">
                         </div>
-                        <div class="col-md-9">
+                        <div class="col-md-6">
                         	<h2 class='thin '>So what is 44cooks.com?</h2>
                         	
 
@@ -130,23 +74,16 @@ to solve their everyday food problem.</h3> <h3 class='thin'>It also helps people
 <br>
 					<a class='btn btn-primary' href="{% url 'intro_blog' %}">Read More</a>
 						</div>
+						<div class="col-md-3">
+                            <img src="{% static 'assets/images/cooking-man.png' %}">
+                        </div>
                     </div>
                 </div>
             </div>
       
 		</div>		
 
-	<div class='row text-center' style='padding:35px;background-color:#384452;'>
-
-			<h3 class='thin' style='color:white'>Hundreds of people are using 44Cooks to cook and find amazing cooks around them.</h3>
-			<form class='form-inline' method='post' id='subscription_form'>{% csrf_token %}
-				<input type='text' class='form-control' id='location_input_1' name='location' style='margin:10px;' placeholder='Enter your location'/>
-				<input type='text' class='form-control' id='email_input' name='email' style='margin:10px;' placeholder='Your email'/>
-				<button class='btn btn-primary' type='submit'>Subscribe</button>
-				<h4 class='thin' style='color:white'>Subscribe and get notified when someone starts cooking in your area.</h4>
-			</form>
-
-</div>
+	
 
 
 
@@ -161,14 +98,43 @@ to solve their everyday food problem.</h3> <h3 class='thin'>It also helps people
 		<h3 class='thin text-center'>Featured Cooks from UAE</h3>
 	
 {% include 'cooks_list_block.html' %}
-       
-
-
-
-      
-
+ 
 </div>
 </div>
+<div class='row' style='margin:25px;'>
+	<div class='col-md-3'>
+	</div>
+	<div class='col-md-6'>
+<h3 class='thin text-center' style='margin-bottom:20px;'>Find people to cook for you!</h3>
+					<form method="GET" action="{% url 'cooks_list_view' %}">
+			 <div class='input-group'>
+	            {{form}}
+				<span class="input-group-btn">
+					<button class="btn btn-default" type="submit" style='height:34px;'>
+              <span class="fa fa-search"></span>
+             </button></span>
+             </div>
+         </form>
+
+        </div> 
+
+        <div class='col-md-3'>
+	</div>
+</div>	
+
+<div class='row text-center' style='padding:35px;background-color:#384452;'>
+
+			<h3 class='thin' style='color:white'>Hundreds of people are using 44Cooks to cook and find amazing cooks around them.</h3>
+			<form class='form-inline' method='post' id='subscription_form'>{% csrf_token %}
+				<input type='text' class='form-control' id='location_input_1' name='location' style='margin:10px;' placeholder='Enter your location'/>
+				<input type='text' class='form-control' id='email_input' name='email' style='margin:10px;' placeholder='Your email'/>
+				<button class='btn btn-primary' type='submit'>Subscribe</button>
+				<h4 class='thin' style='color:white'>Subscribe and get notified when someone starts cooking in your area.</h4>
+			</form>
+
+</div>
+
+
 
 	<script>
 	var input = document.getElementById('location_input');

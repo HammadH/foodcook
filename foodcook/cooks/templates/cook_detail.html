@@ -33,17 +33,7 @@
 			</div>
 		</div>
 
-		<div class='row text-center' style='width:80%'>
-			<div class='panel panel-info' > 
-			 <h4>Mobile</h4>	
-			 {% if object.mobile %}
-			 <a id=mobile_button class='btn btn-default' style='margin:5px;'>Show number</a>	 
-			 {% else %}
-			 <p style='text-color:red'>No mobile provided.</p>
-			 {% endif %}
-			</div>
-
-		</div>
+	
 
 		<div class='row text-center' style='width:80%'>
 			<div class='panel panel-info' > 
@@ -179,6 +169,17 @@
 
 		{% endif %}
 
+	</div>
+
+	<div class='col-md-3 text-center'>
+		<div class='panel panel-info' > 
+			 <h4>Mobile</h4>	
+			 {% if object.mobile %}
+			 <a id=mobile_button class='btn btn-default' style='margin:5px;'>Show number</a>	 
+			 {% else %}
+			 <p style='text-color:red'>No mobile provided.</p>
+			 {% endif %}
+			</div>
 	</div>
 
 	</div>
