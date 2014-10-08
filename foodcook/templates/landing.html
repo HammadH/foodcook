@@ -3,6 +3,14 @@
 {% load thumbnail %}
 
 
+{% block food_buttons %}
+
+	<a class="btn" href="{% url 'new_everyday_food' %}" style="background-color:white; color:#CF3030">Everyday Food</a>
+	<a class="btn" href="{% url 'new_event_food' %}" style="background-color:white; color:#CF3030">Event Food</a>
+	<a class="btn" href="{% url 'new_baked_food' %}" style="background-color:white; color:#CF3030">Baked Food</a>
+	
+{% endblock %}
+
 {% block auth %}
 					{% if not user.is_authenticated %}
 						<li><a class='btn' href="{% url 'account_signup' %}?next={% url 'new_profile_view' %}" style='background:#CF3030;'><h4 class='thin' style='color:white;'>Become a cook</h4></a></li>
@@ -20,7 +28,7 @@
 			<div class="row text-center" style='margin:;'>
 
 				
-				<div class='col-md-5' style='background-color:#eee; padding:15px;margin-top:20px;'>
+				<div class='col-md-7' style='background-color:#eee; padding:15px;margin-top:20px;'>
 					<img src="{% static 'default/timesbanner2.jpg' %}" />
 
 					<h3 class='thin text-center' style='margin-bottom:20px;'>Search cooks in your area</h3>
@@ -43,7 +51,7 @@
 
 		</div>
 
-				<div class='col-md-7 text-center' >
+				<div class='col-md-5 text-center' >
 					<h4 class='thin'>Today's featured cooks</h4>
 						
 					{% include 'cook_card.html' %}
@@ -89,13 +97,28 @@ to solve their everyday food problem.</h3> <h3 class='thin'>It also helps people
 
 	
 
+	<div class='container' style="margin-top:50px;">
+  		<div class='row'>
+		<h3 class='thin text-center'>These people are looking for everyday food</h3>
+		{% include 'everyday_food_list.html' %}
+</div>
+</div>
 
+	<div class='container' style="margin-top:50px;">
+  		<div class='row'>
+
+		<h3 class='thin text-center'>These people need food for events</h3>
+	
+
+ 
+</div>
+</div>
      		
   		
   	<div class='container' style="margin-top:50px;">
   		<div class='row'>
 
-		<h3 class='thin text-center'>Featured Cooks from UAE</h3>
+		<h3 class='thin text-center'>These people are offering cooking services</h3>
 	
 {% include 'cooks_list_block.html' %}
  

@@ -24,6 +24,13 @@ urlpatterns = patterns('',
 	url(r'^accounts/', include('allauth.urls')),
 	url(r'^cooks/', include('cooks.urls')),
 	url(r'^what-is-44cooks/$', 'views.intro_blog', name='intro_blog'),
+
+	url(r'^everyday/(?P<pk>\d+)/$', 'views.everydayfood_details', name='everydayfood_details'),
+	url(r'^everyday/new$', 'views.new_everyday_food', name='new_everyday_food'),
+	url(r'^event/new$', 'views.new_event_food', name='new_event_food'),
+	url(r'^baked/new$', 'views.new_baked_food', name='new_baked_food'),
+	url(r'^success/$', 'views.food_success', name='food_successfully_posted'),
+
 	
 )+ static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
 

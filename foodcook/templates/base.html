@@ -19,7 +19,7 @@
 	<!-- Custom styles for our template -->
 	<link rel="stylesheet" href="{% static 'assets/css/bootstrap-theme.css' %}" media="screen" >
 	<link rel="stylesheet" href="{% static 'assets/css/main.css' %}">
-	<link rel="stylesheet" href="{% static 'assets/css/cook_card.css' %}">
+
 	
 	
 	<link href="//maxcdn.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css" rel="stylesheet">
@@ -98,12 +98,12 @@
 				</div></a> 
 
 				</div>
-				
-				
+										
 			</div>
 
 			</div>
-				
+
+				{% block food_buttons %} {% endblock %}
 			<div class="navbar-collapse collapse">
 				<ul class="nav navbar-nav pull-right">
 					<!-- <li class="active"><a href="#">Home</a></li>
@@ -142,6 +142,7 @@
 	{% block logout %} {% endblock %}
 	{% block contact %} {% endblock %}
 	{% block content %} {% endblock %}
+
 
 
 <!-- 	
@@ -262,8 +263,6 @@
 	<!-- JavaScript libs are placed at the end of the document so the pages load faster -->
 	
 	<script src="http://netdna.bootstrapcdn.com/bootstrap/3.0.0/js/bootstrap.min.js"></script>
-	<script src="assets/js/headroom.min.js"></script>
-	<script src="assets/js/jQuery.headroom.min.js"></script>
-	<script src="assets/js/template.js"></script>
+	
 </body>
 </html>

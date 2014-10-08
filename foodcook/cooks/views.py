@@ -133,6 +133,8 @@ edit_profile_view = EditProfileView.as_view()
 
 
 
+
+
 class NewMealView(LoginRequiredMixin, FormView):
 	form_class = MealForm
 	template_name = 'new_meal.html'

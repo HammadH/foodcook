@@ -3,7 +3,7 @@ from django import forms
 import autocomplete_light
 from autocomplete_light.widgets import TextWidget, MultipleChoiceWidget, ChoiceWidget
 
-from cooks.models import Cook, Area, Meal, EmailLead, UserSubscription
+from cooks.models import *
 
 from form_utils.widgets import ImageWidget
 # from form_utils.forms import BetterModelForm, BetterModelFormMetaclass
@@ -16,6 +16,9 @@ from form_utils.widgets import ImageWidget
 
 # NewCookProfileForm = autocomplete_light.modelform_factory(Cook, autocomplete_exclude=['user',], registry=Area)
 
+EverydayFoodPlaceholder ="Hi, \nI am looking for someone who can provide me dinner everyday.\nFeel free to contact me anytime."
+EventFoodPlaceholder = "Hi, \nI am looking for someone to cook food for a party on..."
+BakedFoodPlaceholder = "Hi, \nI am looking for someone to bake a Cheese cake on..."
 
 class SignupForm(forms.Form):
 	first_name = forms.CharField(max_length=50, label="First Name")
@@ -46,6 +49,41 @@ class NewCookProfileForm(autocomplete_light.ModelForm):
 		'area_info': forms.TextInput(attrs={'class':'form-control', 'placeholder':'eg. Marina Pinnacle, near Marina Walk'}),
 		}
 		
+class EverydayFoodForm(forms.ModelForm):
+	class Meta:
+		model = EverydayFood
+		exclude = ['area']
+		widgets = {
+			'message': forms.Textarea(attrs={'class':'form-control', 'rows':3, 'style':'margin-bottom:10px;', 'placeholder':EverydayFoodPlaceholder}),
+			'place_slug': forms.TextInput(attrs={'class':'form-control','id':'location_input', 'placeholder':'Enter your location','style':'margin-bottom:10px;'}),
+			'email': forms.EmailInput(attrs={'class':'form-control','style':'margin-bottom:10px;','placeholder':'Your email'}),
+			'phone': forms.TextInput(attrs={'class':'form-control','placeholder':'Your mobile'}),
+			'cuisines':MultipleChoiceWidget('CuisineAutocomplete', attrs={'class':'form-control', 'placeholder':'eg. Chinese, Italian'}),
+		}
+
+class EventFoodForm(forms.ModelForm):
+	class Meta:
+		model = EventFood
+		exclude = ['area']
+		widgets = {
+			'message': forms.Textarea(attrs={'class':'form-control', 'rows':3, 'style':'margin-bottom:10px;', 'placeholder':EventFoodPlaceholder}),
+			'cuisines':MultipleChoiceWidget('CuisineAutocomplete', attrs={'class':'form-control', 'placeholder':'eg. Chinese, Italian'}),
+			'place_slug': forms.TextInput(attrs={'class':'form-control','id':'location_input', 'placeholder':'Enter your location','style':'margin-bottom:10px;'}),
+			'email': forms.EmailInput(attrs={'class':'form-control','style':'margin-bottom:10px;','placeholder':'Your email'}),
+			'phone': forms.TextInput(attrs={'class':'form-control','placeholder':'Your mobile'}),
+			
+		}
+
+class BakedFoodForm(forms.ModelForm):
+	class Meta:
+		model = BakedFood
+		exclude = ['area']
+		widgets = {
+			'message': forms.Textarea(attrs={'class':'form-control', 'rows':3, 'style':'margin-bottom:10px;', 'placeholder':BakedFoodPlaceholder}),
+			'place_slug': forms.TextInput(attrs={'class':'form-control','id':'location_input', 'placeholder':'Enter your location','style':'margin-bottom:10px;'}),
+			'item': forms.TextInput(attrs={'class':'form-control', 'placeholder':'eg: Cheese cake, choco chip cookies'})
+		}
+
 
 class MealForm(forms.ModelForm):
 	class Meta:

@@ -20,6 +20,10 @@ urlpatterns = patterns('',
 	# url(r'^sort/$', views.sort_list, name='sort_list'),
 	url(r'^mobile_click/', views.mobile_click_counter, name='count_mobile_click_lead'),
 
+	
+
+
+
 	# url(r'^new/congrats/$', views.congrats_view, name='congrats_view'),
 
 	
