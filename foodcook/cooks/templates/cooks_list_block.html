@@ -6,7 +6,7 @@
 
       	{% for cook in object_list %}
 
-   <div class="block-update-card status col-xs-12" style='margin-bottom:15px;background-color:;' >
+   <div class="block-update-card status col-xs-12 panel panel-default" style='margin-bottom:15px;padding:15px;background-color:#eee;' >
   <a href="{% url 'cooks_detail_view' pk=cook.id %}" style='cursor:pointer; color:#555'>
  <div class="update-card-body"  style='background-color:red;' >
     	<div class="pull-left" >
@@ -20,11 +20,18 @@
       
       <h5 class='thin'><b>{{cook.user.first_name}}</b></h5>
       <h5 class='thin'>{{cook.cook_type}}</h5>
-      <h5 class='thin'>{{cook.get_price_range}}</h5>
+      {% if "Everyday" in cook.cook_type.name %}
+     	 <h5 class='thin'>{{cook.get_price_range}}/meal</h5>
+      {% elif "Special" in cook.cook_type.name %}
+      	<h5 class='thin'>{{cook.get_price_range}}/event</h5>
+      {% elif "Baker" in cook.cook_type.name %}
+      	<h5 class='thin'>{{cook.get_price_range}}/cake</h5>
+      	{% endif %}	 
       <h5 class='thin'>{{cook.area}}</h5>
 
 </div>
 <div class="col-xs-1 " style='background-color:;'>
+
       {% for cuisine in cook.cuisines.all|slice:":3" %}
 							<h5 class='thin'>{{cuisine}}</h5>
 							{% endfor %}
@@ -44,7 +51,7 @@
 							{% endif %}
 						</div>
 
-<div class="col-xs-1 " style='background-color:;'>
+<div class="col-xs-2 " style='background-color:;'>
 <div class="card-action-pellet btn-toolbar text-center" role="toolbar">
     <br>
       <div class="btn-group fa fa-phone" ></div><br><br>

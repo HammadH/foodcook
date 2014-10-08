@@ -13,13 +13,14 @@ from utils import LoginRequiredMixin
 class LandingView(FormMixin, ListView):
 	template_name = 'landing.html'
 	model = Cook
-	queryset = Cook.objects.filter(is_featured=False)
+	queryset = Cook.objects.filter(is_featured=False)[:10]
 	
 	def get_context_data(self, **kwargs):
 		context = super(LandingView, self).get_context_data(**kwargs)
 		context['featured_cooks'] = Cook.objects.filter(is_featured=True)[:3]
-		context['eventfood'] = EventFood.objects.all()
-		context['everydayfood'] = EverydayFood.objects.all()
+		context['eventfood'] = EventFood.objects.order_by('-created_at')[:10]
+		context['everydayfood'] = EverydayFood.objects.order_by('-created_at')[:10]
+		context['bakedfood'] = BakedFood.objects.order_by('-created_at')[:10]
 		context['form'] = CookSearchForm()
 		return context
 

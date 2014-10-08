@@ -5,9 +5,9 @@
 
 {% block food_buttons %}
 
-	<a class="btn" href="{% url 'new_everyday_food' %}" style="background-color:white; color:#CF3030">Everyday Food</a>
-	<a class="btn" href="{% url 'new_event_food' %}" style="background-color:white; color:#CF3030">Event Food</a>
-	<a class="btn" href="{% url 'new_baked_food' %}" style="background-color:white; color:#CF3030">Baked Food</a>
+	<li><a class="btn" href="{% url 'new_everyday_food' %}" style="background-color:white; color:#CF3030">Everyday Food</a></li>
+	<li><a class="btn" href="{% url 'new_event_food' %}" style="background-color:white; color:#CF3030">Event Food</a></li>
+	<li><a class="btn" href="{% url 'new_baked_food' %}" style="background-color:white; color:#CF3030">Baked Food</a></li>
 	
 {% endblock %}
 
@@ -46,12 +46,13 @@
         	<h5 class='thin'><i>for</i><h5>  
         <h4 class='thin'>Everyday food - Events - Parties - Special occassions</h4>
      	</div>
-
-     	<div  style='margin-top:25px;' class="fb-like" data-href="http://www.44cooks.com" data-layout="box_count" data-action="like" data-show-faces="false" data-share="true"></div>
+     		<div class="fb-like" data-href="http://www.44cooks.com" data-layout="button_count" data-action="like" data-show-faces="false" data-share="true" style='margin:10px;'></div>
+     	
 
 		</div>
 
-				<div class='col-md-5 text-center' >
+
+			<div class='col-md-4 text-center' style='margin:15px;background-color:#eee;' >
 					<h4 class='thin'>Today's featured cooks</h4>
 						
 					{% include 'cook_card.html' %}
@@ -63,6 +64,8 @@
 
 		
 </div>
+
+
 </div>
 
 <div class="row row-margin-bottom" style='background-color:#eee; padding:px;'>
@@ -73,18 +76,20 @@
                             <img src="{% static 'assets/images/woman-cooking.png' %}">
                         </div>
                         <div class="col-md-6">
-                        	<h2 class='thin '>So what is 44cooks.com?</h2>
+                        	<h3 class='thin'><b style='color:grey'>So what is 44cooks.com?</b></h3><br>
                         	
 
-<h3 class='thin'>44cooks is a platform where people can cook for other people. </h3>
-<h3 class='thin'>It helps busy individuals find close by home cooks 
-to solve their everyday food problem.</h3> <h3 class='thin'>It also helps people to hire top class chefs for events such as parties and birthdays.</h3>
+<h4 class='thin'><b style='color:grey'>44cooks is a platform where people can cook for other people.</b> </h4><br>
+<h4 class='thin'><b style='color:grey'>It helps busy individuals find close by home cooks 
+to solve their everyday food problem.</b></h4><br> <h4 class='thin'><b style='color:grey'>It also helps people to hire top class chefs for events such as parties and birthdays.</b></h4><br>
 <br>
 					<a class='btn btn-primary' href="{% url 'intro_blog' %}">Read More</a>
 						</div>
-						<div class="col-md-3">
-                            <img src="{% static 'assets/images/cooking-man.png' %}">
-                        </div>
+
+						<div class='col-md-3'>
+							<img src="{% static 'assets/images/cooking-man.png' %}">
+						</div>
+						
                     </div>
                 </div>
             </div>
@@ -97,25 +102,69 @@ to solve their everyday food problem.</h3> <h3 class='thin'>It also helps people
 
 	
 
-	<div class='container' style="margin-top:50px;">
+	<div class='container' style="margin-top:50px;background-color:;padding:15px;">
   		<div class='row'>
-		<h3 class='thin text-center'>These people are looking for everyday food</h3>
+		<h3 class='thin text-center'>These people are looking for Everyday Food</h3>
+		<div class='col-lg-2'>
+		</div>
+		<div class='col-lg-8'>
+		
 		{% include 'everyday_food_list.html' %}
+		</div>
+		<div class='col-lg-2'>
+		</div>
+
 </div>
 </div>
-
-	<div class='container' style="margin-top:50px;">
-  		<div class='row'>
-
-		<h3 class='thin text-center'>These people need food for events</h3>
 	
 
- 
+{% if eventfood %}
+	<div class='container' style="margin-top:50px;background-color:;padding:15px;">
+  		<div class='row'>
+		<h3 class='thin text-center'>These people need Food for Events</h3>
+		<div class='col-lg-2'>
+		</div>
+		<div class='col-lg-8'>
+		
+		{% include 'event_food_list.html' %}
+		</div>
+		<div class='col-lg-2'>
+		</div>
+
+	</div>
 </div>
+{% endif %}     		
+
+{% if bakedfood %}
+	<div class='container' style="margin-top:50px;background-color:;padding:15px;">
+  		<div class='row'>
+		<h3 class='thin text-center'>These people are looking for Baked Food</h3>
+		<div class='col-lg-2'>
+		</div>
+		<div class='col-lg-8'>
+		
+		{% include 'baked_food_list.html' %}
+		</div>
+		<div class='col-lg-2'>
+		</div>
+
+	</div>
 </div>
-     		
+{% endif %}  
+  	
+<div class='row text-center' style='padding:35px;background-color:#384452;'>
+
+			<h3 class='thin' style='color:white'>Hundreds of people are using 44Cooks to cook and find amazing cooks around them.</h3>
+			<form class='form-inline' method='post' id='subscription_form'>{% csrf_token %}
+				<input type='text' class='form-control' id='location_input_1' name='location' style='margin:10px;' placeholder='Enter your location'/>
+				<input type='text' class='form-control' id='email_input' name='email' style='margin:10px;' placeholder='Your email'/>
+				<button class='btn btn-primary' type='submit'>Subscribe</button>
+				<h4 class='thin' style='color:white'>Subscribe and get notified when someone starts cooking in your area.</h4>
+			</form>
+
+</div>
   		
-  	<div class='container' style="margin-top:50px;">
+  	<div class='container' style="margin-top:50px;background-color:;padding:15px;">
   		<div class='row'>
 
 		<h3 class='thin text-center'>These people are offering cooking services</h3>
@@ -124,6 +173,8 @@ to solve their everyday food problem.</h3> <h3 class='thin'>It also helps people
  
 </div>
 </div>
+
+
 <div class='row' style='margin:25px;'>
 	<div class='col-md-3'>
 	</div>
@@ -145,17 +196,7 @@ to solve their everyday food problem.</h3> <h3 class='thin'>It also helps people
 	</div>
 </div>	
 
-<div class='row text-center' style='padding:35px;background-color:#384452;'>
 
-			<h3 class='thin' style='color:white'>Hundreds of people are using 44Cooks to cook and find amazing cooks around them.</h3>
-			<form class='form-inline' method='post' id='subscription_form'>{% csrf_token %}
-				<input type='text' class='form-control' id='location_input_1' name='location' style='margin:10px;' placeholder='Enter your location'/>
-				<input type='text' class='form-control' id='email_input' name='email' style='margin:10px;' placeholder='Your email'/>
-				<button class='btn btn-primary' type='submit'>Subscribe</button>
-				<h4 class='thin' style='color:white'>Subscribe and get notified when someone starts cooking in your area.</h4>
-			</form>
-
-</div>
 
 
 

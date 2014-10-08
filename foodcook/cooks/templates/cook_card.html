@@ -1,37 +1,45 @@
 {% load thumbnail %}
 
 {% for cook in featured_cooks %}
-<div class="block-update-card status col-xs-10" style='margin-bottom:10px;' >
+
+
+<div class="block-update-card status col-xs-12 " style='margin-bottom:10px;background-color:white;padding:5px;'>
   <a href="{% url 'cooks_detail_view' pk=cook.id %}" style='cursor:pointer; color:#555'>
- <div class="update-card-body">
-    	<div class="pull-left" >
+ <div class="col-md-5">
+    	
         {% thumbnail cook.image "110x110" crop="center" as im %}
                 <img  class='img-thumbnail' src="{{ cook.image.url }}"  width="{{ im.width }}" height="{{ im.height }}">
               {% endthumbnail %}
     
   </div>
-      <div class="update-card-body text-center">
+
+
+  <div class="col-md-5"> 
       <h5><b>{{cook.user.first_name}}</b></h5>
       <h5>{{cook.cook_type}}</h5>
       <h5>{{cook.get_price_range}}</h5>
       <h5>{{cook.area}}</h5>
-</div>
-
-    </div>
-   
-      
+      </div>
 
 
-</div>
 
-<div class="card-action-pellet btn-toolbar text-center col-xs-2" role="toolbar">
- <br>
+ <div class="update-card-body col-md-1">
+  <br>
       <div class="btn-group fa fa-phone" ></div><br><br>
 <div class="btn-group fa fa-envelope"></div>
       <!-- <div class="btn-group fa fa-magic"></div>
       <div class="btn-group fa fa-photo"></div>  -->
     </div>
     </a>
+
+      
+
+
+</div>
+
+
+ 
+
 
 {% endfor %}
 
