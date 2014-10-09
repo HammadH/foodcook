@@ -71,6 +71,7 @@ class EventFoodForm(autocomplete_light.ModelForm):
 			'place_slug': forms.TextInput(attrs={'class':'form-control','id':'location_input', 'placeholder':'Enter your location','style':'margin-bottom:10px;'}),
 			'email': forms.EmailInput(attrs={'class':'form-control','style':'margin-bottom:10px;','placeholder':'Your email'}),
 			'phone': forms.TextInput(attrs={'class':'form-control','placeholder':'Your mobile'}),
+			'time':forms.DateTimeInput(attrs={'placeholder':'eg: 2006-10-25 14:30:59'})
 			
 		}
 
