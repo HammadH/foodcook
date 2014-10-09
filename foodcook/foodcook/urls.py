@@ -26,6 +26,8 @@ urlpatterns = patterns('',
 	url(r'^what-is-44cooks/$', 'views.intro_blog', name='intro_blog'),
 
 	url(r'^everyday/(?P<pk>\d+)/$', 'views.everydayfood_details', name='everydayfood_details'),
+	url(r'^event/(?P<pk>\d+)/$', 'views.eventfood_details', name='eventfood_details'),
+	url(r'^baked/(?P<pk>\d+)/$', 'views.bakedfood_details', name='bakedfood_details'),
 	url(r'^everyday/new$', 'views.new_everyday_food', name='new_everyday_food'),
 	url(r'^event/new$', 'views.new_event_food', name='new_event_food'),
 	url(r'^baked/new$', 'views.new_baked_food', name='new_baked_food'),

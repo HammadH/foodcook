@@ -51,7 +51,7 @@ class Cook(models.Model):
 	intro = models.TextField(blank=True)
 	place_slug = models.CharField(max_length=150, null=True, blank=False)
 	area = models.ForeignKey(Area, null=True, blank=True)
-	cuisines = models.ManyToManyField(Cuisine, blank=False, null=True)
+	cuisines = models.ManyToManyField(Cuisine, blank=False, null=True, )
 	breakfast = models.BooleanField(blank=False, default=False)
 	lunch = models.BooleanField(blank=False, default=False)
 	dinner = models.BooleanField(blank=False, default=False)
@@ -144,6 +144,7 @@ class FoodBase(models.Model):
 
 class EverydayFood(FoodBase):
 	cuisines = models.ManyToManyField(Cuisine, blank=True, null=True)
+	cuisines.help_text = ''
 	breakfast = models.BooleanField(blank=False, default=False)
 	lunch = models.BooleanField(blank=False, default=False)
 	dinner = models.BooleanField(blank=False, default=False)
@@ -156,7 +157,7 @@ class EventFood(FoodBase):
 
 class BakedFood(FoodBase):
 	time = models.DateTimeField('When do you need it?',blank=True, null=True)
-	item = models.CharField('What do you want?', max_length=100, blank=True, null=True)
+	item = models.CharField('Item to be baked', max_length=100, blank=False, null=True)
 
 
 

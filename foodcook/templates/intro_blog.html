@@ -1,54 +1,93 @@
 {% extends 'base.html' %}
 {% load staticfiles %}
 
+{% block food_buttons %}
+
+	<li><a class="btn" href="{% url 'new_everyday_food' %}" style="background-color:#FF8000; color:white; margin:10px;">New Everyday Food</a></li>
+	<li><a class="btn" href="{% url 'new_event_food' %}" style="background-color:#50d07d; color:white; margin:10px;">New Event Food</a></li>
+	<li><a class="btn" href="{% url 'new_baked_food' %}" style="background-color:#DFD297; color:white; margin:10px;">New Baked Food</a></li>
+	
+{% endblock %}
+
+{% block auth %}
+					{% if not user.is_authenticated %}
+						<li><a class='btn' href="{% url 'account_signup' %}?next={% url 'new_profile_view' %}" style='background:#CF3030;'><h4 class='thin' style='color:white;'>Become a cook</h4></a></li>
+						<li><a class="btn" href="{% url 'account_login' %}" style="background-color:white; color:#CF3030">SIGN IN</a></li>
+					{% else %}
+					<li><a class="btn" href="{% url 'edit_profile_view' %}" style="background-color:white; color:#CF3030">EDIT PROFILE</a></li>
+					<li><a class="btn" href="{% url 'account_logout' %}" style="background-color:#CF3030; color:white">LOGOUT</a></li>
+					{% endif %}
+{% endblock %}
+
 {% block content %}
 <div class='container' style='margin-top:-150px;'>
 
 
-<div class='row-fluid' style='margin-bottom:40px;'>
+<div class='row' style='margin-bottom:100px;'>
 <img src="{% static 'assets/images/cook2.jpg' %}" >
 <h2 class="thin text-center">Find people to cook for you</h2>
 	<div class='col-sm-2'>
 	</div>
 	<div class='col-md-8'>
 		
-<h4 class='thin'>Take a moment and think about the number of times you ordered food from restaurants.</h4>
+<h4 class='thin'>Take a moment and think about the number of times you order food from restaurants.</h4>
 
 <h4 class='thin'>If its more than 5 times a week, you my friend need some good food.</h4><br>
 
-<h4 class='thin'>Introducing 44cooks.com, a place to find amazing home and professional cooks to cook for you.</h4>
+<h4 class='thin'>Introducing 44cooks.com, a place to find amazing food cooked by home and professional chefs.</h4>
 
 <h4 class='thin'>Be it for parties, social gatherings, date nights or just your daily lunch. You can find 
-awesome cooks right in your neighbourhood.</h4>
+awesome cooks from your neighbourhood to cook for you.</h4>
 <br>
 
-<h4 class='thin'>The idea sprung to us when we were quite fedup with ordering unhealthy and expensive restaurant food and came to know
-there are people around us who offered cooking services, that is they either come home and cook or deliver fresh food to your home, routinely.</h4>
+<h4 class='thin'>The idea was to create an open place where busy individuals can find healthy and cheap food by finding home cooks in their neighbourhood. To be honest we were quite fedup with ordering restaurant food which is unhealthy and expensive which is why we were looking for alternatives in the first place.</h4>
+<br>
+
+<h4 class='thin'>We then came to know there are people around us who offered cooking services, they either come home and cook or deliver fresh food to your home. And some of them are really talented cooks!</h4>
 <br>
 
 <h4> With so many people cooking all this awesome food around us we had to eat it! But there was just one problem, we couldn't find them..</h4> 
 <br>
+<h4 class='thin'>So we thought there should be a place where we can find these people and ask them to cook for us. And so we built we built 44cooks.com. Now anyone who wants to cook can sign up and people who needs food can easily find them.</h4>
 <br>
-<h4 class='thin'>We thought there should be a place where anyone who wants to cook could sign up and offer cooking services and people like us can easily find them and eat their delicious and healthy meals!</h4>
-
-
-<h4 class='thin'>That's why we built 44cooks.com.</h4><br>
-<h4 class='thin'>Using 44cooks is pretty straight forward. If you are looking for someone to cook, just enter your neighbourhood and browse through the people, click on them to see what they have been cooking. If you like their food, call them up or send them an email. 
-<br>
-<h4 class='thin'>If you're looking to offer cooking services, just click the 'Become a cook' button and fill your profile and you should be visible to people in your neighbourhood. </h4><br>
-
-<h4 class='thin'>There are two types of cooks; Regular cooks and Special/Occasional cooks. Regular cooks offer everyday food
-where as Special/Occasional cooks are for events such as parties and social gatherings.</h4><br>
-
 <h4 class='thin'>So the next time you are thinking of a party or dinner with your girlfriend call a chef and have him cook at
 home. And don't worry about the prices, some of them are as low as 100 AED.</h4><br>
 
 <h4 class='thin'>Happy cooking!</h4>
 
+<div class='row' style='margin:30px;'>
+					<a class="twitter-share-button"
+    		data-url="http://www.44cooks.com"
+    data-text="Find people to cook for you!"
+    	>
+Tweet
+</a>
 
+<div class="fb-like" data-href="http://www.44cooks.com" data-layout="button_count" data-action="like" data-show-faces="false" data-share="true" ></div>
 </div>
 
-</div>
-</div>
 
+    <div id="disqus_thread"></div>
+    <script type="text/javascript">
+        /* * * CONFIGURATION VARIABLES: EDIT BEFORE PASTING INTO YOUR WEBPAGE * * */
+        var disqus_shortname = '44cookscom'; // required: replace example with your forum shortname
+
+        /* * * DON'T EDIT BELOW THIS LINE * * */
+        (function() {
+            var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+            dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+            (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+        })();
+    </script>
+    <noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+
+
+</div>
+<div class='col-sm-2'>
+	</div>
+</div>
+</div>
+<script type="text/javascript">
+window.twttr=(function(d,s,id){var t,js,fjs=d.getElementsByTagName(s)[0];if(d.getElementById(id)){return}js=d.createElement(s);js.id=id;js.src="https://platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);return window.twttr||(t={_e:[],ready:function(f){t._e.push(f)}})}(document,"script","twitter-wjs"));
+</script>
 {% endblock %}

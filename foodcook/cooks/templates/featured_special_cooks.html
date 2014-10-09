@@ -1,0 +1,35 @@
+{% load thumbnail %}
+
+{% for cook in featured_special_cooks %}
+<div class="block-update-card status col-xs-12 " style='margin-bottom:10px;background-color:white;padding:5px;'>
+  <a href="{% url 'cooks_detail_view' pk=cook.id %}" style='cursor:pointer; color:#555'>
+ <div class="col-md-3">
+    	
+        {% thumbnail cook.image "110x110" crop="center" as im %}
+                <img  class='img-thumbnail' src="{{ cook.image.url }}"  width="{{ im.width }}" height="{{ im.height }}">
+              {% endthumbnail %}  
+  </div>
+  <div class="col-md-4"> 
+      <h5><b>{{cook.user.first_name}}</b></h5>
+      <h5>{{cook.cook_type}}</h5>
+      <h5>{{cook.get_price_range}}/event</h5>
+      <h5>{{cook.area}}</h5>
+      </div>
+
+       <div class="col-md-3"> 
+     {% for cuisine in cook.cuisines.all %}
+      <h5>{{cuisine}}</h5>
+      {% endfor %}
+      </div>
+ <div class="update-card-body col-xs-1">
+  <br>
+      {% if cook.mobile %}
+      <div class="btn-group fa fa-phone fa-2x" ></div><br><br>
+      {% endif %}
+<div class="btn-group fa fa-envelope fa-2x"></div>
+      <!-- <div class="btn-group fa fa-magic"></div>
+      <div class="btn-group fa fa-photo"></div>  -->
+    </div>
+    </a>
+</div>
+{% endfor %}

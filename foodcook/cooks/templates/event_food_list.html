@@ -1,0 +1,52 @@
+{% for food in eventfood %}
+
+<div class="col-xs-12" style='margin-bottom:15px;background-color: #50d07d;padding:15px;' >
+  
+
+<div class="col-xs-10" style='background-color:;'>
+      <a href="{% url 'everydayfood_details' pk=food.id %}" style='cursor:pointer; color:#555'>
+    <h5 class='thin' style='color:black'><i class='fa fa-comment-o' style='margin:5px;'></i>{{food.message}}</b></h5>
+      </a>
+
+      <div class="col-md-4" style='background-color:;'>
+       <h5 class='thin'><i class='fa fa-map-marker' style='margin:5px;'></i> <abbr title="Neighbourhood">{{food.area}}</abbr></h5>
+        <h6 class='thin'><i class='fa fa-pencil' style='margin:5px;'></i><abbr title="Posted on">{{food.created_at}}</abbr></h6>
+      
+      </div>
+
+      <div class="col-md-3" style='background-color:;'>
+        {% for cuisine in food.cuisines.all %}
+        <h5 class='thin'><i class='fa fa-support' style='margin:5px;'></i><abbr title="Type of food required">{{cuisine}}</abbr></h5>
+        {% endfor %}
+      </div>
+
+       <div class="col-md-5" style='background-color:;'>
+
+        <h5 class='thin'><i class='fa fa-group' style='margin:5px;'></i><abbr title="No. of people to cook for">{{food.people}}</abbr></h5>
+        <h5 class='thin'><i class='fa fa-glass' style='margin:5px;'></i><abbr title="Type of event">{{food.event}}</abbr></h5>
+        <h5 class='thin'><i class='fa fa-clock-o' style='margin:5px;'></i><abbr title="Time of event">{{food.time}}</abbr></h5>
+      </div>
+
+    
+
+</div>
+
+
+<div class="col-xs-1 " style='background-color:;'>
+<div class="card-action-pellet btn-toolbar text-center" role="toolbar">
+    <br>
+    
+      {% if food.phone %}
+      <abbr class="fa fa-phone fa-2x" title="Mobile available"></abbr><br><br>
+      {% endif %}
+      <abbr class="fa fa-envelope fa-2x" title="Email available"></abbr>
+      <!-- <div class="btn-group fa fa-magic"></div>
+      <div class="btn-group fa fa-photo"></div>  -->
+    </div>    
+       </div>         
+
+
+ </div>
+
+			
+{% endfor %}

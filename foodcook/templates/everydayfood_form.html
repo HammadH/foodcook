@@ -1,0 +1,67 @@
+{% extends 'base.html' %}
+{% load bootstrap3 %}
+
+
+{% block food_buttons %}
+
+	<li><a class="btn" href="{% url 'new_everyday_food' %}" style="background-color:#2E9AFE; color:white; margin:10px;">New Everyday Food</a></li>
+	<li><a class="btn" href="{% url 'new_event_food' %}" style="background-color:#50d07d; color:white; margin:10px;">New Event Food</a></li>
+	<li><a class="btn" href="{% url 'new_baked_food' %}" style="background-color:#DFD297; color:white; margin:10px;">New Baked Food</a></li>
+	
+{% endblock %}
+
+{% block auth %}
+					{% if not user.is_authenticated %}
+						<li><a class='btn' href="{% url 'account_signup' %}?next={% url 'new_profile_view' %}" style='background:#CF3030;'><h4 class='thin' style='color:white;'>Become a cook</h4></a></li>
+						<li><a class="btn" href="{% url 'account_login' %}" style="background-color:white; color:#CF3030">SIGN IN</a></li>
+					{% else %}
+					<li><a class="btn" href="{% url 'edit_profile_view' %}" style="background-color:white; color:#CF3030">EDIT PROFILE</a></li>
+					<li><a class="btn" href="{% url 'account_logout' %}" style="background-color:#CF3030; color:white">LOGOUT</a></li>
+					{% endif %}
+{% endblock %}
+
+
+	{% block content %}
+	<div class='container' style='margin-top:100px; background-color:;'>
+		<h3 class='thin text-center'>Create a new Everyday Food requirement</h3>
+		<div class='row'>
+		<div class='col-lg-3'>
+		</div>
+		
+		<div class='col-lg-6 '>
+	<form  id='everydayfoodform'  method="POST">{% csrf_token %}
+		<div class='panel panel-default' style='padding:15px;background-color:#eee;'>
+		{% bootstrap_form form %}
+		<button class='btn btn-primary' style='margin:15px;' type='submit'>Create</button>
+		</div>
+		</form>
+	</div>
+		<div class='col-lg-3'>
+		</div>
+
+
+	</div>
+</div>	
+
+
+
+	<script>
+	var input = document.getElementById('location_input');
+	var types = []
+	var autocomplete = new google.maps.places.Autocomplete(input);
+	autocomplete.setTypes(types)
+	
+	
+	$(document).on("keypress", '#everydayfoodform', function(e){
+		var code = e.keyCode || e.which;
+		if (code == 13) {
+			e.preventDefault();
+			return false;
+		}
+	});
+	</script>
+
+	{% endblock %}
+
+
+

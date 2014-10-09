@@ -17,10 +17,11 @@ class LandingView(FormMixin, ListView):
 	
 	def get_context_data(self, **kwargs):
 		context = super(LandingView, self).get_context_data(**kwargs)
-		context['featured_cooks'] = Cook.objects.filter(is_featured=True)[:3]
-		context['eventfood'] = EventFood.objects.order_by('-created_at')[:10]
-		context['everydayfood'] = EverydayFood.objects.order_by('-created_at')[:10]
-		context['bakedfood'] = BakedFood.objects.order_by('-created_at')[:10]
+		context['featured_everyday_cooks'] = Cook.objects.filter(is_featured=True, cook_type__name__icontains='Everyday Cook')[:3]
+		context['featured_special_cooks'] = Cook.objects.filter(is_featured=True, cook_type__name__icontains='Special Cook')[:3]
+		context['eventfood'] = EventFood.objects.order_by('-created_at')[:5]
+		context['everydayfood'] = EverydayFood.objects.order_by('-created_at')[:5]
+		context['bakedfood'] = BakedFood.objects.order_by('-created_at')[:5]
 		context['form'] = CookSearchForm()
 		return context
 
@@ -116,4 +117,20 @@ class EverydayfoodDetailsView(LoginRequiredMixin, FormMixin, DetailView):
 	template_name = 'food_details.html'
 
 everydayfood_details = EverydayfoodDetailsView.as_view()
+
+class EventfoodDetailsView(LoginRequiredMixin, FormMixin, DetailView):
+	model = EventFood
+	form_class = EmailForm
+	pk_url_kwarg = 'pk'
+	template_name = 'food_details.html'
+
+eventfood_details = EventfoodDetailsView.as_view()
+
+class BakedfoodDetailsView(LoginRequiredMixin, FormMixin, DetailView):
+	model = BakedFood
+	form_class = EmailForm
+	pk_url_kwarg = 'pk'
+	template_name = 'food_details.html'
+
+bakedfood_details = BakedfoodDetailsView.as_view()
 
