@@ -79,7 +79,8 @@
 				</div>
 				<br>
 
-				<h4 class='thin' id='help_text_price_input_1' style='color:maroon'>If you are an everyday cook, enter a price range for one meal. Eg: if you wish to charge 15 AED for one meal then enter 10-20.</h4><h4 id='help_text_price_input_2' class='thin' style='color:grey'>If you are a special cook, enter a price range for one time cooking. Eg: if you wish to charge 130 AED for one time cooking then enter 100-150.</h4><br><br>
+				<h4 class='thin' id='help_text_price_input_1' style='color:maroon'>If you are an everyday cook, enter a price range for one meal. Eg: if you wish to charge 15 AED for one meal then enter 10-20.</h4><h4 id='help_text_price_input_2' class='thin' style='color:grey'>If you are a special cook, enter a price range for one time cooking. Eg: if you wish to charge 130 AED for one time cooking then enter 100-150.</h4>
+				<h4 class='thin' id='help_text_price_input_3' style='color:maroon'>If you are a baker, enter a price range for baking a cake.</h4><br><br>
 			</div>
 		</div>
 
@@ -128,10 +129,12 @@
 <script>
 	$('#help_text_price_input_1').hide();
 	$('#help_text_price_input_2').hide();
-
+	$('#help_text_price_input_3').hide();
+	
 	$('#min_price').click(function(){
 		$('#help_text_price_input_1').show()
 		$('#help_text_price_input_2').show()
+		$('#help_text_price_input_3').show()
 	}
 	);
 

@@ -111,8 +111,9 @@
 		<div class='col-lg-2'>
 		</div>
 		<div class='col-lg-8'>
-		
+		{% for food in everydayfood %}
 		{% include 'everyday_food_list.html' %}
+		{% endfor %}
 		</div>
 		<div class='col-lg-2'>
 		</div>
@@ -128,8 +129,9 @@
 		<div class='col-lg-2'>
 		</div>
 		<div class='col-lg-8'>
-		
-		{% include 'event_food_list.html' %}
+			{% for food in eventfood %}
+				{% include 'event_food_list.html' %}
+			{% endfor %}
 		</div>
 		<div class='col-lg-2'>
 		</div>
@@ -145,8 +147,9 @@
 		<div class='col-lg-2'>
 		</div>
 		<div class='col-lg-8'>
-		
+		{% for food in bakedfood %}
 		{% include 'baked_food_list.html' %}
+		{% endfor %}
 		</div>
 		<div class='col-lg-2'>
 		</div>

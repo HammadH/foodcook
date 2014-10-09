@@ -2,13 +2,16 @@ from django.views.generic import View, TemplateView, DetailView
 from django.views.generic.edit import FormMixin, FormView
 from django.views.generic.list import ListView
 from django.core.urlresolvers import reverse
-from django.http import HttpResponseRedirect
+from django.http import HttpResponseRedirect, HttpResponse
 from django.core.mail import send_mail
 
 from cooks.forms import *
 from cooks.models import EventFood, EverydayFood, BakedFood, Cook
 
 from utils import LoginRequiredMixin
+
+mail_subject = 'You have a cook!'
+from_email = 'findcooks@44cooks.com'
 
 class LandingView(FormMixin, ListView):
 	template_name = 'landing.html'
@@ -110,27 +113,59 @@ class FoodPostSuccess(TemplateView):
 
 food_success = FoodPostSuccess.as_view()
 
-class EverydayfoodDetailsView(LoginRequiredMixin, FormMixin, DetailView):
+
+class EverydayfoodDetailsView(LoginRequiredMixin, DetailView):
 	model = EverydayFood
-	form_class = EmailForm
+	template_name = 'everydayfood_details.html'
 	pk_url_kwarg = 'pk'
-	template_name = 'food_details.html'
+	context_object_name = 'food'
+
+	def get_context_data(self, **kwargs):
+		context = super(EverydayfoodDetailsView, self).get_context_data(**kwargs)
+		context['form'] = EmailForm()
+		return context
+
+	def post(self, request, *args, **kwargs):
+		message = request.POST.get('message')
+		send_mail(mail_subject, message, from_email, [self.get_object().email])
+		return HttpResponse('Your message was sent')
+
 
 everydayfood_details = EverydayfoodDetailsView.as_view()
 
-class EventfoodDetailsView(LoginRequiredMixin, FormMixin, DetailView):
+class EventfoodDetailsView(LoginRequiredMixin, DetailView):
 	model = EventFood
-	form_class = EmailForm
+	template_name = 'eventfood_details.html'
 	pk_url_kwarg = 'pk'
-	template_name = 'food_details.html'
+	context_object_name = 'food'
+
+	def get_context_data(self, **kwargs):
+		context = super(EventfoodDetailsView, self).get_context_data(**kwargs)
+		context['form'] = EmailForm()
+		return context
+
+	def post(self, request, *args, **kwargs):
+		message = request.POST.get('message')
+		send_mail(mail_subject, message, from_email, [self.get_object().email])
+		return HttpResponse('Your message was sent')
 
 eventfood_details = EventfoodDetailsView.as_view()
 
-class BakedfoodDetailsView(LoginRequiredMixin, FormMixin, DetailView):
+class BakedfoodDetailsView(LoginRequiredMixin, DetailView):
 	model = BakedFood
-	form_class = EmailForm
+	template_name = 'bakedfood_details.html'
 	pk_url_kwarg = 'pk'
-	template_name = 'food_details.html'
+	context_object_name = 'food'
+
+	def get_context_data(self, **kwargs):
+		context = super(BakedfoodDetailsView, self).get_context_data(**kwargs)
+		context['form'] = EmailForm()
+		return context
+
+	def post(self, request, *args, **kwargs):
+		message = request.POST.get('message')
+		send_mail(mail_subject, message, from_email, [self.get_object().email])
+		return HttpResponse('Your message was sent')
 
 bakedfood_details = BakedfoodDetailsView.as_view()
 

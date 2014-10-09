@@ -1,10 +1,10 @@
-{% for food in eventfood %}
+
 
 <div class="col-xs-12" style='margin-bottom:15px;background-color: #50d07d;padding:15px;' >
   
 
 <div class="col-xs-10" style='background-color:;'>
-      <a href="{% url 'everydayfood_details' pk=food.id %}" style='cursor:pointer; color:#555'>
+      <a href="{% url 'eventfood_details' pk=food.id %}" style='cursor:pointer; color:#555'>
     <h5 class='thin' style='color:black'><i class='fa fa-comment-o' style='margin:5px;'></i>{{food.message}}</b></h5>
       </a>
 
@@ -49,4 +49,3 @@
  </div>
 
 			
-{% endfor %}
