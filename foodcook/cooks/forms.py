@@ -6,6 +6,8 @@ from autocomplete_light.widgets import TextWidget, MultipleChoiceWidget, ChoiceW
 from cooks.models import *
 
 from form_utils.widgets import ImageWidget
+
+DISABLE_FORM_SUBMIT_ON_PLACE_SELECT = "if($('.pac-container').is(':visible') && event.keyCode == 13) {event.preventDefault();}"
 # from form_utils.forms import BetterModelForm, BetterModelFormMetaclass
 
 # class NewCookProfileForm(forms.ModelForm):
@@ -45,7 +47,7 @@ class NewCookProfileForm(autocomplete_light.ModelForm):
 		'cook_type': forms.RadioSelect(attrs={'class':'form-control ', 'style':'margin-left:10px;'}, ),
 		'min_price': forms.NumberInput(attrs={'class':'form-control', 'style':'width:70px;', 'id':'min_price'}),
 		'max_price': forms.NumberInput(attrs={'class':'form-control', 'style':'width:70px;'}),
-		'place_slug': forms.TextInput(attrs={'class':'form-control', 'placeholder':'Type your location and select..', 'id':'place-input'}),
+		'place_slug': forms.TextInput(attrs={'class':'form-control', 'placeholder':'Type your location and select..', 'id':'place-input','onkeydown':DISABLE_FORM_SUBMIT_ON_PLACE_SELECT}),
 		'area_info': forms.TextInput(attrs={'class':'form-control', 'placeholder':'eg. Marina Pinnacle, near Marina Walk'}),
 		}
 		
@@ -55,7 +57,7 @@ class EverydayFoodForm(autocomplete_light.ModelForm):
 		exclude = ['area']
 		widgets = {
 			'message': forms.Textarea(attrs={'class':'form-control', 'rows':3, 'style':'margin-bottom:10px;', 'placeholder':EverydayFoodPlaceholder}),
-			'place_slug': forms.TextInput(attrs={'class':'form-control','id':'location_input', 'placeholder':'Enter your location','style':'margin-bottom:10px;'}),
+			'place_slug': forms.TextInput(attrs={'class':'form-control','id':'location_input', 'placeholder':'Enter your location','style':'margin-bottom:10px;','onkeydown':DISABLE_FORM_SUBMIT_ON_PLACE_SELECT}),
 			'email': forms.EmailInput(attrs={'class':'form-control','style':'margin-bottom:10px;','placeholder':'Your email'}),
 			'phone': forms.TextInput(attrs={'class':'form-control','placeholder':'Your mobile'}),
 			'cuisines':MultipleChoiceWidget('CuisineAutocomplete', attrs={'class':'form-control', 'placeholder':'eg. Chinese, Italian', }),
@@ -68,7 +70,7 @@ class EventFoodForm(autocomplete_light.ModelForm):
 		widgets = {
 			'message': forms.Textarea(attrs={'class':'form-control', 'rows':3, 'style':'margin-bottom:10px;', 'placeholder':EventFoodPlaceholder}),
 			'cuisines':MultipleChoiceWidget('CuisineAutocomplete', attrs={'class':'form-control', 'placeholder':'eg. Chinese, Italian'}),
-			'place_slug': forms.TextInput(attrs={'class':'form-control','id':'location_input', 'placeholder':'Enter your location','style':'margin-bottom:10px;'}),
+			'place_slug': forms.TextInput(attrs={'class':'form-control','id':'location_input', 'placeholder':'Enter your location','style':'margin-bottom:10px;', 'onkeydown':DISABLE_FORM_SUBMIT_ON_PLACE_SELECT}),
 			'email': forms.EmailInput(attrs={'class':'form-control','style':'margin-bottom:10px;','placeholder':'Your email'}),
 			'phone': forms.TextInput(attrs={'class':'form-control','placeholder':'Your mobile'}),
 			'time':forms.DateTimeInput(attrs={'placeholder':'eg: 2006-10-25 14:30:59'})
@@ -81,7 +83,7 @@ class BakedFoodForm(forms.ModelForm):
 		exclude = ['area']
 		widgets = {
 			'message': forms.Textarea(attrs={'class':'form-control', 'rows':3, 'style':'margin-bottom:10px;', 'placeholder':BakedFoodPlaceholder}),
-			'place_slug': forms.TextInput(attrs={'class':'form-control','id':'location_input', 'placeholder':'Enter your location','style':'margin-bottom:10px;'}),
+			'place_slug': forms.TextInput(attrs={'class':'form-control','id':'location_input', 'placeholder':'Enter your location','style':'margin-bottom:10px;', 'onkeydown':DISABLE_FORM_SUBMIT_ON_PLACE_SELECT}),
 			'item': forms.TextInput(attrs={'class':'form-control', 'placeholder':'eg: Cheese cake, choco chip cookies'}),
 			'time':forms.DateTimeInput(attrs={'placeholder':'eg: 2006-10-25 14:30:59'})
 		}
