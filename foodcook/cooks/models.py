@@ -73,7 +73,17 @@ class Cook(models.Model):
 		return reverse('cooks_detail_view', kwargs={'pk':str(self.id)})
 
 	def get_price_range(self):
-		return "%s-%s AED" %(self.min_price, self.max_price)
+		if self.cook_type:
+			if 'Everyday' in self.cook_type.name:
+				return "%s-%s AED/meal" %(self.min_price, self.max_price)
+			elif 'Special' in self.cook_type.name:
+				return "%s-%s AED/event" %(self.min_price, self.max_price)
+			elif 'Baker' in self.cook_type.name:
+				return "%s-%s AED/baking" %(self.min_price, self.max_price)
+		else:
+			return "~~~~"
+
+
 
 	@staticmethod
 	def get_search_queryset(params):

@@ -114,9 +114,11 @@
 		{% for food in everydayfood %}
 		{% include 'everyday_food_list.html' %}
 		{% endfor %}
+		<a class="btn" href="{% url 'new_everyday_food' %}" style="background-color:#2E9AFE; color:white; margin:10px;">New Everyday Food</a>
 		</div>
 		<div class='col-lg-2'>
 		</div>
+
 
 </div>
 </div>
@@ -132,6 +134,7 @@
 			{% for food in eventfood %}
 				{% include 'event_food_list.html' %}
 			{% endfor %}
+			<a class="btn" href="{% url 'new_event_food' %}" style="background-color:#50d07d; color:white; margin:10px;">New Event Food</a>
 		</div>
 		<div class='col-lg-2'>
 		</div>
@@ -150,6 +153,7 @@
 		{% for food in bakedfood %}
 		{% include 'baked_food_list.html' %}
 		{% endfor %}
+		<a class="btn" href="{% url 'new_baked_food' %}" style="background-color:#DFD297; color:white; margin:10px;">New Baked Food</a>
 		</div>
 		<div class='col-lg-2'>
 		</div>
@@ -170,6 +174,11 @@
 </div>
 </div>
 
+
+<div class='text-center' style='margin:50px;'>
+<h4 class='thin'>Cook for people around you, sign up as a cook now!</h4>
+		<a class='btn btn-danger thin' style='margin:25px;' href="{% url 'account_signup' %}?next={% url 'new_profile_view' %}">Become a cook</a>
+			</div>	
 </div>
 <div class='row text-center' style='padding:15px;background-color:#384452;'>
 <h3 class='thin' style='color:white'>So what is 44cooks.com?</h3><br>
