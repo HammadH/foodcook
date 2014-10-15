@@ -1,6 +1,11 @@
 {% extends 'base.html' %}
 {% load staticfiles %}
 
+{% block seo %}
+<meta name="description" content"44cooks is place to find healthy home made food cooked by home cooks and professional cooks in Dubai, Abu Dhabi and Sharjah.">
+	<title>The best place to find healthy home made food.</title>
+{% endblock %}
+
 {% block food_buttons %}
 
 	<li><a class="btn" href="{% url 'new_everyday_food' %}" style="background-color:#FF8000; color:white; margin:10px;">New Everyday Food</a></li>
