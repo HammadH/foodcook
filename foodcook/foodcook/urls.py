@@ -24,7 +24,7 @@ urlpatterns = patterns('',
 	url(r'^accounts/', include('allauth.urls')),
 	url(r'^cooks/', include('cooks.urls')),
 	url(r'^what-is-44cooks/$', 'views.intro_blog', name='intro_blog'),
-
+	url(r'^select-your-food/$', 'views.choose_food', name='choose_food'),
 	url(r'^everyday/(?P<pk>\d+)/$', 'views.everydayfood_details', name='everydayfood_details'),
 	url(r'^event/(?P<pk>\d+)/$', 'views.eventfood_details', name='eventfood_details'),
 	url(r'^baked/(?P<pk>\d+)/$', 'views.bakedfood_details', name='bakedfood_details'),

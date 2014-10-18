@@ -7,14 +7,6 @@
 	<title>Post an ad to find people to bake a cake for you.</title>
 {% endblock %}
 
-{% block food_buttons %}
-
-	<li><a class="btn" href="{% url 'new_everyday_food' %}" style="background-color:#2E9AFE; color:white; margin:10px;">New Everyday Food</a></li>
-	<li><a class="btn" href="{% url 'new_event_food' %}" style="background-color:#50d07d; color:white; margin:10px;">New Event Food</a></li>
-	<li><a class="btn" href="{% url 'new_baked_food' %}" style="background-color:#DFD297; color:white; margin:10px;">New Baked Food</a></li>
-	
-{% endblock %}
-
 {% block auth %}
 					{% if not user.is_authenticated %}
 						<li><a class='btn' href="{% url 'account_signup' %}?next={% url 'new_profile_view' %}" style='background:#CF3030;'><h4 class='thin' style='color:white;'>Become a cook</h4></a></li>
@@ -29,7 +21,7 @@
 
 	{% block content %}
 	<div class='container text-center' style='margin-top:100px; background-color:;'>
-		<h3 class='thin'>Create a new Baked Food post</h3>
+		<h3 class='thin'>Find people to bake a cake for you</h3>
 		<div class='row'>
 		<div class='col-lg-3'>
 		</div>

@@ -169,3 +169,8 @@ class BakedfoodDetailsView(LoginRequiredMixin, DetailView):
 
 bakedfood_details = BakedfoodDetailsView.as_view()
 
+class FoodSelectView(TemplateView):
+	template_name = 'food_select.html'
+
+choose_food = FoodSelectView.as_view()
+

@@ -8,13 +8,7 @@
 	<title>Find home food, tiffin service and food for parties in Dubai, Abu Dhabi and Sharjah</title>
 {% endblock %} 
 
-{% block food_buttons %}
 
-	<li><a class="btn" href="{% url 'new_everyday_food' %}" style="background-color:#2E9AFE; color:white; margin:10px;">New Everyday Food</a></li>
-	<li><a class="btn" href="{% url 'new_event_food' %}" style="background-color:#50d07d; color:white; margin:10px;">New Event Food</a></li>
-	<li><a class="btn" href="{% url 'new_baked_food' %}" style="background-color:#DFD297; color:white; margin:10px;">New Baked Food</a></li>
-	
-{% endblock %}
 
 {% block auth %}
 					{% if not user.is_authenticated %}
@@ -30,39 +24,35 @@
 
 	
 <div class='container' style='margin-top:100px;'>
-<div class="row text-center" style='background-color:#eee; padding:;'>
+<div class="row text-center" style='background-color:; padding:;'>
             <div class="col-md-12 no-padding lib-item" data-category="view">
                 <div class="lib-panel">
                     <div class="row box-shadow">
                         <div class="col-xs-3">
                             <img src="{% static 'assets/images/woman-cooking.png' %}">
                         </div>
-                        <div class="col-md-6" style='margin-top:50px;'>
-                        	<h3 class='thin text-center' style='margin:20px;'>Search cooks in your area</h3>
-					<form method="GET" action="{% url 'cooks_list_view' %}">
-			 <div class='input-group'>
-	            {{form}}
-				<span class="input-group-btn">
-					<button class="btn btn-danger" type="submit" style='height:34px;'>
-              <span class="fa fa-search"></span>
-             </button></span>
-             </div>
-         </form>
-         <div class='text-center' style='margin-top:25px;'>
-        <h4 class='thin'>Hire home cooks and professional chefs</h4> 
-        	<h5 class='thin'><i>for</i><h5>  
-        <h4 class='thin'>Everyday food - Events - Parties - Special occassions</h4>
+                        <div class="col-md-6" style='margin-top:100px;'>
 
-        <div class="fb-like" data-href="http://www.44cooks.com" data-layout="button_count" data-action="like" data-show-faces="false" data-share="true"  style='margin:5px;'></div><br>
-     		
+                        		<a class='btn btn-lg btn-primary' href="{% url 'choose_food' %}" >I want food</a>
+                        	<div class='text-center' style='margin-top:25px;'>
+        <h3 class='thin'>Find home cooks and professional chefs</h3> 
+        	<h5 class='thin'><i>for</i><h5>  
+        <h4 class='thin'>Daily meals - Events - Parties - Birthdays</h4>
+
+             		
      			
      	</div>
+
+                        	
+					
+         
      	
-     	
+     	<div class="fb-like" data-href="http://www.44cooks.com" data-layout="button_count" data-action="like" data-show-faces="false" data-share="true"  style='margin:5px;'></div><br>
+
      	
      		
 
-     		<a class='btn' href="{% url 'intro_blog' %}" style='background-color:#CF3030; color:white;margin-top:20px;'>What is 44Cooks?</a>
+     		
                        
 						</div>
 
@@ -77,6 +67,7 @@
 		</div>
 		</div>	
 		
+	
 
 <div class='container'>
 	<div class='row text-center' style='margin:15px;background-color:#eee;' >
@@ -104,6 +95,8 @@
 				<input type='text' class='form-control' id='email_input' name='email' style='margin:10px;' placeholder='Your email'/>
 				<button class='btn btn-primary' type='submit'>Subscribe</button>
 				<h4 class='thin' style='color:white'>Subscribe and get notified when someone starts cooking in your area.</h4>
+
+<a class='btn' href="{% url 'intro_blog' %}" style='background-color:#CF3030; color:white;margin-top:20px;'>Read more</a>
 			</form>
 
 </div>
@@ -169,6 +162,7 @@
   	
 
 
+
   	<div class='container' style="margin-top:50px;background-color:;padding:15px;">
   		<div class='row'>
 
@@ -192,6 +186,8 @@
 <h4 class='thin' style='color:white'>44cooks is a place where people can cook for other people.</h4><br>
 <h4 class='thin'style='color:white'>It helps busy individuals find close by home cooks 
 to solve their everyday food problem.</h4><br> <h4 class='thin' style='color:white'>It also helps people to hire top class chefs for events such as parties and birthdays.</h4><br>
+<a class='btn' href="{% url 'intro_blog' %}" style='background-color:#CF3030; color:white;margin-top:20px;'>Read more</a>
+
 
 
 				
