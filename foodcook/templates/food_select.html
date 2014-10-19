@@ -1,0 +1,31 @@
+{% extends 'base.html' %}
+{% load staticfiles %}
+
+{% block content %}
+	<div class='container' style='margin-top:100px;'>
+		<h2 class='thin text-center' style='margin:40px;'>Select the food you want</h2>
+		<div class='row'>
+			<div class='col-lg-4'>
+				<a href="{% url 'new_everyday_food' %}">
+				<img src = "{% static 'assets/images/daily.jpg' %}">
+				<h3 class='thin'>I want daily meals</h3>
+				</a>
+			</div>
+		
+			<div class='col-lg-4'>
+				<a href="{% url 'new_event_food' %}">
+				<img src = "{% static 'assets/images/event.jpg' %}">
+				<h3 class='thin'>I want food for event</h3>
+				</a>
+			</div>
+
+			<div class='col-lg-4'>
+				<a href="{% url 'new_baked_food' %}">
+				<img src = "{% static 'assets/images/cake.jpg' %}">
+				<h3 class='thin'>I want a cake</h3>
+			</a>
+			</div>
+
+		</div>
+		</div>
+{% endblock %}
