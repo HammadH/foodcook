@@ -21,11 +21,11 @@
       <h5 class='thin'><b>{{cook.user.first_name}}</b></h5>
       <h5 class='thin'>{{cook.cook_type}}</h5>
       {% if "Everyday" in cook.cook_type.name %}
-     	 <h5 class='thin'>{{cook.get_price_range}}/meal</h5>
+     	 <h5 class='thin'>{{cook.get_price_range}}</h5>
       {% elif "Special" in cook.cook_type.name %}
-      	<h5 class='thin'>{{cook.get_price_range}}/event</h5>
+      	<h5 class='thin'>{{cook.get_price_range}}</h5>
       {% elif "Baker" in cook.cook_type.name %}
-      	<h5 class='thin'>{{cook.get_price_range}}/cake</h5>
+      	<h5 class='thin'>{{cook.get_price_range}}</h5>
       	{% endif %}	 
       <h5 class='thin'>{{cook.area}}</h5>
 

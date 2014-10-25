@@ -5,7 +5,7 @@
 
 {% block seo %}
 <meta name="description" content="Find people to cook healthy and delicious home food in Dubai, Abu Dhabi and Sharjah. Find chefs to cook food for parties and events. Also find people to bake cakes for birthdays.">
-	<title>Find home food, tiffin service and food for parties in Dubai, Abu Dhabi and Sharjah</title>
+	<title>Find healthy delicious home food for daily meals and parties in Dubai, Abu Dhabi and Sharjah</title>
 {% endblock %} 
 
 
@@ -25,29 +25,38 @@
 	
 <div class='container' style='margin-top:100px;'>
 <div class="row text-center" style='background-color:; padding:;'>
+
+	<h2 class='thin'>Find neighbours to cook food for you.</h2> 
             <div class="col-md-12 no-padding lib-item" data-category="view">
                 <div class="lib-panel">
                     <div class="row box-shadow">
                         <div class="col-xs-3">
                             <img src="{% static 'assets/images/woman-cooking.png' %}">
                         </div>
-                        <div class="col-md-6" style='margin-top:100px;'>
-
-                        		<a class='btn btn-lg btn-primary' href="{% url 'choose_food' %}" >I want food</a>
-                        	<div class='text-center' style='margin-top:25px;'>
-        <h3 class='thin'>Find home cooks and professional chefs</h3> 
-        	<h5 class='thin'><i>for</i><h5>  
-        <h4 class='thin'>Daily meals - Events - Parties - Birthdays</h4>
-
+                        <div class="col-md-6" style='margin-top:50px;'>
+                        	  
+                        	
+                        	<div class='text-center' style='margin-top:25px;margin-bottom:35px;'>
+      <h3 class='thin'>Where do you stay?</h3>
+       <form method="GET" action="{% url 'cooks_list_view' %}">
+			 <div class='input-group'>
+	            {{form}}
+				<span class="input-group-btn">
+					<button class="btn btn-danger" type="submit" style='height:34px;'>
+              <span class="fa fa-search"></span>
+             </button></span>
+             </div>
+         </form>
              		
      			
      	</div>
-
+     <h4 class='thin'>People in your neighbourhood are cooking food as a service.</h4>
+     <h4 class='thin'>Contact them to eat healthy & delicious meals everyday.</h4>
                         	
 					
          
      	
-     	<div class="fb-like" data-href="http://www.44cooks.com" data-layout="button_count" data-action="like" data-show-faces="false" data-share="true"  style='margin:5px;'></div><br>
+     	<div class="fb-like" data-href="http://www.44cooks.com" data-layout="box_count" data-action="like" data-show-faces="true" data-share="true" style='margin-top:20px;'></div>
 
      	
      		
@@ -72,13 +81,13 @@
 <div class='container'>
 	<div class='row text-center' style='margin:15px;background-color:#eee;' >
 		<div class='col-md-6'>				
-	<h4 class='thin'>Featured Everyday Cooks</h4>
+	<h4 class='thin'>Featured cooks for daily meals</h4>
 						
 					{% include 'featured_everyday_cooks.html' %}
 		</div>
 
 		<div class='col-md-6'>				
-	<h4 class='thin'>Featured Special Cooks</h4>
+	<h4 class='thin'>Featured cooks for events</h4>
 						
 					{% include 'featured_special_cooks.html' %}
 		</div>
@@ -86,6 +95,36 @@
 </div>
 
 	
+
+
+</div>
+
+
+
+
+
+
+<div class='row text-center' style='padding:35px;background-color:;'>
+
+			<h3 class='thin'>HOW IT WORKS</h3>
+			
+			<div class='col-lg-4'>
+				<img class='img-circle' src="{% static 'assets/images/cooks.jpg' %}">
+				<h3 class='thin'>Search your neighourhood to see who is cooking.</h3>
+			</div>
+
+			<div class='col-lg-4'>
+				<img class='img-circle' src="{% static 'assets/images/contact.png' %}">
+
+					<h3 class='thin'>Contact them by phone or email.</h3>
+			</div>
+
+			<div class='col-lg-4'>
+				<img class='img-circle' src="{% static 'assets/images/food.png' %}">
+					<h3 class='thin'>Eat healthy & delicious food everyday.</h3>
+			</div>
+
+</div>
 
 <div class='row text-center' style='padding:35px;background-color:#384452;'>
 
@@ -96,89 +135,20 @@
 				<button class='btn btn-primary' type='submit'>Subscribe</button>
 				<h4 class='thin' style='color:white'>Subscribe and get notified when someone starts cooking in your area.</h4>
 
-<a class='btn' href="{% url 'intro_blog' %}" style='background-color:#CF3030; color:white;margin-top:20px;'>Read more</a>
+
 			</form>
 
 </div>
 
 	
 
-	<div class='container' style="margin-top:50px;background-color:;padding:15px;">
-  		<div class='row'>
-		<h3 class='thin text-center'>These people are looking for Everyday Food</h3>
-		<div class='col-lg-2'>
-		</div>
-		<div class='col-lg-8'>
-		{% for food in everydayfood %}
-		{% include 'everyday_food_list.html' %}
-		{% endfor %}
-		<a class="btn" href="{% url 'new_everyday_food' %}" style="background-color:#2E9AFE; color:white; margin:10px;">New Everyday Food</a>
-		</div>
-		<div class='col-lg-2'>
-		</div>
-
-
-</div>
-</div>
 	
 
-{% if eventfood %}
-	<div class='container' style="margin-top:50px;background-color:;padding:15px;">
-  		<div class='row'>
-		<h3 class='thin text-center'>These people need Food for Events</h3>
-		<div class='col-lg-2'>
-		</div>
-		<div class='col-lg-8'>
-			{% for food in eventfood %}
-				{% include 'event_food_list.html' %}
-			{% endfor %}
-			<a class="btn" href="{% url 'new_event_food' %}" style="background-color:#50d07d; color:white; margin:10px;">New Event Food</a>
-		</div>
-		<div class='col-lg-2'>
-		</div>
 
-	</div>
-</div>
-{% endif %}     		
 
-{% if bakedfood %}
-	<div class='container' style="margin-top:50px;background-color:;padding:15px;">
-  		<div class='row'>
-		<h3 class='thin text-center'>These people are looking for Baked Food</h3>
-		<div class='col-lg-2'>
-		</div>
-		<div class='col-lg-8'>
-		{% for food in bakedfood %}
-		{% include 'baked_food_list.html' %}
-		{% endfor %}
-		<a class="btn" href="{% url 'new_baked_food' %}" style="background-color:#DFD297; color:white; margin:10px;">New Baked Food</a>
-		</div>
-		<div class='col-lg-2'>
-		</div>
-
-	</div>
-</div>
-{% endif %}  
   	
 
 
-
-  	<div class='container' style="margin-top:50px;background-color:;padding:15px;">
-  		<div class='row'>
-
-		<h3 class='thin text-center'>These people are offering cooking services</h3>
-	
-{% include 'cooks_list_block.html' %}
- 
-</div>
-</div>
-
-
-<div class='text-center' style='margin:50px;'>
-<h4 class='thin'>Cook for people around you, sign up as a cook now!</h4>
-		<a class='btn btn-danger thin' style='margin:25px;' href="{% url 'account_signup' %}?next={% url 'new_profile_view' %}">Become a cook</a>
-			</div>	
-</div>
 <div class='row text-center' style='padding:15px;background-color:#384452;'>
 <h3 class='thin' style='color:white'>So what is 44cooks.com?</h3><br>
                         	
