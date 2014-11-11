@@ -21,7 +21,7 @@
 {% block profile_form %}
 
 <div class="container text-center" style="margin-top:120px;">
-	<h2 class='thin'>Reach over 500 people who want your food!</h2>
+	<h2 class='thin'>Fill in your cooking details!</h2>
 
 
 
@@ -89,31 +89,9 @@
 		
 
 		
-		<div class='row text-center'>
-			<div class='panel panel-info' style='padding:15px;'> 
-			 <h4 class='thin' style="margin-top:20px;">Select cook type</h4>
-				<div class='form-inline'>
-					{% for type in form.cook_type %}
-					{{type}}
-					{% endfor %}
-				</div>		 
-			</div>
-		</div>
+		
 
-		<div class='row text-center'>
-		<div class='panel panel-info' style='padding:15px;'>
-	<h4 class='thin' style="margin-top:40px;">Enter a price range for your cooking service</h4>				
-					<div class="form-inline" style="margin-top:35px;">
-					{{form.min_price}}  AED
-					 <b style='margin-left:10px;margin-right:10px;'>to</b> 		
-					{{form.max_price}} AED
-				</div>
-				<br>
-
-				<h4 class='thin' id='help_text_price_input_1' style='color:maroon'>If you are an everyday cook, enter a price range for one meal. Eg: if you wish to charge 15 AED for one meal then enter 10-20.</h4><h4 id='help_text_price_input_2' class='thin' style='color:grey'>If you are a special cook, enter a price range for one time cooking. Eg: if you wish to charge 130 AED for one time cooking then enter 100-150.</h4>
-				<h4 class='thin' id='help_text_price_input_3' style='color:maroon'>If you are a baker, enter a price range for baking a cake.</h4><br><br>
-			</div>
-		</div>
+		
 
 		<div class='row text-center'>
 
@@ -130,10 +108,7 @@
 
 			<div class='row text-center'>
 
-			<div class='panel panel-info' style='padding:15px;'>
-				<h4 class='thin'>What should people know about your cooking?</h4>
-				{{form.intro}}
-				</div>
+			
 
 				<button class='btn btn-lg'  type="submit" style="background-color:#CF3030; color:white; margin:50px;">I am ready!</button>
 			

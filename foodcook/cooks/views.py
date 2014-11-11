@@ -25,12 +25,13 @@ class CookSignUpView_CookingDetails(LoginRequiredMixin,  CreateView):
 		self.object.instance.user = self.request.user
 
 		  #TODO: remove this save()
+		import pdb;pdb.set_trace()
 		self.object.instance.area,created_new = Area.objects.get_or_create(name=data.get('place_slug'))
 		self.object.instance.save()
 		for cuisine in data.get('cuisines'):
 			self.object.instance.cuisines.add(cuisine)
 		self.object.instance.save()
-		return HttpResponseRedirect(reverse('cooks_detail_view', kwargs={'pk':self.object.instance.id}))
+		return HttpResponseRedirect(reverse('food_successfully_posted'))
 
 new_cook_cooking_details = CookSignUpView_CookingDetails.as_view()
 

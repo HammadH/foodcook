@@ -2,6 +2,8 @@ from django.conf.urls import patterns, include, url
 from django.conf import settings
 from django.conf.urls.static import static
 
+from django.views.generic.base import RedirectView
+
 
 
 
@@ -15,7 +17,7 @@ urlpatterns = patterns('',
     # Examples:
     # url(r'^$', 'foodcook.views.home', name='home'),
     # url(r'^blog/', include('blog.urls')),
-	url(r'^$', 'views.landing_view', name='landing_view'),
+	url(r'^$', RedirectView.as_view(url='accounts/signup/?next=/cooks/profile/new/', permanent=True), name='landing_view'),
 	url(r'^contact/$', 'views.contact_view', name='contact_view'),
 	url(r'^login/', 'views.check_and_login', name='check_and_login'),
 

@@ -5,6 +5,7 @@ from django.core.urlresolvers import reverse
 from django.http import HttpResponseRedirect, HttpResponse
 from django.core.mail import send_mail
 
+from allauth.account.forms import SignupForm
 from cooks.forms import *
 from cooks.models import EventFood, EverydayFood, BakedFood, Cook
 
@@ -13,11 +14,12 @@ from utils import LoginRequiredMixin
 mail_subject = 'You have a cook!'
 from_email = 'findcooks@44cooks.com'
 
-class LandingView(FormMixin, ListView):
+class LandingView(FormView):
 	template_name = 'landing.html'
-	model = Cook
-	queryset = Cook.objects.filter(is_featured=False)[:10]
-	
+	form_class = SignupForm
+	redirect_field_name = "next"
+	success_url = None
+
 	def get_context_data(self, **kwargs):
 		context = super(LandingView, self).get_context_data(**kwargs)
 		context['featured_everyday_cooks'] = Cook.objects.filter(is_featured=True, cook_type__name__icontains='Everyday Cook')[:3]
@@ -25,7 +27,7 @@ class LandingView(FormMixin, ListView):
 		context['eventfood'] = EventFood.objects.order_by('-created_at')[:5]
 		context['everydayfood'] = EverydayFood.objects.order_by('-created_at')[:5]
 		context['bakedfood'] = BakedFood.objects.order_by('-created_at')[:5]
-		context['form'] = CookSearchForm()
+		context['form'] = SignupForm()
 		return context
 
 	def form_valid(self, form):

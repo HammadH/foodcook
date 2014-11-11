@@ -55,10 +55,10 @@ class Cook(models.Model):
 	breakfast = models.BooleanField(blank=False, default=False)
 	lunch = models.BooleanField(blank=False, default=False)
 	dinner = models.BooleanField(blank=False, default=False)
-	min_price = models.IntegerField(blank=False, null=True)
-	max_price = models.IntegerField(blank=False, null=True)
+	min_price = models.IntegerField(blank=True, null=True)
+	max_price = models.IntegerField(blank=True, null=True)
 	area_info = models.TextField(blank=True)
-	cook_type = models.ForeignKey(CookType, blank=False, null=True, default='Unspecified')
+	cook_type = models.ForeignKey(CookType, blank=True, null=True)
 	created_at = models.DateTimeField(auto_now_add=True)
 	updated_at = models.DateTimeField(blank=True, null=True) # when the cook updates profile.
 	is_featured = models.BooleanField(blank=True, default=False)
