@@ -25,7 +25,7 @@ class CookSignUpView_CookingDetails(LoginRequiredMixin,  CreateView):
 		self.object.instance.user = self.request.user
 
 		  #TODO: remove this save()
-		import pdb;pdb.set_trace()
+	
 		self.object.instance.area,created_new = Area.objects.get_or_create(name=data.get('place_slug'))
 		self.object.instance.save()
 		for cuisine in data.get('cuisines'):

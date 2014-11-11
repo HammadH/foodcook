@@ -4,6 +4,8 @@ from django.views.generic.list import ListView
 from django.core.urlresolvers import reverse
 from django.http import HttpResponseRedirect, HttpResponse
 from django.core.mail import send_mail
+from django.contrib.auth import logout
+from django.shortcuts import render_to_response
 
 from allauth.account.forms import SignupForm
 from cooks.forms import *
@@ -112,6 +114,10 @@ new_baked_food = BakedFoodFormView.as_view()
 
 class FoodPostSuccess(TemplateView):
 	template_name = 'food_success.html'
+
+	def get(self, request, *args, **kwargs):
+		logout(request)
+		return render_to_response('food_success.html')
 
 food_success = FoodPostSuccess.as_view()
 
